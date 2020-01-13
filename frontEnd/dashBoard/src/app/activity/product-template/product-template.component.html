@@ -1,0 +1,27 @@
+<div class="container">
+  
+        <div class="row it">
+            <div class="col-sm-offset-1 col-sm-10" id="one">
+                <div class="row">
+                    <div class="col-sm-offset-4 col-sm-4 form-group">
+                    </div>
+                </div>
+                <div id="uploader">
+                    <div class="row uploadDoc">
+                        <div class="col-sm-3">
+                            <div class="fileUpload btn btn-orange">
+                            <!--<img src="https://image.flaticon.com/icons/svg/136/136549.svg" class="icon">-->
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <input class="centerElement" type="file" name="file" (change)="fileObject($event)"/></div>
+
+                    </div>
+                    <button class="centerElement btn btn-primary" type="button" (click)="onUpload()">Upload</button>
+                </div>
+            </div>
+            
+        </div>
+        
+
+</div>
