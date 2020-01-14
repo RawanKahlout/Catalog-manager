@@ -1,0 +1,51 @@
+<table style="width:100% ;padding:100px;">
+    <thead>
+        <tr>
+            <th>total proccessed articles :</th>
+            <th>total proccessed skus</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{myRes.totalproccessedarticles}}</td>
+            <td>{{myRes.totalproccessedskus}}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+        <table style="display: inline-block; padding-right:50px;">
+            <thead>
+                <tr>
+                    <th>rejected articles</th>
+                    <th>rejected skus</th>
+        
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td *ngFor="let i of myRes.rejectedarticles.noSkus.articles">{{myRes.rejectedarticles.noSkus.articles}}</td>
+                    <td *ngFor="let i of myRes.rejectedarticles.duplicate.articles">
+                        {{myRes.rejectedarticles.duplicate.articles}}</td>
+                </tr>
+            </tbody>
+        </table>
+   
+ 
+        <table style="float: left; padding-left:50px;">
+            <thead>
+                <tr>
+                    <th>fails</th>
+                    <TH>unknown failure</TH>
+        
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td *ngFor="let i of myRes.rejectedskus.duplicate.articles">{{myRes.rejectedskus.duplicate.articles}}</td>
+                    <td *ngFor="let i of myRes.rejectedskus.notFound.skus">{{myRes.rejectedskus.notFound.skus}}</td>
+                    <td *ngFor="let i of myRes.fail">{{myRes.fail}}</td>
+                    <td *ngFor="let i of myRes.unknownfailure">{{myRes.unknownfailure}}</td>
+                </tr>
+            </tbody>
+        </table>

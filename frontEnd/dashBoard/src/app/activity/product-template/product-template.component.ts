@@ -35,6 +35,7 @@ export class ProductTemplateComponent implements OnInit {
     fileObj.append('file', this.uploadedFile);
     this._productService.uploadTemplate(fileObj)
   }
+  
 
 }
 
