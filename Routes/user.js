@@ -39,10 +39,8 @@ module.exports = (app) => {
 
     })
     app.get('/api/isActive', auth, async (req,res,next) => {
-  
-
     return res.status(200).res.header('authToken', token).json(token);
     })
-
+    
 
 }

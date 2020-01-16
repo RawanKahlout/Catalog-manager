@@ -6,7 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { ProductTemplateComponent } from './activity/product-template/product-template.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {UploadReportsComponent} from './activity/upload-reports/upload-reports.component'
+import {UploadReportsComponent} from './activity/upload-reports/upload-reports.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {UploadReportsComponent} from './activity/upload-reports/upload-reports.c
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgbModule
    
 
   ],

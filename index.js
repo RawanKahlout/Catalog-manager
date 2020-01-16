@@ -35,6 +35,7 @@ app.use((req, res, next) => {
 });
 require('./Routes/user')(app);
 require('./Routes/files')(app);
+require('./Routes/upload')(app);
 // set enviorment variable
 const ports = normalizePort('3000' || process.env.port);
 app.set('port', ports);

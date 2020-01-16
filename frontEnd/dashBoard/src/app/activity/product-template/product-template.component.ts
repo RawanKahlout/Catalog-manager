@@ -15,7 +15,7 @@ export class ProductTemplateComponent implements OnInit {
   uploadedFile;
   constructor(private http: HttpClient, private _productService: productService , private _userService : userService,private router: Router ) {
     this._userService.isActive().subscribe(
-      data=>{},
+      data=> 
       error => this.router.navigate(['/signin']),
       
     );
