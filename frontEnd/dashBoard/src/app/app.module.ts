@@ -8,13 +8,15 @@ import { ProductTemplateComponent } from './activity/product-template/product-te
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {UploadReportsComponent} from './activity/upload-reports/upload-reports.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MainNavComponent } from './main-nav/main-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponent,
     ProductTemplateComponent,
-    UploadReportsComponent
+    UploadReportsComponent,
+    MainNavComponent
 
     
   ],

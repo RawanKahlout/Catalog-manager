@@ -1,32 +1,29 @@
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<div class="myCenter"><table  class="table" style="width:80% " >
-    <thead  style="padding:100px;">
-        <tr>
-            <th>Total proccessed articles</th>
-            <th>Total proccessed skus</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{myRes.totalproccessedarticles}}</td>
-            <td>{{myRes.totalproccessedskus}}</td>
-        </tr>
-    </tbody>
-</table></div>
+<app-main-nav></app-main-nav>
+<div class="myCenter">
+    <table class="table table-striped" style="width:70% ">
+        <thead style="padding:100px;">
+            <tr class="thead-dark">
+                <th>Total proccessed articles</th>
+                <th>Total proccessed skus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{myRes.totalproccessedarticles}}</td>
+                <td>{{myRes.totalproccessedskus}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <div>
-    
-    <table class="table table-striped" style="width:80% ;padding:100px;">
+
+    <table class="table table-striped" style="width:70% ;padding:100px;">
         <thead>
-            <tr><h3>Succuess product</h3></tr>
-            <tr>
+            <tr >
+                <h3>Succuess product</h3>
+            </tr >
+            <tr class="thead-dark">
                 <th>Number of succuess product</th>
             </tr>
         </thead>
@@ -38,74 +35,96 @@
     </table>
 </div>
 <div *ngIf="myRes.rejectedarticles.noSkus.articles.length || myRes.rejectedarticles.duplicate.articles.length">
-    
-    <table class="table table-striped" style="width:80% ;padding:100px;">
+
+    <table class="table table-striped" style="width:70% ;padding:100px;">
         <thead>
-            <tr><h3>Rejected articles</h3></tr>
             <tr>
+                <h3>Rejected articles</h3>
+            </tr>
+            <tr class="thead-dark">
                 <th *ngIf="myRes.rejectedarticles.noSkus.articles.length">No SKUs</th>
-
-                <th *ngIf="myRes.rejectedarticles.duplicate.articles.length">Duplicate </th>
-
             </tr>
         </thead>
         <tbody>
+
             <tr *ngFor="let i of myRes.rejectedarticles.noSkus.articles">
-                <td>{{myRes.rejectedarticles.noSkus.articles}}
-                </td>
+                <td>{{i}}</td>
             </tr>
+        </tbody>
+        <thead>
+            <tr class="thead-dark">
+                <th *ngIf="myRes.rejectedarticles.duplicate.articles.length">Duplicate </th>
+            </tr>
+        </thead>
+        <tbody>
+
             <tr *ngFor="let i of myRes.rejectedarticles.duplicate.articles">
-                <td>
-                    {{myRes.rejectedarticles.duplicate.articles}}</td>
+                <td>{{i}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 <div *ngIf="myRes.rejectedskus.duplicate.articles.length || myRes.rejectedskus.notFound.skus.length ">
- 
-    <table class="table table-striped" style="width:80% ;padding:100px;">
-           
+
+    <table class="table table-striped" style="width:70% ;padding:100px;">
+
         <thead>
-            <tr><h3>Rejected SKUs</h3></tr>
             <tr>
-                <th *ngIf="myRes.rejectedskus.duplicate.articles.length">No SKUs</th>
-
-
-                <th *ngIf="myRes.rejectedskus.notFound.skus.length">Duplicate</th>
-
+                <h3>Rejected SKUs</h3>
+            </tr>
+            <tr class="thead-dark">
+                <th  *ngIf="myRes.rejectedskus.duplicate.articles.length">No SKUs</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let i of myRes.rejectedskus.duplicate.articles">
-                <td>{{myRes.rejectedskus.duplicate.articles}}
+                <td>{{i}}
                 </td>
 
             </tr>
+        </tbody>
+        <thead>
+            <tr class="thead-dark">
+                <th  *ngIf="myRes.rejectedskus.notFound.skus.length">Duplicate</th>
+            </tr>
+        </thead>
+        <tbody>
             <tr *ngFor="let i of myRes.rejectedskus.notFound.skus">
-                <td>{{myRes.rejectedskus.notFound.skus}}</td>
+                <td>{{i}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-<div *ngIf="myRes.fail.length || myRes.unknownfailure.length">
-    
-    <table class="table table-striped" style="width:80% ;padding:100px;">
-        <thead>
-            <tr><h3>Fails</h3></tr>
-            <tr>
-                <th *ngIf="myRes.fail.length">Fails</th>
+<div *ngIf="myRes.fail.length || myRes.unknownfailure.length" >
 
+    <table class="table table-striped" style="width:100%;width:70% ;padding:100px;" >
+        <thead >
+            <tr>
+                <h3>Fails</h3>
+            </tr>
+            <tr class="thead-dark"> 
+                <th *ngIf="myRes.fail.length">Fails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let failObject of myRes.fail">
+                <td>{{failObject.sqlMessage}}</td>
+            </tr>
+
+        </tbody>
+        <thead >
+            <tr class="thead-dark">
                 <TH *ngIf="myRes.unknownfailure.length">Unknown failure</TH>
 
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let i of myRes.fail">
-                <td>{{myRes.fail}}</td>
-            </tr>
-            <tr *ngFor="let i of myRes.unknownfailure">
-                <td>{{myRes.unknownfailure}}</td>
+            <tr *ngFor="let unknownfailureObj of myRes.unknownfailure">
+                <td>{{unknownfailureObj.sqlMessage}}</td>
             </tr>
         </tbody>
+        
     </table>
+
+
 </div>

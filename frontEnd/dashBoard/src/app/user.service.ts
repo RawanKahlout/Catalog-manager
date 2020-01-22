@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class userService {
-        
+       logged;
         constructor(private http: HttpClient ,  private router: Router) { }
         loginUser(email, password) {
                
@@ -12,6 +12,7 @@ export class userService {
                 .subscribe(
                         data => {
                               localStorage.setItem('token',data.toString());  
+                          
                               this.router.navigate(['/upload']);
                         },
                         error=>{
@@ -25,12 +26,20 @@ export class userService {
                 const tokens =localStorage.getItem('token');
                 return this.http.get('http://localhost:3000/api/isActive',{
                         observe :'body',
-                       params : new HttpParams().append('token',localStorage.getItem('token'))
+                       params : new HttpParams().append('token',localStorage.getItem('token')),
+                      
                 })
                 
         }
 
-
+        logout(){
+                this.http.get('http://localhost:3000/api/logout').subscribe(
+                    Response=>{
+                      localStorage.removeItem('token');
+                      this.router.navigate(['/signin']);
+                    });
+              }
+     
         
 }
 

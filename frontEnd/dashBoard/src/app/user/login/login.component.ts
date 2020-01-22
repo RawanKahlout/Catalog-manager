@@ -21,8 +21,5 @@ export class LoginComponent implements OnInit {
     this._userService.loginUser(form.value.email,form.value.password);
 
   }
-  logout(){
-    localStorage.removeItem('token');
-    this.router.navigate(['/signin']);
-  }
+ 
 }

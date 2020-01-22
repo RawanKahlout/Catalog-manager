@@ -6,7 +6,7 @@ module.exports = function (req , res , next){
 var token = req.header('authToken');
 token=req.query.token;
 //token =authToken;
-if (!token)
+if (!token || token==null)
     return res.status(401).send('Access denied ,No token provided');
   else{  try{
         
