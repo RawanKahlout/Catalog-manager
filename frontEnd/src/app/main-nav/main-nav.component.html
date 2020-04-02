@@ -1,0 +1,11 @@
+<mat-toolbar class="mat-elevation-z4">
+  <span><a  [routerLink]="['/home-page']"><img src="../../assets/logo-en.png" class="responsive"></a></span>
+<div class="spacer">
+  <a mat-button [routerLink]="['/upload-products']">Upload products</a>
+  <a mat-button [routerLink]="['/upload-split']" >Upload split</a>
+  <a mat-button [routerLink]="['/Disabled-product']">Disabled products</a> 
+</div>  
+  <a id="log" class="logoutButton" (click)="signout()"><i class="material-icons">logout</i></a>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

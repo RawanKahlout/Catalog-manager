@@ -1,0 +1,33 @@
+.forms-input{
+    float: right;
+}
+.material-icons{
+    float : left;
+}
+placeholder{
+    text-align: center;
+}
+.center{
+    text-align: center;
+}
+label {
+    display: inline-block;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .pryButton{
+    text-align: center;
+    color:#FBAD18;
+    border: 2px solid black;
+    border-radius: 0px 8px 0px 8px;
+    background-color: black;
+    width :99%;
+    font-weight: bold;
+    margin: auto;
+    padding: 1.5%;
+    }
+    .erorrLabels{
+        float: right;
+        padding: 5px;
+    }

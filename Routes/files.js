@@ -2,34 +2,31 @@ const auth = require('../midleware/auth');
 var multer = require('multer');
 var path = require('path');
 module.exports = (app) => {
-
     var store = multer.diskStorage({
-        destination:function(req,file,cb){
-            cb(null, './uploads');
+        destination: function (req, file, cb) {
+            cb(null, './uploadedProducts');
         },
-        filename:function(req,file,cb){
-            cb(null, Date.now()+'.'+file.originalname);
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
         }
     });
-    
-    var upload = multer({storage:store}).single('file');
-    app.post('/upload',auth,function(req,res){
-        //var a = originalname.split(".");
-        upload(req,res,function(err){
-           if(err){
-
-            return res.status(501).json({error:err});
-            }
-      
-    return res.json({uploadname:req.file.filename , originalname:req.file.originalname});
-           
-        });
-   
-//originalname	Name of the file on the user's computer
-//The name of the file within the destination	
+    var storeSplits = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './splitFiles');
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
+        }
     });
+    var upload = multer({ storage: store });
+    var uploadSplits = multer({ storage: storeSplits });
+    app.post('/api/uploadProducts', auth, upload.single('file'), function (req, res) {
+        return res.status(200);
+    });
+    app.post('/api/uploadSplits',auth,uploadSplits.single('file'), function (req, res) {
+        return res.status(200);
+    })
 
-
-
-
+    //originalname	Name of the file on the user's computer
+    //The name of the file within the destination	
 }

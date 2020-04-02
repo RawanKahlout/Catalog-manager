@@ -7,15 +7,17 @@ const app = express();
 var bodyParser = require('body-parser');
 const http = require('http');
 const normalizePort = require('normalize-port');
-mongoose.connect('mongodb://localhost/nejreeDashBoard')
+mongoose.connect('mongodb://localhost/nejreeDashBoard',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    })
     .then(() => { console.log("coneect"); })
     .catch((err) => {
-       
+        console.log(err)
     });
-//if (!config.get('jwtPrivateKey')){
-// console.log('jwt is not defiend');
-//process.exit(1);
-//}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,8 +37,7 @@ app.use((req, res, next) => {
 });
 require('./Routes/user')(app);
 require('./Routes/files')(app);
-require('./Routes/upload')(app);
-// set enviorment variable
+require('./Routes/reports')(app);
 const ports = normalizePort('3000' || process.env.port);
 app.set('port', ports);
 const server = http.createServer(app);
