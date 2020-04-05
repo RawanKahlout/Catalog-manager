@@ -7,6 +7,7 @@ import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { AddCategoryComponent } from '../disabledProductActions/add-category/add-category.component'
 import { AddGenderComponent } from '../add-gender/add-gender.component';
+import { AddDescriptionComponent } from '../disabledProductActions/add-description/add-description.component';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -52,18 +53,30 @@ export class DisabledProductComponent implements OnInit {
     var filteredValues = ["hydrogen", "boron"];
     var filteredValues2 = "boron";
     this.dataSource.filter = JSON.stringify(filteredValues);
+    return false;
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
+ 
+  changePrice() { }
 
-  addPrice() { }
-
-  addDescription() { }
-  enableProduct() { }
-  disableProduct() { }
+  addDescription() {
+    this._dialog.open(AddDescriptionComponent, {
+      width: "60%",
+      data: {
+        dataKey: this.selection.selected
+      }
+    });
+   }
+  enableProduct() { 
+    this._productService.enableProduct(this.selection.selected);
+  }
+  disableProduct(){
+    this._productService.disableProduct(this.selection.selected);
+   }
   addGender() {
     this._dialog.open(AddGenderComponent, {
       width: "60%",
@@ -72,8 +85,10 @@ export class DisabledProductComponent implements OnInit {
       }
     })
   }
-  addCategory() {
+  addDiscount(){
 
+  }
+  addCategory() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; //when press out side the window
     dialogConfig.autoFocus = true;// 

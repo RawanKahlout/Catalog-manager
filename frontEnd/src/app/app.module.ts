@@ -30,6 +30,8 @@ import{MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { ProductsDescriptionComponent } from './products-description/products-description.component';
 import { AddGenderComponent } from './add-gender/add-gender.component';
+import { AddDescriptionComponent } from './disabledProductActions/add-description/add-description.component';
+import { TableFilteringExampleComponent } from './table-filtering-example/table-filtering-example.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { AddGenderComponent } from './add-gender/add-gender.component';
     SplitTemplateComponent,
     AddCategoryComponent,
     ProductsDescriptionComponent,
-    AddGenderComponent
+    AddGenderComponent,
+    AddDescriptionComponent,
+    TableFilteringExampleComponent
 
     
   ],
@@ -73,7 +77,7 @@ import { AddGenderComponent } from './add-gender/add-gender.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddCategoryComponent,AddGenderComponent]
+  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent]
 
 })
 export class AppModule { }

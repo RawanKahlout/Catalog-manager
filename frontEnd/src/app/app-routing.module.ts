@@ -1,4 +1,4 @@
-import{NgModule } from '@angular/core';
+import{NgModule, Component } from '@angular/core';
 import{Routes, RouterModule } from '@angular/router';
 import{LoginComponent } from './user/login/login.component';
 import{ProductTemplateComponent} from './upload product activity/product-template/product-template.component';
@@ -9,6 +9,7 @@ import{SplitTemplateComponent} from './split product activity/split-template/spl
 import{AddCategoryComponent} from './disabledProductActions/add-category/add-category.component';
 import {ProductsDescriptionComponent} from './products-description/products-description.component';
 import{AddGenderComponent} from './add-gender/add-gender.component';
+import{TableFilteringExampleComponent}from './table-filtering-example/table-filtering-example.component';
 import { from } from 'rxjs';
 const routes: Routes = [
 {path:'signin', component: LoginComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
 {path:'addc', component:AddCategoryComponent},
 {path:'Add-Dedcription',component:ProductsDescriptionComponent},
 {path:'Add-gender', component:AddGenderComponent},
+{path:'TableFilteringExample' ,component: TableFilteringExampleComponent},
 {path: '',redirectTo: 'signin',pathMatch: 'full'},
 ];
 
