@@ -5,9 +5,10 @@ import{Router}from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class productService {
 temp : any;
+PeriodicElement
     constructor(private _http: HttpClient , private _router : Router) { }
     getDiabledProduct(){
-        var PeriodicElement = [
+         this.PeriodicElement = [
             {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
             {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
             {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -29,7 +30,24 @@ temp : any;
             {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
             {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
             ];
-            return PeriodicElement;
+            return this.PeriodicElement;
     }
+    updateCategory(category , rowData ){
+        console.log("here is update category");
+        rowData.dataKey.forEach(rowDataElement => {
+            console.log(rowDataElement.name);
+            this.PeriodicElement.forEach(element=>{
+            if(rowDataElement.name == element.name)
+               {element.name = "rawan"}
+            })
+            console.log("==========");
+        });
+        console.log("final result");
+        console.log(this.PeriodicElement)
 
+    }
+    updateGender(gender , rowData){
+      console.log("Gender" , gender);
+    }
+ 
 }

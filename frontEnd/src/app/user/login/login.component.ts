@@ -9,15 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private _userService:userService ,private router: Router) { }
+ errorMessage;
+  constructor(private _userService:userService ,private _router: Router) { }
 
   ngOnInit() {
     window.document.body.style.backgroundColor= "black";
   }
 
   onSubmit(form : NgForm){
-    this._userService.loginUser(form.value.email,form.value.password);
-  }
- 
+    this._userService.loginUser(form.value.email,form.value.password).subscribe(
+      data => {
+            localStorage.setItem('token',data.toString());  
+            
+            this._router.navigate(['/home-page']);
+      },
+      error=>{
+        console.log("here us in the error block");
+              this.errorMessage = error;      
+      })
+}
+
 }

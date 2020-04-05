@@ -1,0 +1,11 @@
+
+<app-main-nav></app-main-nav>
+<div class=" outerDiv col-md-10 col-md-offset-1 card" >
+   <div class="innerDiv">
+    <mat-divider></mat-divider>
+       <h4>Upload Dscriptions</h4>
+       <input class="centerElement element" type="file" name="file" (change)="fileObject($event)"/>
+       <button class="pryButton" type="submit" name="submit" (click)="onUpload()" >Upload</button>
+    </div>
+</div> 
+

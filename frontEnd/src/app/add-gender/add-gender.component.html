@@ -1,0 +1,15 @@
+<mat-toolbar>
+    <span>Select category</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+      <form #category="ngForm" (ngSubmit)="submitData(gender)"  class="pageCenter">
+          <label>Select gender</label>
+            <select name="selectGender" id="#" class="form-control fields"  ngModel >
+                <option value="women">women</option>
+                <option value="men">Men</option>
+                <option value="unisex">unisex</option>
+            </select>
+            <button type="submit" class="btn pryButton">Submit</button>
+      </form>
+     

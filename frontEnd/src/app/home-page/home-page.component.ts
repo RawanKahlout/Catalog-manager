@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import{dataService}from '../data.service';
-import { element } from 'protractor';
+import { element, Key } from 'protractor';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-blocks// to be accceed by html
+preBlocks// to be accceed by html
+blocks : any[]=[];
   constructor(private _dataService : dataService) { }
   ngOnInit() {
-    this.blocks = this._dataService.getBlocksData();
-
-    console.log(this.blocks[0])
-
-  }
+    this.preBlocks = this._dataService.getBlocksData();
+    this.preBlocks.forEach(element => {
+      for (var Key in element) {
+        this.blocks.push(Key)
+      }
+  })
+}
 
 }
+
+

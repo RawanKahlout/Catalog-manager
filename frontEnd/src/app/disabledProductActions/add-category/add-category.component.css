@@ -1,0 +1,46 @@
+.fields{margin: auto;}
+select{
+width: 50%; 
+border: 2px solid #FBAD18;
+text-align: center;
+}
+
+label {
+    display: inline-block;
+    float: left;
+    text-align: right;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #FBAD18;
+    font-size: 16px;
+    background-color: none;
+}
+.pryButton{
+    text-align: center;
+    color:#FBAD18;
+    border: 2px solid #FBAD18;
+    border-radius: 0px 8px 0px 8px;
+    width :20%;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 10px;
+    
+    }
+    .pageCenter{
+        padding-top: 60px;
+        margin: auto;
+        text-align: center;
+    }
+    #category{
+        text-align: center; 
+            height: 600px;
+            width: 600px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 0px;
+            padding-right: 0px;
+            text-align:center;   
+        }
+.fill-remaining-space{
+    width: 100%;
+}

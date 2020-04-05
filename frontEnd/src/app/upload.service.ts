@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
 
 @Injectable({ providedIn: 'root' })
 export class uploadService {
@@ -22,6 +23,17 @@ export class uploadService {
             params: new HttpParams().append('token', localStorage.getItem('token'))
         })
             .subscribe(res => {
+            })
+    }
+    uploadDescriptions(fileObj){
+        this.http.post('http://localhost:3000/api/uploadDescriptions',fileObj, {
+            observe: 'body',
+            params: new HttpParams().append('token', localStorage.getItem('token'))
+        })
+            .subscribe(data => {},
+            error=>{
+                console.log("here ua derek");
+                console.log(error);
             })
     }
     getUploadProductReport() {

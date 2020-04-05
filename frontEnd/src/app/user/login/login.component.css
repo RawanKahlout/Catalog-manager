@@ -31,3 +31,6 @@ label {
         float: right;
         padding: 5px;
     }
+    .errorMessage{
+        padding-top: 10px;
+    }

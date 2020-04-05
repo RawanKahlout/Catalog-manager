@@ -9,17 +9,7 @@ export class userService {
         constructor(private _http: HttpClient ,  private _router: Router) { }
         loginUser(email, password) {
                 return this._http.post('http://localhost:3000/api/login', { email, password })
-                .subscribe(
-                        data => {
-                              localStorage.setItem('token',data.toString());  
-                              
-                              this._router.navigate(['/home-page']);
-                        },
-                        error=>{
-                             
-                                       
-                        }
-                );
+            
         }
        
         isActive(){

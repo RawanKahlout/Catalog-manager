@@ -25,6 +25,12 @@ import { SplitTemplateComponent } from './split product activity/split-template/
 import {MatGridListModule} from '@angular/material/grid-list';
 import{MatCardModule} from '@angular/material/card';
 import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AddCategoryComponent } from './disabledProductActions/add-category/add-category.component';
+import{MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import { ProductsDescriptionComponent } from './products-description/products-description.component';
+import { AddGenderComponent } from './add-gender/add-gender.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +41,10 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/
     HomePageComponent,
     NotFoundComponent,
     DisabledProductComponent,
-    SplitTemplateComponent
+    SplitTemplateComponent,
+    AddCategoryComponent,
+    ProductsDescriptionComponent,
+    AddGenderComponent
 
     
   ],
@@ -59,10 +68,12 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/
     MatGridListModule,
     MatCardModule,
     MatDialogModule,
-  
-    
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AddCategoryComponent,AddGenderComponent]
+
 })
 export class AppModule { }
