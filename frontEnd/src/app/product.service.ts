@@ -99,7 +99,7 @@ export class productService {
             { position: 10, name: 'Adizero-Boston-8 Indigo/Silver/Black',article:'e1022a013-001',price:20,gender:'men',specialprice:100,imageUrl:'1.jpg'},
           
         ];
-       return {data:this.searchedResult,tableName:"disabled"}
+       return this.searchedResult
     }
     updateTableValues(){
      

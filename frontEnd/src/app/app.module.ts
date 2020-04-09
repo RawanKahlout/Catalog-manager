@@ -45,6 +45,7 @@ import { TableProductComponent } from './table-product/table-product.component';
 import { ProductPipe } from './product.pipe';
 import {CdkTableModule}from "@angular/cdk/table";
 import { ProductsComponent } from './products/products.component';
+import { ShowImageComponent } from './popup/show-image/show-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import { ProductsComponent } from './products/products.component';
     MainNavbarComponent,
     TableProductComponent,
     ProductPipe,
-    ProductsComponent
+    ProductsComponent,
+    ShowImageComponent
 
     
   ],
@@ -105,7 +107,7 @@ import { ProductsComponent } from './products/products.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent] 
+  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent] 
 
 })
 export class AppModule { }

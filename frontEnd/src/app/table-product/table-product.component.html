@@ -1,8 +1,17 @@
-<app-main-navbar>
+<app-main-navbar> 
 <div class="container">
-<mat-table #table [dataSource]="dataSource">
+
+  <h4 *ngIf="routerParams == 'Disabled'">Disabled Product</h4>
+  <h4 *ngIf="routerParams == 'Banned'">Banned Product</h4>
+  <h4 *ngIf="routerParams =='Nocategory'">No Category Product</h4>
+  <h4 *ngIf="routerParams == 'NoImage'">No Image Product</h4>
+  <h4 *ngIf="routerParams =='Noprice'">No Price Product</h4>
+  <h4 *ngIf="routerParams =='Outofstock'">Out Of Stock Product</h4>
+
+<input type="search" (keyup)="applyFilter($event)" class="form-control"  placeholder="Search For products ..">
+<mat-table #table [dataSource]="dataSource" matSort>
   <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
-    <mat-header-cell *cdkHeaderCellDef >
+    <mat-header-cell *cdkHeaderCellDef  mat-sort-header>
       <mat-checkbox *ngIf="column.columnDef == 'Select'" (change)="$event ? masterToggle() : null"
       [checked]="selection.hasValue() && isAllSelected()"
       [indeterminate]="selection.hasValue() && !isAllSelected()"
@@ -16,7 +25,8 @@
       [checked]="selection.isSelected(row)"
       [aria-label]="checkboxLabel(row)">
       </mat-checkbox>
-      <div *ngIf="column.columnDef !== 'Select'"> {{ column.cell(row) }}</div>
+      <div *ngIf="column.columnDef =='imageUrl'" > <img src = "../../assets/1.jpg"  class="matTable-img" (click)="onImage(row)"></div>
+      <div *ngIf="column.columnDef !== 'Select' && column.columnDef !== 'imageUrl'"> {{ column.cell(row) }}</div>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

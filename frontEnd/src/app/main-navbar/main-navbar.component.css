@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 180px;
+  width: 200px;
 }
 
 .sidenav .mat-toolbar {
@@ -27,7 +27,6 @@ mat-toolbar {
 
 a.mat-list-item{ color: aliceblue;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-padding-left: 10px;
 padding-top:30px;
 font-size: 14px;
 

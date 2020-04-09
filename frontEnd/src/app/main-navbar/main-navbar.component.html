@@ -5,20 +5,20 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar><a  [routerLink]="['/home-page']"><img src="../../assets/logo-en.png"></a></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/upload-products']">Upload products</a>
-      <a mat-list-item [routerLink]="['/upload-split']" >Upload split</a>
-      <a mat-list-item [routerLink]="['/Add-Dedcription']">Upload Description</a>
-      <a mat-list-item [routerLink]="['/Search-products']">Search For Products </a> 
-      <a mat-list-item [routerLink]="['/Hidden-products/Disabled']" >Disabled Products</a>
-      <a mat-list-item [routerLink]="['/Hidden-products/NoImage']">No image Products</a>
-      <a mat-list-item [routerLink]="['/Hidden-products/Outofstock']">Out of stock Product</a> 
-      <a mat-list-item [routerLink]="['/Hidden-products/Noprice']" >No Price Product</a>
-      <a mat-list-item [routerLink]="['/Hidden-products/Nocategory']">No Category Product</a>
-      <a mat-list-item [routerLink]="['/Hidden-products/Banned']">Banned Product</a> 
+      <a mat-list-item [routerLink]="['/upload-products']"><i class="material-icons">get_app</i>Upload products</a>
+      <a mat-list-item [routerLink]="['/upload-split']"><i class="material-icons">get_app</i>Upload split</a>
+      <a mat-list-item [routerLink]="['/Add-Dedcription']"><i class="material-icons">comment</i>Upload Description</a>
+      <a mat-list-item [routerLink]="['/Search-products']"><i class="material-icons">search</i>Search For Products </a> 
+      <a mat-list-item [routerLink]="['/Hidden-products/Disabled']"><i class="material-icons">pause_circle_outline</i>Disabled Products</a>
+      <a mat-list-item [routerLink]="['/Hidden-products/NoImage']"><i class="material-icons">broken_image</i>No image Products</a>
+      <a mat-list-item [routerLink]="['/Hidden-products/Outofstock']"><i class="material-icons">warning</i>Out of stock Product</a> 
+      <a mat-list-item [routerLink]="['/Hidden-products/Noprice']" ><i class="material-icons">style</i>No Price Product</a>
+      <a mat-list-item [routerLink]="['/Hidden-products/Nocategory']"><i class="material-icons">grid_off</i>No Category Product</a>
+      <a mat-list-item [routerLink]="['/Hidden-products/Banned']"><i class="material-icons">block</i>Banned Product</a> 
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar >
+    <mat-toolbar>
       <button
         type="button"
         aria-label="Toggle sidenav"

@@ -40,7 +40,7 @@ export class DisabledProductComponent implements OnInit {
  
   constructor(private _productService: productService, private _dialog: MatDialog) { }
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.initData);
+    this.dataSource.data = new MatTableDataSource(this.initData);
     this.dataSource.filterPredicate= (data:tableCol ,filter: string): boolean=>{
       const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
         return (currentTerm + (data as { [key: string]: any })[key]);
@@ -160,7 +160,7 @@ export class DisabledProductComponent implements OnInit {
   }
   onSearch(form: NgForm) {
     this.result = this._productService.searchForProduct(form.value.search);
-    this.dataSource.data = this.result;
+    this.dataSource.data = this._productService.searchForProduct(form.value.search);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     console.log(this.result);
