@@ -7,7 +7,6 @@ import { error } from 'protractor';
 export class uploadService {
     temp: any;
     constructor(private http: HttpClient, private _router: Router) { }
-
     uploadTemplate(fileObj) {
         this.http.post('http://localhost:3000/api/uploadProducts', fileObj, {
             observe: 'body',

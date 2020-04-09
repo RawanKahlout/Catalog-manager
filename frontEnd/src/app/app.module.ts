@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,Component } from '@angular/core';
 import { AppRoutingModule , routingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,7 +32,19 @@ import { ProductsDescriptionComponent } from './products-description/products-de
 import { AddGenderComponent } from './add-gender/add-gender.component';
 import { AddDescriptionComponent } from './disabledProductActions/add-description/add-description.component';
 import { TableFilteringExampleComponent } from './table-filtering-example/table-filtering-example.component';
-
+import { AddPriceComponent } from './add-price/add-price.component';
+import { DiscountPriceComponent } from './discount-price/discount-price.component';
+import { JsonMapperPipe } from './pipe/json-mapper.pipe';
+import { ProductStatusComponent } from './product-status/product-status.component';
+import { WarningComponent } from './popup/warning/warning.component';
+import { MainNavbarComponent } from './main-navbar/main-navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { TableProductComponent } from './table-product/table-product.component';
+import { ProductPipe } from './product.pipe';
+import {CdkTableModule}from "@angular/cdk/table";
+import { ProductsComponent } from './products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +60,16 @@ import { TableFilteringExampleComponent } from './table-filtering-example/table-
     ProductsDescriptionComponent,
     AddGenderComponent,
     AddDescriptionComponent,
-    TableFilteringExampleComponent
+    TableFilteringExampleComponent,
+    AddPriceComponent,
+    DiscountPriceComponent,
+    JsonMapperPipe,
+    ProductStatusComponent,
+    WarningComponent,
+    MainNavbarComponent,
+    TableProductComponent,
+    ProductPipe,
+    ProductsComponent
 
     
   ],
@@ -73,11 +94,18 @@ import { TableFilteringExampleComponent } from './table-filtering-example/table-
     MatCardModule,
     MatDialogModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatListModule,
+    CdkTableModule,
+    BrowserModule,
+    BrowserModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent]
+  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent] 
 
 })
 export class AppModule { }

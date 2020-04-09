@@ -3,12 +3,12 @@
     <span class="fill-remaining-space"></span>
     <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
     </mat-toolbar>
-      <form #category="ngForm" (ngSubmit)="submitData(category)"  class="pageCenter">
+      <form #descriptions="ngForm" (ngSubmit)="submitData(descriptions)"  class="pageCenter">
         <label>Arabic Description</label>
-        <textarea class="form-control" name="arabic" rows="4" cols="50"></textarea>
+        <textarea class="form-control" name="arabic" rows="4" cols="50" ngModel></textarea>
         <br>
         <label>English Description</label>
-        <textarea class="form-control" name="english" rows="4" cols="50"></textarea>
+        <textarea class="form-control" name="english" rows="4" cols="50" ngModel></textarea>
         <br>
         <button type="submit" class="btn pryButton">Submit</button>
       </form>

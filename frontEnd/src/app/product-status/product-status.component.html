@@ -1,0 +1,14 @@
+<mat-toolbar>
+    <span>ِAdd Gender</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+      <form #status="ngForm" (ngSubmit)="submitData(status)"  class="pageCenter">
+          <label>Select gender</label>
+            <select name="selectstatus" id="#" class="form-control fields"  ngModel >
+                <option value="instock">instock</option>
+                <option value="outofStock">outofStock</option>
+            </select>
+            <button type="submit" class="btn pryButton">Submit</button>
+      </form>
+     

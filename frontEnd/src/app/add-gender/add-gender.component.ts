@@ -18,7 +18,7 @@ export class AddGenderComponent implements OnInit {
   }
 
   submitData(form: NgForm) {
-    this._productService.updateGender(form.value.selectCategory, this.rowData);
+    this._productService.updateGender(form.value.selectGender, this.rowData);
     this.onClose();
   }
   onClose() {

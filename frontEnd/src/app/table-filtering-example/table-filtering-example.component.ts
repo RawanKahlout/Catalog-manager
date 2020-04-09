@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 export interface PeriodicElement {
   name: string;
@@ -30,8 +31,10 @@ export class TableFilteringExampleComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   ngOnInit() {
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string): boolean => {
       const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
         return (currentTerm + (data as { [key: string]: any })[key] + '◬');

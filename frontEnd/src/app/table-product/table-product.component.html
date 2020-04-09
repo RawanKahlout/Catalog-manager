@@ -1,0 +1,27 @@
+<app-main-navbar>
+<div class="container">
+<mat-table #table [dataSource]="dataSource">
+  <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
+    <mat-header-cell *cdkHeaderCellDef >
+      <mat-checkbox *ngIf="column.columnDef == 'Select'" (change)="$event ? masterToggle() : null"
+      [checked]="selection.hasValue() && isAllSelected()"
+      [indeterminate]="selection.hasValue() && !isAllSelected()"
+      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+        <div *ngIf="column.columnDef !== 'Select'"> {{ column.header }}</div>
+      </mat-header-cell>
+    <mat-cell *cdkCellDef="let row">
+      <mat-checkbox *ngIf="column.columnDef == 'Select'" (click)="$event.stopPropagation()"
+      (change)="$event ? selection.toggle(row) : null"
+      [checked]="selection.isSelected(row)"
+      [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+      <div *ngIf="column.columnDef !== 'Select'"> {{ column.cell(row) }}</div>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+</app-main-navbar>

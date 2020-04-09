@@ -4,14 +4,14 @@
 <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
 </mat-toolbar>
   <form #category="ngForm" (ngSubmit)="submitData(category)"  class="pageCenter">
-      <label>Select category
+      <label>Select category</label>
         <select name="selectCategory" id="#" class="form-control fields"  ngModel >
             <option value="sale">sale</option>
             <option value="limitedEddition">limitedEddition</option>
             <option value="designer">designer</option>
             <option value="women">women</option>
         </select>
-      </label>
+      
         <button type="submit" class="btn pryButton">Submit</button>
   </form>
  

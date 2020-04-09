@@ -10,18 +10,22 @@ import{AddCategoryComponent} from './disabledProductActions/add-category/add-cat
 import {ProductsDescriptionComponent} from './products-description/products-description.component';
 import{AddGenderComponent} from './add-gender/add-gender.component';
 import{TableFilteringExampleComponent}from './table-filtering-example/table-filtering-example.component';
+import{TableProductComponent}from './table-product/table-product.component'
+import{ProductsComponent} from './products/products.component';
 import { from } from 'rxjs';
 const routes: Routes = [
 {path:'signin', component: LoginComponent},
 {path:'upload-products' , component : ProductTemplateComponent},
 {path :'product-report', component: UploadReportsComponent },
 {path :'home-page', component:HomePageComponent},
-{path: 'Disabled-product',component:DisabledProductComponent},
-{path : 'upload-split',component: SplitTemplateComponent},
+{path: 'Search-products',component:DisabledProductComponent},
+{path :'upload-split',component: SplitTemplateComponent},
 {path:'addc', component:AddCategoryComponent},
 {path:'Add-Dedcription',component:ProductsDescriptionComponent},
 {path:'Add-gender', component:AddGenderComponent},
+{path:'Hidden-products/:issue',component:TableProductComponent},
 {path:'TableFilteringExample' ,component: TableFilteringExampleComponent},
+{path :'all', component:ProductsComponent},
 {path: '',redirectTo: 'signin',pathMatch: 'full'},
 ];
 

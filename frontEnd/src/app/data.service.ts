@@ -8,7 +8,7 @@ temp : any;
     constructor(private _http: HttpClient , private _router : Router) { }
     getBlocksData(){
         var data = [
-          {disabledProduct: 5},
+          {disabled: 10},
           {noimage  :300},
           {outOfStock:500},
           {noPrice:600},

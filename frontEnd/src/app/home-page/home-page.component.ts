@@ -12,11 +12,11 @@ blocks : any[]=[];
   constructor(private _dataService : dataService) { }
   ngOnInit() {
     this.preBlocks = this._dataService.getBlocksData();
-    this.preBlocks.forEach(element => {
-      for (var Key in element) {
-        this.blocks.push(Key)
-      }
-  })
+    //this.preBlocks.forEach(element => {
+      //for (var Key in element) {
+       // this.blocks.push(Key)
+     // }
+  //})
 }
 
 }

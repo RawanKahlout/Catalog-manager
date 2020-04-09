@@ -1,0 +1,60 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 180px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.mat-sidenav{
+  background-color: black;
+  text-align: center;
+}
+mat-toolbar {
+  background-color: black;
+  text-align: center;
+  color : aliceblue;
+}
+
+a.mat-list-item{ color: aliceblue;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+padding-left: 10px;
+padding-top:30px;
+font-size: 14px;
+
+}
+a.mat-list-item.activ{ color :#FBAD18 }
+.active-list-item {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color:#FBAD18!important; 
+}
+
+
+.logoutButton{
+  font-size: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  color: #aaaaaa;
+  position: absolute;
+  right: 5px;
+}
+.title-center {
+  margin: 0 auto;
+}
+img{
+  padding-top: 30px;
+  width: 120px;
+  height: auto;
+}
+mat-sidenav-container{
+  background-color: whitesmoke;
+}

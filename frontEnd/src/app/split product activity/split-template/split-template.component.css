@@ -37,6 +37,7 @@
     h4{
       font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
       font-weight: bold;
+      color: black;
     }
     @media screen and ( max-width: 1024px ) {
       img.responsive { width: 60px; }
