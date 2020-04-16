@@ -28,3 +28,6 @@ mat-grid-tile {
  display:block;
  float: none;
 }
+a{
+  text-decoration: none;
+}

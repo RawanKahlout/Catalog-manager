@@ -1,13 +1,15 @@
 <app-main-navbar>
     <section class="container">
         <div class="row">
-        <mat-grid-list cols="3" rowHeight="fit" style="height:500px; width:1000px;" gutterSize="50px" class="myCenter">
+        <mat-grid-list cols="4" rowHeight="fit" style="height:500px; width:1000px;" gutterSize="50px" class="myCenter">
         <mat-grid-tile *ngFor="let entry of preBlocks | jsonMapper">       
+            <a >
                 <div class="block">
                 <img src="../../assets/{{entry.icon}}.svg" width="55" height="55" class="icons">
                 <div class="number"> {{entry.value}}</div>
                 <div class="issue">{{entry.label}}</div>
                 </div>
+            </a>
         </mat-grid-tile>
         </mat-grid-list> 
         </div>

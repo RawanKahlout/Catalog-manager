@@ -13,7 +13,9 @@ temp : any;
           {outOfStock:500},
           {noPrice:600},
           {Nocategory :500},
-          {Banned:600}
+          {Banned:600},
+          {invisible : 0},
+          {description : 0}
             ];
             return data;
     }

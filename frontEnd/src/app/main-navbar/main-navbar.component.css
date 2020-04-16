@@ -57,3 +57,14 @@ img{
 mat-sidenav-container{
   background-color: whitesmoke;
 }
+i{
+  padding-right: 4px;
+}
+.list-unstyled{
+  width: 100%;
+}
+div.mat-list-item-content{
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}

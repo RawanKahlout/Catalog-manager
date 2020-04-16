@@ -1,0 +1,43 @@
+<app-main-navbar>
+    <div class="container">
+        <h4>Edit Featured Product</h4> 
+         <!---- <div class="container">
+            <div>
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="btn-group btn-group-lg col-md-8" >
+                <button class="btn pryButton"(click)="deleteFeatured()">Delete Featured Product</button>
+                </div>
+              </div>
+            </div> -->
+          <input type="search" (keyup)="applyFilter($event)" class="form-control"  placeholder="Search For products ..">
+          <mat-table #table [dataSource]="dataSource" matSort>  
+            <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
+              <mat-header-cell *cdkHeaderCellDef  mat-sort-header class="checkBox">
+                <mat-checkbox *ngIf="column.columnDef == 'Select'" (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                  [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+                <div *ngIf="column.columnDef !== 'Select'"> {{ column.header }}</div>
+              </mat-header-cell>
+              <mat-cell *cdkCellDef="let row">
+                <mat-checkbox *ngIf="column.columnDef == 'Select'" (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)"
+                [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+                <div *ngIf="column.columnDef =='thumbnailImageUrl'" > <img src = {{column.cell(row)}}  class="matTable-img" (click)="onImage(row)"></div>
+                <div *ngIf="column.columnDef !== 'Select' && column.columnDef !== 'thumbnailImageUrl' && column.columnDef !== 'delete' "> {{ column.cell(row) }}</div>
+                <div *ngIf="column.columnDef == 'delete' "><button (click)="deleteFeatured(row)" class="pryButton">Remove</button></div>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+     
+      </div>
+  
+</app-main-navbar>
+    

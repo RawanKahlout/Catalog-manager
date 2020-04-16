@@ -44,20 +44,6 @@ label {
 .fill-remaining-space{
     width: 100%;
 }
-h5{
- color: whitesmoke;
- font-size: 18px;
- margin-top: 20px;
- text-align: center;
-}
-.icon{
-    font-size: 50px;
-    color:#FBAD18;
-  }
-h4{
-    color:#FBAD18;
-    font-weight: bold;
-    font-size: 25px;
-    text-align: center;
-    padding-top: 20px;
+.checked{
+    float: left;
 }

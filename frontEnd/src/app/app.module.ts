@@ -44,8 +44,12 @@ import { MatListModule } from '@angular/material/list';
 import { TableProductComponent } from './table-product/table-product.component';
 import { ProductPipe } from './product.pipe';
 import {CdkTableModule}from "@angular/cdk/table";
-import { ProductsComponent } from './products/products.component';
 import { ShowImageComponent } from './popup/show-image/show-image.component';
+import { SuccessComponent } from './popup/success/success.component';
+import { AddFeaturedProductComponent } from './featured-products/add-featured-product/add-featured-product.component';
+import { EditFeaturedProductComponent } from './featured-products/edit-featured-product/edit-featured-product.component';
+import { AddDiscountPersentageComponent } from './add-discount-persentage/add-discount-persentage.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,8 +74,11 @@ import { ShowImageComponent } from './popup/show-image/show-image.component';
     MainNavbarComponent,
     TableProductComponent,
     ProductPipe,
-    ProductsComponent,
-    ShowImageComponent
+    ShowImageComponent,
+    SuccessComponent,
+    AddFeaturedProductComponent,
+    EditFeaturedProductComponent,
+    AddDiscountPersentageComponent
 
     
   ],
@@ -107,7 +114,7 @@ import { ShowImageComponent } from './popup/show-image/show-image.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent] 
+  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent,SuccessComponent,AddDiscountPersentageComponent] 
 
 })
 export class AppModule { }

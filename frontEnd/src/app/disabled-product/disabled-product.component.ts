@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { productService } from '../product.service';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource} from '@angular/material/table';
 import { SelectionModel ,DataSource } from '@angular/cdk/collections';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { AddCategoryComponent } from '../disabledProductActions/add-category/add-category.component'
@@ -11,8 +14,9 @@ import { JsonMapperPipe } from '../pipe/json-mapper.pipe';
 import { NgForm } from '@angular/forms';
 import { ProductStatusComponent } from '../product-status/product-status.component';
 import { WarningComponent } from '../popup/warning/warning.component';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import { from } from 'rxjs';
+import { ShowImageComponent } from '../popup/show-image/show-image.component';
+import{SuccessComponent}from '../popup/success/success.component';
+import { AddDiscountPersentageComponent } from '../add-discount-persentage/add-discount-persentage.component';
 
 export interface tableCol {
   position: number;
@@ -33,23 +37,26 @@ export class DisabledProductComponent implements OnInit {
   initData =[{ position: 1, name: 'air max', article: 'e1022a013-009', price:200 ,gender:'men',specialprice:100 ,image:'1.jpg'}]
   result;
   displayedColumns: string[] = [ 'select','position', 'name', 'article', 'price', 'gender', 'specialprice', 'image'];
-  dataSource;
+  dataSource = new MatTableDataSource();
   selection = new SelectionModel(true, []);
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) set Paginatorcontent (paginator:MatPaginator){
+    this.dataSource.paginator = paginator
+  }
+  @ViewChild(MatSort ,{static: false}) set content(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
  
   constructor(private _productService: productService, private _dialog: MatDialog) { }
   ngOnInit() {
-    this.dataSource.data = new MatTableDataSource(this.initData);
     this.dataSource.filterPredicate= (data:tableCol ,filter: string): boolean=>{
       const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
         return (currentTerm + (data as { [key: string]: any })[key]);
       }, '').toLowerCase();
       let terms = filter.replace(/\s/g, "|");
     let regEx = new RegExp(terms);
-    console.log(data, filter);
     return regEx.test(dataStr);
     }
+  
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -77,7 +84,7 @@ export class DisabledProductComponent implements OnInit {
   }
 
   changePrice() {
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
     this._dialog.open(AddPriceComponent, {
       width: "60%",
       data: {
@@ -88,7 +95,7 @@ export class DisabledProductComponent implements OnInit {
   }
 
   addDescription() {
-    if (this.checkRows() != true) {
+    if (this.checkRows("Description") != true) {
     this._dialog.open(AddDescriptionComponent, {
       width: "60%",
       data: {
@@ -99,19 +106,22 @@ export class DisabledProductComponent implements OnInit {
   }
 
   enableProduct() { 
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
+    this._dialog.open(SuccessComponent);
     this._productService.enableProduct(this.selection.selected);
+   
     }
   }
 
   disableProduct() {
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
+    this._dialog.open(SuccessComponent);
     this._productService.disableProduct(this.selection.selected);
   }
 }
 
   addGender() {
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
     this._dialog.open(AddGenderComponent, {
       width: "60%",
       data: {
@@ -120,9 +130,18 @@ export class DisabledProductComponent implements OnInit {
     })
   }
   }
-
+  addDiscountPrice() {
+    if (this.checkRows("") != true) {
+    this._dialog.open(AddDiscountPersentageComponent, {
+      width: "60%",
+      data: {
+        dataKey: this.selection.selected
+      }
+    })
+  }
+  }
   addDiscount() {
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
     this._dialog.open(DiscountPriceComponent, {
       width: "60%",
       data: {
@@ -132,7 +151,7 @@ export class DisabledProductComponent implements OnInit {
   }
   }
   changeStatus() {
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
     this._dialog.open(ProductStatusComponent, {
       width: "60%",
       data: {
@@ -143,7 +162,7 @@ export class DisabledProductComponent implements OnInit {
   }
   addCategory() {
 
-    if (this.checkRows() != true) {
+    if (this.checkRows("") != true) {
       this._dialog.open(AddCategoryComponent, {
         width: "60%",
         data: {
@@ -152,19 +171,40 @@ export class DisabledProductComponent implements OnInit {
       });
     }
   }
-  checkRows() {
-    if (this.selection.selected.length == 0) {
-      this._dialog.open(WarningComponent);
+  checkRows(actionName) {
+    if (actionName == 'Description' && this.selection.selected.length > 1 ){
+        if (this.selection.selected.length > 1){
+        this._dialog.open(WarningComponent,{
+          width: "60%",
+          data :{
+            message: 'Select only one product'
+          }
+        });
+        return true
+      }
+    }
+    else if (this.selection.selected.length == 0) {
+      this._dialog.open(WarningComponent,{
+        width: "60%",
+        data:{
+          message:"You have to select a product before any operation"
+        }
+      });
       return true
     }
   }
-  onSearch(form: NgForm) {
-    this.result = this._productService.searchForProduct(form.value.search);
-    this.dataSource.data = this._productService.searchForProduct(form.value.search);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    console.log(this.result);
-    
+  onImage(element) {
+  console.log(element.imageUrl)
+    this._dialog.open(ShowImageComponent, {
+      width: "60%",
+     data: element.imageUrl
+    })
   }
+  onSearch(form: NgForm) {
+    this.dataSource.data = this._productService.searchForProduct(form.value.search);
+    this.result = this.dataSource.data;
+
+  }
+
 }
 

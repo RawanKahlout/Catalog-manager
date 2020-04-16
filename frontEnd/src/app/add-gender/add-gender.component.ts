@@ -11,17 +11,20 @@ import { NgForm } from '@angular/forms';
 })
 export class AddGenderComponent implements OnInit {
   rowData
+  addCategory;
   constructor(private _productService: productService,
     public _dialogRef: MatDialogRef<AddGenderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { this.rowData = data; }
   ngOnInit() {
   }
-
   submitData(form: NgForm) {
-    this._productService.updateGender(form.value.selectGender, this.rowData);
+    this._productService.updateGender(form.value.selectGender,this.rowData);
     this.onClose();
   }
   onClose() {
     this._dialogRef.close();
+  }
+  callCategory(){
+   this.addCategory = 1;
   }
 }

@@ -44,3 +44,9 @@ label {
 .fill-remaining-space{
     width: 100%;
 }
+.form-control{
+    padding: 10px;
+}
+.checked{
+    float: left;
+}

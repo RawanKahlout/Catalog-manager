@@ -11,7 +11,9 @@ import {ProductsDescriptionComponent} from './products-description/products-desc
 import{AddGenderComponent} from './add-gender/add-gender.component';
 import{TableFilteringExampleComponent}from './table-filtering-example/table-filtering-example.component';
 import{TableProductComponent}from './table-product/table-product.component'
-import{ProductsComponent} from './products/products.component';
+import{AddFeaturedProductComponent}from'./featured-products/add-featured-product/add-featured-product.component';
+import{EditFeaturedProductComponent} from './featured-products/edit-featured-product/edit-featured-product.component';
+
 import { from } from 'rxjs';
 const routes: Routes = [
 {path:'signin', component: LoginComponent},
@@ -25,7 +27,8 @@ const routes: Routes = [
 {path:'Add-gender', component:AddGenderComponent},
 {path:'Hidden-products/:issue',component:TableProductComponent},
 {path:'TableFilteringExample' ,component: TableFilteringExampleComponent},
-{path :'all', component:ProductsComponent},
+{path:'Add-Featured-Product',component:AddFeaturedProductComponent},
+{path:'Edit-Featured-Product' ,component: EditFeaturedProductComponent},
 {path: '',redirectTo: 'signin',pathMatch: 'full'},
 ];
 

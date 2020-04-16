@@ -13,7 +13,6 @@ export class ShowImageComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { this.imageUrl = data; }
 
   ngOnInit() {
-    console.log(this.imageUrl)
   }
   onClose() {
     this._dialogRef.close();

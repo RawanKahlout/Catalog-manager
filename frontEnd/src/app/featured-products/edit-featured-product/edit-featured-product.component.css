@@ -1,0 +1,40 @@
+h4{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    font-weight: bold;
+    color: black;
+    padding-top: 100px;
+  }
+  .container{
+    padding-top: 50px;
+  }
+  .form-control{
+    width: 40%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+  }
+  .matTable-img{
+    width: 100px;
+    height: 100px;
+  }
+  .pryButton{
+    text-align: center;
+    color:#FBAD18;
+    border: 2px solid black;
+    border-radius: 0px 8px 0px 8px;
+    background-color: black;
+    width :100%;
+    font-weight: bold;
+    margin: auto;
+    font-size: 12px;
+    }
+.checkBox{
+  
+      width: 30%;
+    }
+.myCenter{
+      color: black;
+    }
+.origin{
+      width: 100%;
+    }
