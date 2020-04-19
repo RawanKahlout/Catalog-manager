@@ -158,14 +158,9 @@ constructor(private _productService: productService, private _dialog: MatDialog,
     })
   }
   onSearch(form: NgForm) {
-    var products = form.value.products
-    //let terms = products.split(" ");
-    //console.log(terms);
-    //let regEx = new RegExp(terms);
-    //console.log(regEx);
-    this.dataSource.data=this._productService.getSearchedFeaturedProduct();
+    var ArrayOfArticles = form.value.search.split(/\s/);
+    this.dataSource.data=this._productService.getSearchedFeaturedProduct(ArrayOfArticles);
     this.result= this.dataSource.data;
-    console.log(this.result)
   }
 }
 function mapper(type, value) {

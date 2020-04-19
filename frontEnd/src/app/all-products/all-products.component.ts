@@ -5,18 +5,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import { SelectionModel ,DataSource } from '@angular/cdk/collections';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { AddCategoryComponent } from '../disabledProductActions/add-category/add-category.component'
-import { AddGenderComponent } from '../add-gender/add-gender.component';
-import { AddDescriptionComponent } from '../disabledProductActions/add-description/add-description.component';
-import { AddPriceComponent } from '../add-price/add-price.component';
-import { DiscountPriceComponent } from '../discount-price/discount-price.component';
+import { AddCategoryComponent } from '../ProductActions/add-category/add-category.component';
+import { AddGenderComponent } from '../ProductActions/add-gender/add-gender.component';
+import { AddDescriptionComponent } from '../ProductActions/add-description/add-description.component';
+import { AddPriceComponent } from '../ProductActions/add-price/add-price.component';
+import { DiscountPriceComponent } from '../ProductActions/discount-price/discount-price.component';
 import { JsonMapperPipe } from '../pipe/json-mapper.pipe';
 import { NgForm } from '@angular/forms';
-import { ProductStatusComponent } from '../product-status/product-status.component';
+import { ProductStatusComponent } from '../ProductActions/product-status/product-status.component';
 import { WarningComponent } from '../popup/warning/warning.component';
 import { ShowImageComponent } from '../popup/show-image/show-image.component';
 import{SuccessComponent}from '../popup/success/success.component';
-import { AddDiscountPersentageComponent } from '../add-discount-persentage/add-discount-persentage.component';
+import { AddDiscountPersentageComponent } from '../ProductActions/add-discount-persentage/add-discount-persentage.component';
 
 export interface tableCol {
   position: number;
@@ -29,11 +29,11 @@ export interface tableCol {
 }
 const ELEMENT_DATA: tableCol[]=[]
 @Component({
-  selector: 'app-disabled-product',
-  templateUrl: './disabled-product.component.html',
-  styleUrls: ['./disabled-product.component.css']
+  selector: 'app-all-products',
+  templateUrl: './all-products.component.html',
+  styleUrls: ['./all-products.component.css']
 })
-export class DisabledProductComponent implements OnInit {
+export class AllProductsComponent implements OnInit {
   initData =[{ position: 1, name: 'air max', article: 'e1022a013-009', price:200 ,gender:'men',specialprice:100 ,image:'1.jpg'}]
   result;
   displayedColumns: string[] = [ 'select','position', 'name', 'article', 'price', 'gender', 'specialprice', 'image'];
@@ -201,7 +201,8 @@ export class DisabledProductComponent implements OnInit {
     })
   }
   onSearch(form: NgForm) {
-    this.dataSource.data = this._productService.searchForProduct(form.value.search);
+    var ArrayOfArticles = form.value.search.split(/\s/);
+    this.dataSource.data = this._productService.searchForAllProduct(ArrayOfArticles);
     this.result = this.dataSource.data;
 
   }

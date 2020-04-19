@@ -8,14 +8,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ShowImageComponent } from '../popup/show-image/show-image.component';
 import { Params, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { AddCategoryComponent } from '../disabledProductActions/add-category/add-category.component'
-import { AddGenderComponent } from '../add-gender/add-gender.component';
-import { AddDescriptionComponent } from '../disabledProductActions/add-description/add-description.component';
-import { AddPriceComponent } from '../add-price/add-price.component';
-import { DiscountPriceComponent } from '../discount-price/discount-price.component';
+import { AddCategoryComponent } from '../ProductActions/add-category/add-category.component'
+import { AddGenderComponent } from '../ProductActions/add-gender/add-gender.component';
+import { AddDescriptionComponent } from '../ProductActions/add-description/add-description.component';
+import { AddPriceComponent } from '../ProductActions/add-price/add-price.component';
+import { DiscountPriceComponent } from '../ProductActions/discount-price/discount-price.component';
 import { JsonMapperPipe } from '../pipe/json-mapper.pipe';
 import { NgForm } from '@angular/forms';
-import { ProductStatusComponent } from '../product-status/product-status.component';
+import { ProductStatusComponent } from '../ProductActions/product-status/product-status.component';
 import { WarningComponent } from '../popup/warning/warning.component';
 import { SuccessComponent } from '../popup/success/success.component';
 import { from } from 'rxjs';
@@ -52,11 +52,11 @@ export interface tableCol {
   visiblityId: number;
 }
 @Component({
-  selector: 'app-table-product',
-  templateUrl: './table-product.component.html',
-  styleUrls: ['./table-product.component.css']
+  selector: 'app-hidden-products',
+  templateUrl: './hidden-products.component.html',
+  styleUrls: ['./hidden-products.component.css']
 })
-export class TableProductComponent implements OnInit {
+export class HiddenProductsComponent implements OnInit {
   returnedValue;
   dataSource = new MatTableDataSource();
   displayedColumns;
@@ -89,9 +89,12 @@ export class TableProductComponent implements OnInit {
       return regEx.test(dataStr);
     }
   }
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) set Paginatorcontent (paginator:MatPaginator){
+    this.dataSource.paginator = paginator
+  }
+  @ViewChild(MatSort ,{static: false}) set content(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
   selection = new SelectionModel(true, []);
 
 columns = [
@@ -140,15 +143,11 @@ getTableData(issueName){
       data => {
         this.result = data;
         this.count=this.result.count;
-        console.log(this.count);
         if (this.count == 0){
           const text = document.getElementById('content');
-          text.innerHTML += "<p style='font-size:30px;text-align:center;font-weight:bold;'class='myCenter'>No product here !</p>"
+          text.innerHTML += "<p style='padding-top:100px;font-size:30px;text-align:center;font-weight:bolder;class=centerThing'>No product here !</p>"
           return}
         this.dataSource.data = this.result.data;
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-
       },
       error => {
         console.log("ERROR", error)

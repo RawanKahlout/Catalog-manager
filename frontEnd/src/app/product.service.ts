@@ -9,7 +9,7 @@ export class productService {
     temp: any;
     searchedResult
     constructor(private _http: HttpClient, private _router: Router , private _dialog :MatDialog ) { }
-    searchForProduct(serchedValue) {
+    searchForAllProduct(serchedValue) {
         this.searchedResult= [
             { position: 1, name: 'air max', article: 'e1022a013-009', price:200 ,gender:'men',specialprice:100 ,imageUrl:'https://admin.nejree.com/pub/media/catalog/product/1/_/1_239.jpg'},
             { position: 2, name: 'air zoom', article: 'e1022a013-008', price:300 ,gender:'men',specialprice:100 ,imageUrl:'1.jpg'},
@@ -88,7 +88,7 @@ export class productService {
             })
         });   
     }
-    getSearchedFeaturedProduct(){
+    getSearchedFeaturedProduct(ArrayOfArticles){
           this.searchedResult= [
             { position: 1, name: 'air max', article: 'e1022a013-009', price:200 ,gender:'men',specialprice:100 ,imageUrl:'https://admin.nejree.com/pub/media/catalog/product/1/_/1_239.jpg'},
             { position: 2, name: 'air zoom', article: 'e1022a013-008', price:300 ,gender:'men',specialprice:100 ,imageUrl:'1.jpg'},
