@@ -1,7 +1,7 @@
 <app-main-navbar>
     <section class="container">
         <div class="row">
-        <mat-grid-list cols="4" rowHeight="fit" style="height:500px; width:1000px;" gutterSize="50px" class="myCenter">
+        <mat-grid-list rowHeight="fit" style="width:1000px;height:500px;"  gutterSize="50px" class="myCenter"  [cols]="breakpoint"  (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor="let entry of preBlocks | jsonMapper">       
             <a routerLink="{{entry.url}}" >
                 <div class="block">

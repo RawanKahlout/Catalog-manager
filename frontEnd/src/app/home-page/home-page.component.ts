@@ -9,16 +9,22 @@ import { element, Key } from 'protractor';
 export class HomePageComponent implements OnInit {
 preBlocks// to be accceed by html
 blocks : any[]=[];
+breakpoint
+
   constructor(private _dataService : dataService) { }
   ngOnInit() {
     this.preBlocks = this._dataService.getBlocksData();
+    this.breakpoint = (window.innerWidth <= 100) ? 1 : 4;
+
     //this.preBlocks.forEach(element => {
       //for (var Key in element) {
        // this.blocks.push(Key)
      // }
   //})
 }
+onResize(event) {
+  this.breakpoint = (event.target.innerWidth <= 100) ? 1 : 4 ;
 
 }
 
-
+}

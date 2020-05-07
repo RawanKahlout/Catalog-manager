@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
@@ -9,8 +9,8 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ShowImageComponent } from '../../popup/show-image/show-image.component';
 import { Params, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import{WarningComponent}from'../../popup/warning/warning.component';
-import{SuccessComponent}from '../../popup/success/success.component';
+import { WarningComponent } from '../../popup/warning/warning.component';
+import { SuccessComponent } from '../../popup/success/success.component';
 
 export interface tableCol {
   ParentSky: string;
@@ -54,11 +54,11 @@ export class EditFeaturedProductComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   selection = new SelectionModel(true, []);
-columns = [
+  columns = [
     { columnDef: 'thumbnailImageUrl', header: 'Thumbnail Image', cell: (element: any) => `${element.thumbnailImageUrl}` },
     { columnDef: 'parentSku', header: 'Parent Sku', cell: (element: any) => `${element.parentSku}` },
     { columnDef: 'parentId', header: 'Parent Id', cell: (element: any) => `${element.parentId}` },
-    { columnDef: 'owner', header:'Owner', cell: (element: any) => mapper("", element.owner) },
+    { columnDef: 'owner', header: 'Owner', cell: (element: any) => mapper("", element.owner) },
     { columnDef: 'delete', header: 'Delete', cell: (element: any) => `${element.delete}` },
     { columnDef: 'Select', header: 'Select', cell: (element: any) => `${element.Select}` },
     { columnDef: 'specialprice', header: 'specialprice', cell: (element: any) => mapper("", element.specialprice) },
@@ -95,11 +95,11 @@ columns = [
   routerParams: Params;
   result;
   count;
-constructor(private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute) { 
-   
-}
+  constructor(private _changeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute) {
+
+  }
   ngOnInit() {
-    this.displayedColumns = ['Select','thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice','discountPercentage','owner','delete'];
+    this.displayedColumns = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner', 'delete'];
     this.dataSource.data = this._productService.getCurrentFeaturedProduct();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -133,14 +133,22 @@ constructor(private _productService: productService, private _dialog: MatDialog,
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  deleteFeatured(row){
-   this._productService.deleteOneFeaturedProduct(row);
+  deleteFeatured(row) {
+    this.deleteRow(row);
   }
   onImage(row) {
     this._dialog.open(ShowImageComponent, {
       width: "60%",
       data: row.imageUrl
     })
+  }
+  deleteRow(row) {
+    var data = this.dataSource.data;
+    data.splice(data.indexOf(row), 1);
+    console.log(data.indexOf(row));
+    this.dataSource.data = data;
+    //this._changeDetectorRef.detectChanges();
+    this._productService.deleteOneFeaturedProduct(row);
   }
 }
 function mapper(type, value) {

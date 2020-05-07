@@ -23,7 +23,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SplitTemplateComponent } from './split product activity/split-template/split-template.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import{MatCardModule} from '@angular/material/card';
-import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { AddDescriptionComponent } from './ProductActions/add-description/add-description.component';
 import{MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
@@ -106,9 +106,9 @@ import { AddDiscountPersentageComponent } from './ProductActions/add-discount-pe
     CdkTableModule,
     BrowserModule,
     BrowserModule,
-
+    
   ],
-  providers: [],
+  providers: [MatDialogConfig],
   bootstrap: [AppComponent],
   entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent,SuccessComponent,AddDiscountPersentageComponent] 
 

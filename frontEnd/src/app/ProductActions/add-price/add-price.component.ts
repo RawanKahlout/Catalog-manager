@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { productService } from '../../product.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { error } from 'protractor';
 @Component({
   selector: 'app-add-price',
   templateUrl: './add-price.component.html',
@@ -17,10 +18,14 @@ export class AddPriceComponent implements OnInit {
   ngOnInit() {
   }
   submitData(form: NgForm) {
-    this._productService.addPrice(form.value.price, this.rowData);
-    this.onClose();
+    this._productService.get("noImages",this.data,form.value.price).subscribe(
+    (response)=>{
+      this.onClose(1);
+    }
+    );
+    
   }
-  onClose() {
-    this._dialogRef.close();
+  onClose(status) {
+    this._dialogRef.close(status);
   }
 }
