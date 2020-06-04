@@ -4,20 +4,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import{MatTab}from '@angular/material/tabs'
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { AddCategoryComponent } from '../ProductActions/add-category/add-category.component';
-import { AddGenderComponent } from '../ProductActions/add-gender/add-gender.component';
-import { AddDescriptionComponent } from '../ProductActions/add-description/add-description.component';
-import { AddPriceComponent } from '../ProductActions/add-price/add-price.component';
-import { DiscountPriceComponent } from '../ProductActions/discount-price/discount-price.component';
 import { NgForm } from '@angular/forms';
-import { ProductStatusComponent } from '../ProductActions/product-status/product-status.component';
 import { WarningComponent } from '../popup/warning/warning.component';
 import { ShowImageComponent } from '../popup/show-image/show-image.component';
 import { SuccessComponent } from '../popup/success/success.component';
-import { AddDiscountPersentageComponent } from '../ProductActions/add-discount-persentage/add-discount-persentage.component';
-import{FilterComponent}from '../popup/filter/filter.component';
+import{ChangeArticleComponent}from '../ProductActions/change-article/change-article.component';
+import{ChangeSizeComponent}from '../ProductActions/change-size/change-size.component';
 export interface tableCol {
   position: number;
   name: string;
@@ -29,11 +22,11 @@ export interface tableCol {
 }
 const ELEMENT_DATA: tableCol[] = []
 @Component({
-  selector: 'app-all-products',
-  templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.css']
+  selector: 'app-all-skus',
+  templateUrl: './all-skus.component.html',
+  styleUrls: ['./all-skus.component.css']
 })
-export class AllProductsComponent implements OnInit {
+export class AllSkusComponent implements OnInit {
   initData = [{ position: 1, name: 'air max', article: 'e1022a013-009', price: 200, gender: 'men', specialprice: 100, image: '1.jpg' }]
   result;
   displayedColumns: string[] = ['select', 'position', 'name', 'article', 'price', 'gender', 'specialprice', 'image'];
@@ -46,6 +39,7 @@ export class AllProductsComponent implements OnInit {
     this.dataSource.sort = sort;
   }
   constructor(private _productService: productService, private _dialog: MatDialog) { }
+
   ngOnInit() {
     this.dataSource.filterPredicate = (data: tableCol, filter: string): boolean => {
       const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
@@ -55,7 +49,6 @@ export class AllProductsComponent implements OnInit {
       let regEx = new RegExp(terms);
       return regEx.test(dataStr);
     }
-
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -78,48 +71,6 @@ export class AllProductsComponent implements OnInit {
     filterValue = filterValue.toLowerCase();
     return this.dataSource.filter = filterValue;
   }
-  changePrice() {
-    this.openDialog(AddPriceComponent, this.selection.selected, "addPrice");
-  }
-  addDescription() {
-    this.openDialog(AddDescriptionComponent, this.selection.selected,"addDescription")
-  }
-  enableProduct() {
-    this.openDialog(SuccessComponent, this.selection.selected,"enableProduct")
-  }
-  disableProduct() {
-    this.openDialog(SuccessComponent, this.selection.selected,"disableProduct")
-    this._productService.disableProduct(this.selection.selected);
-  }
-  addGender() {
-    this.openDialog(AddGenderComponent, this.selection.selected,"updateGender")
-  }
-  addDiscountPrice() {
-   this.openDialog(AddDiscountPersentageComponent, this.selection.selected,"addDiscountPrice");
-  }
-  addDiscount() {
-    this.openDialog(DiscountPriceComponent, this.selection.selected, "")
-  }
-  changeStatus() {
-    this.openDialog(ProductStatusComponent, this.selection.selected,"changeStatus");
-  }
-  addCategory() {
-    this.openDialog(AddCategoryComponent, this.selection.selected,"updateCategory")
-  }
-  onImage(element) {
-    console.log(element.imageUrl)
-    this._dialog.open(ShowImageComponent, {
-      width: "60%",
-      data: element.imageUrl
-    })
-  }
-  onSearch(form: NgForm) {
-    var ArrayOfArticles = form.value.search.split(/\s/).join(',');
-    this._productService.searchForAllProduct(ArrayOfArticles).subscribe(data=>{
-      this.result = data;
-      this.dataSource.data=this.result.data;
-  });
-  }
   openDialog(DialogBodyComponent, data, actionName) {
     if (this.checkRows(actionName) != true) {
       const dialogConfig = new MatDialogConfig();
@@ -135,18 +86,7 @@ export class AllProductsComponent implements OnInit {
     }
   }
   checkRows(actionName) {
-    if (actionName == 'addDescription' && this.selection.selected.length > 1) {
-      if (this.selection.selected.length > 1) {
-        this._dialog.open(WarningComponent, {
-          width: "60%",
-          data: {
-            message: 'Select only one product'
-          }
-        });
-        return true
-      }
-    }
-    else if (this.selection.selected.length == 0) {
+  if (this.selection.selected.length == 0) {
       this._dialog.open(WarningComponent, {
         width: "60%",
         data: {
@@ -175,13 +115,28 @@ export class AllProductsComponent implements OnInit {
       })
     });
   }
-  filter(){
-  this._dialog.open(FilterComponent,
-    {
-    //  panelClass: 'myapp-no-padding-dialog',
-      width : "60%",
-      height:"60%"
+  onSearch(form: NgForm) {
+    var ArrayOfArticles = form.value.search.split(/\s/).join(',');
+    this._productService.searchForAllSkus(ArrayOfArticles).subscribe(data => {
+      this.result = data;
+      this.dataSource.data = this.result.data;
+    });
+  }
+  onImage(element) {
+    console.log(element.imageUrl)
+    this._dialog.open(ShowImageComponent, {
+      width: "60%",
+      data: element.imageUrl
     })
   }
+  changeSize(){
+    this.openDialog(ChangeSizeComponent, this.selection.selected,"changeSize")
+  }
+  changeArticle(){
+    this.openDialog(ChangeArticleComponent, this.selection.selected,"changeArticle")
+  }
+  enable(){ this.openDialog(SuccessComponent, this.selection.selected,"enableProduct")}
+  disable(){
+  this.openDialog(SuccessComponent, this.selection.selected,"disableProduct")
+  this._productService.disableProduct(this.selection.selected);}
 }
-

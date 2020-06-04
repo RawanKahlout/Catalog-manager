@@ -158,11 +158,14 @@ constructor(private _productService: productService, private _dialog: MatDialog,
     })
   }
   onSearch(form: NgForm) {
-    var ArrayOfArticles = form.value.search.split(/\s/);
-    this.dataSource.data=this._productService.getSearchedFeaturedProduct(ArrayOfArticles);
-    this.result= this.dataSource.data;
+      var ArrayOfArticles = form.value.search.split(/\s/).join(',');
+      this._productService.searchForAllProduct(ArrayOfArticles).subscribe(data=>{
+        this.result = data;
+        this.dataSource.data=this.result.data;
+    });
+    }
   }
-}
+
 function mapper(type, value) {
   if (!value) return "N/A";
   if (type == "date") return (new Date(value)).toLocaleDateString();

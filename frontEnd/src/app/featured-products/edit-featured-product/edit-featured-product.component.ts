@@ -100,7 +100,23 @@ export class EditFeaturedProductComponent implements OnInit {
   }
   ngOnInit() {
     this.displayedColumns = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner', 'delete'];
-    this.dataSource.data = this._productService.getCurrentFeaturedProduct();
+    this._productService.getDaynamic("featured").subscribe(
+      data=>{
+        this._productService.getDaynamic("featured").subscribe(
+          data => {
+          this.result = data;
+                 this.count=this.result.count;
+                  if (this.count == 0){
+                    const text = document.getElementById('content');
+                    text.innerHTML += "<p style='padding-top:100px;font-size:30px;text-align:center;font-weight:bolder;class=centerThing'>No product here !</p>"
+                    return}
+                   this.dataSource.data = this.result.data;
+                },
+                error => {
+                  console.log("ERROR", error)
+               }
+              )
+    });
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.dataSource.filterPredicate = (data: tableCol, filter: string): boolean => {

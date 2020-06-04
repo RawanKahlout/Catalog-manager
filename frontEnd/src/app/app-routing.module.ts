@@ -11,7 +11,7 @@ import{AddGenderComponent} from './ProductActions/add-gender/add-gender.componen
 import{HiddenProductsComponent}from './hidden-products/hidden-products.component'
 import{AddFeaturedProductComponent}from'./featured-products/add-featured-product/add-featured-product.component';
 import{EditFeaturedProductComponent} from './featured-products/edit-featured-product/edit-featured-product.component';
-
+import{AllSkusComponent} from './all-skus/all-skus.component';
 import { from } from 'rxjs';
 const routes: Routes = [
 {path:'signin', component: LoginComponent},
@@ -25,6 +25,7 @@ const routes: Routes = [
 {path:'Hidden-products/:issue',component:HiddenProductsComponent},
 {path:'Add-Featured-Product',component:AddFeaturedProductComponent},
 {path:'Edit-Featured-Product' ,component: EditFeaturedProductComponent},
+{path:'search-skus', component: AllSkusComponent},
 {path: '',redirectTo: 'signin',pathMatch: 'full'},
 ];
 
@@ -33,4 +34,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponent =[LoginComponent,UploadReportsComponent,HomePageComponent , ProductsDescriptionComponent];
+export const routingComponent =[LoginComponent,UploadReportsComponent,HomePageComponent , ProductsDescriptionComponent,AllSkusComponent];

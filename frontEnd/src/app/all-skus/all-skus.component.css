@@ -24,7 +24,7 @@ table {
     margin: 10px;
     }
     .form-control{
-      width: 50%;
+      width: 40%;
       margin-left: 10px;
       margin-bottom: 10px;
       margin-top: 100px;
@@ -50,7 +50,7 @@ table {
       font-size: 14px;
     }
     .origin{
-      width: 90%;
+      width: 100%;
     }
  
     label {
@@ -59,25 +59,4 @@ table {
       text-align: left;
       font-size: 15px;
       font-weight: bold;
-    }
-    .search {
-      border: 0.5px solid #D3D3D3	;
-      border-radius: 5px;
-      height: 40px;
-      width: 90%;
-      padding: 2px 23px 2px 30px;
-      outline: 0;
-      background-color: #f5f5f5;
-      background-color: white;
-      margin-left:100px;
-    }
-    .search:hover, .search:focus {
-      border: 1.5px solid  #FBAD18;;
-      background-color: white;
-    }
-    button{
-      border-radius: 5px;
-    }
-    .container{
-      margin-top: 50px;
     }

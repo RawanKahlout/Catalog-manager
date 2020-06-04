@@ -47,6 +47,13 @@ import { SuccessComponent } from './popup/success/success.component';
 import { AddFeaturedProductComponent } from './featured-products/add-featured-product/add-featured-product.component';
 import { EditFeaturedProductComponent } from './featured-products/edit-featured-product/edit-featured-product.component';
 import { AddDiscountPersentageComponent } from './ProductActions/add-discount-persentage/add-discount-persentage.component';
+import { AllSkusComponent } from './all-skus/all-skus.component';
+import { ChangeArticleComponent } from './ProductActions/change-article/change-article.component';
+import { ChangeSizeComponent } from './ProductActions/change-size/change-size.component';
+import { FilterComponent } from './popup/filter/filter.component';
+import{MatTabsModule}from '@angular/material/tabs'
+import{MatSlideToggleModule}from '@angular/material/slide-toggle';
+import{MatSliderModule}from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -74,8 +81,12 @@ import { AddDiscountPersentageComponent } from './ProductActions/add-discount-pe
     SuccessComponent,
     AddFeaturedProductComponent,
     EditFeaturedProductComponent,
-    AddDiscountPersentageComponent
-
+    AddDiscountPersentageComponent,
+    AllSkusComponent,
+    ChangeArticleComponent,
+    ChangeSizeComponent,
+    FilterComponent,
+    
     
   ],
   imports: [
@@ -106,11 +117,14 @@ import { AddDiscountPersentageComponent } from './ProductActions/add-discount-pe
     CdkTableModule,
     BrowserModule,
     BrowserModule,
-    
+    MatTabsModule,
+    MatSlideToggleModule,
+    MatSliderModule
   ],
   providers: [MatDialogConfig],
   bootstrap: [AppComponent],
-  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent,SuccessComponent,AddDiscountPersentageComponent] 
+  entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent,SuccessComponent,AddDiscountPersentageComponent
+  ,ChangeArticleComponent,ChangeSizeComponent,FilterComponent] 
 
 })
 export class AppModule { }

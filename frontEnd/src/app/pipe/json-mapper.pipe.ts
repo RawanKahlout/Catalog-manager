@@ -6,13 +6,25 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class JsonMapperPipe implements PipeTransform {
   route = "/Hidden-products"
   struct = {
+    all:{
+      icon: "disabledProduct",
+      color: "",
+      label: "Disabled",
+      url:"/Hidden-products/Disabled"
+    },
+    allSku: {
+      icon: "disabledProduct",
+      color: "",
+      label: "Disabled",
+      url:"/Hidden-products/Disabled"
+    },
     disabled: {
       icon: "disabledProduct",
       color: "",
       label: "Disabled",
       url:"/Hidden-products/Disabled"
     },
-    noimage: {
+    noImages: {
       icon: "noimage",
       color: "",
       label: "No image",
@@ -30,13 +42,13 @@ export class JsonMapperPipe implements PipeTransform {
       label: "No price",
       url:"/Hidden-products/Noprice"
     },
-    Nocategory: {
+    noCategories: {
       icon: "Nocategory",
       color: "",
       label: "No category",
       url: "/Hidden-products/Nocategory"
     },
-    Banned: {
+    banned: {
       icon: "Banned",
       color: "",
       label: "Banned",
@@ -48,21 +60,40 @@ export class JsonMapperPipe implements PipeTransform {
       label: "Invisible",
       url: "/Hidden-products/Invisible"
     },
-    description: {
+    noArabicDescription: {
       icon: "description",
       color: "",
-      label: "description",
+      label: "no Arabic Description",
       url: "/Hidden-products/Nodescription"
     },
+    noEnglishDescription: {
+      icon: "description",
+      color: "",
+      label: "no English Description",
+      url: "/Hidden-products/Nodescription"
+    },
+    differentPrice: {
+      icon: "noPrice",
+      color: "",
+      label: "Different Price",
+      url: "/Hidden-products/Nodescription"
+    },
+    description:{
+      icon: "description",
+      color: "",
+      label: "no English Description",
+      url: "/Hidden-products/Nodescription"
+    }
+
   }
   transform(value: any, ...args: any[]): any {
     let Json = [];
-    value.forEach(element => {
+    let temp =[];
+    temp.push(value);
+    temp.forEach(element => {
       for (var Key in element) {
         Json.push({ key: Key, value: element[Key], icon:this.struct[Key].icon, label:this.struct[Key].label, url : this.struct[Key].url });
-
       }
-
     })
     return Json;
     //  for (let key in value) {

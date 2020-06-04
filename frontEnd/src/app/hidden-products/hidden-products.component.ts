@@ -126,27 +126,26 @@ export class HiddenProductsComponent implements OnInit {
     { columnDef: 'visiblityId', header: 'visiblityId', cell: (element: any) => mapper("", element.visiblityId) }
   ];
   common = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner'];
-  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; Nodescription = this.common;
+  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; noArabicDescription = this.common;noEnglishDescription = this.common;disabledToParent = this.common;
+  outOfStockToParent=this.common;differentPrice=this.common;
   NoImage = ['Select', 'parentId', 'parentSku', 'price', 'owner'];
   Noprice = ['Select', 'parentId', 'parentSku', 'brand', 'owner', 'thumbnailImageUrl'];
 
   getTableData(issueName) {
-    this.dataSource.data = this._productService.getDaynamic(issueName);
-    //this._productService.getDaynamic(issueName).subscribe(
-    //data => {
-    //this.result = data;
-    //        this.count=this.result.count;
-    //        if (this.count == 0){
-    //          const text = document.getElementById('content');
-    //          text.innerHTML += "<p style='padding-top:100px;font-size:30px;text-align:center;font-weight:bolder;class=centerThing'>No product here !</p>"
-    //          return}
-    //        this.dataSource.data = this.result.data;
-    //      },
-    //      error => {
-    //        console.log("ERROR", error)
-    //      }
-    //    )
-
+    this._productService.getDaynamic(issueName).subscribe(
+    data => {
+    this.result = data;
+           this.count=this.result.count;
+            if (this.count == 0){
+              const text = document.getElementById('content');
+              text.innerHTML += "<p style='padding-top:100px;font-size:30px;text-align:center;font-weight:bolder;class=centerThing'>No product here !</p>"
+              return}
+             this.dataSource.data = this.result.data;
+          },
+          error => {
+            console.log("ERROR", error)
+         }
+        )
   }
   getTableHeader(tableName) {
     switch (tableName) {
@@ -181,9 +180,25 @@ export class HiddenProductsComponent implements OnInit {
         this.getTableData('invisible')
         return this.invisible;
       }
-      case "Nodescription": {
-        this.getTableData('disabled')
-        return this.Nodescription;
+      case "disabledToParent": {
+        this.getTableData('disabledToParent')
+        return this.disabledToParent;
+      }
+      case "outOfStockToParent": {
+        this.getTableData('outOfStockToParent')
+        return this.outOfStockToParent;
+      }
+      case "noArabicDescription": {
+        this.getTableData('noArabicDescription')
+        return this.noArabicDescription;
+      }
+      case "noEnglishDescription": {
+        this.getTableData('noEnglishDescription')
+        return this.noEnglishDescription;
+      }
+      case "differentPrice": {
+        this.getTableData('differentPrice')
+        return this.differentPrice;
       }
       default:
         return "No data today"
