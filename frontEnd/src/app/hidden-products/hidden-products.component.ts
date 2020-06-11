@@ -13,6 +13,8 @@ import { AddPriceComponent } from '../ProductActions/add-price/add-price.compone
 import { ProductStatusComponent } from '../ProductActions/product-status/product-status.component';
 import { WarningComponent } from '../popup/warning/warning.component';
 import { SuccessComponent } from '../popup/success/success.component';
+import{ShowSkusComponent} from '../ProductActions/show-skus/show-skus.component';
+import{dataService}from '../data.service';
 export interface tableCol {
   ParentSky: string;
   specialprice: number;
@@ -55,9 +57,9 @@ export class HiddenProductsComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns;
   routerParams: Params;
-  result;
-  count;
-  constructor(private _MatDialogConfig: MatDialogConfig, private _ChangeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute) {
+  result;count;
+  constructor(private _MatDialogConfig: MatDialogConfig, private _ChangeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute,
+    private _dataService : dataService ) {
     this._router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
@@ -126,11 +128,13 @@ export class HiddenProductsComponent implements OnInit {
     { columnDef: 'visiblityId', header: 'visiblityId', cell: (element: any) => mapper("", element.visiblityId) }
   ];
   common = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner'];
-  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; noArabicDescription = this.common;noEnglishDescription = this.common;disabledToParent = this.common;
+  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; noDescription = this.common;disabledToParent = this.common;differentLanguages=this.common;
   outOfStockToParent=this.common;differentPrice=this.common;
   NoImage = ['Select', 'parentId', 'parentSku', 'price', 'owner'];
   Noprice = ['Select', 'parentId', 'parentSku', 'brand', 'owner', 'thumbnailImageUrl'];
-
+  download(){
+    this._dataService.downloadFile(this.result.data, 'Hidden Articles');
+  }
   getTableData(issueName) {
     this._productService.getDaynamic(issueName).subscribe(
     data => {
@@ -188,17 +192,17 @@ export class HiddenProductsComponent implements OnInit {
         this.getTableData('outOfStockToParent')
         return this.outOfStockToParent;
       }
-      case "noArabicDescription": {
-        this.getTableData('noArabicDescription')
-        return this.noArabicDescription;
-      }
-      case "noEnglishDescription": {
-        this.getTableData('noEnglishDescription')
-        return this.noEnglishDescription;
+      case "noDescription": {
+        this.getTableData('noDescription')
+        return this.noDescription;
       }
       case "differentPrice": {
         this.getTableData('differentPrice')
         return this.differentPrice;
+      }
+      case "differentLanguages":{
+        this.getTableData('noDescription')
+        return this.differentLanguages
       }
       default:
         return "No data today"
@@ -258,8 +262,8 @@ export class HiddenProductsComponent implements OnInit {
     this.openDialog(AddDescriptionComponent, this.selection.selected);
   }
   checkRows() {
-    if (this.routerParams.toString() == 'Nodescription' && this.selection.selected.length > 1) {
-      if (this.selection.selected.length > 1) {
+    if (this.routerParams.toString() == 'noDescription' || this.routerParams.toString() == 'differentLanguages' && this.selection.selected.length > 1) {
+    if (this.selection.selected.length > 1) {
         this._dialog.open(WarningComponent, {
           width: "60%",
           data: {
@@ -284,6 +288,7 @@ export class HiddenProductsComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = data;
       dialogConfig.width = "60%";
+      dialogConfig.height = "60%";
       let dialogRef = this._dialog.open(DialogBodyComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
@@ -302,6 +307,11 @@ export class HiddenProductsComponent implements OnInit {
     this.dataSource.data = tempData;
     this._ChangeDetectorRef.detectChanges();
     this.selection = new SelectionModel(true, []);
+  }
+  showSkus(){
+   // if (this.checkRows() != true) {
+      this.openDialog(ShowSkusComponent, this.selection.selected)
+   // }
   }
 }
 function mapper(type, value) {

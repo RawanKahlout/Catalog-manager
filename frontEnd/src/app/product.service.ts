@@ -35,11 +35,15 @@ export class productService {
       )
     }
     filter(queryData){
-        return this._http.get('http://15.185.60.39:3000/getProductsNew/searchSku?',{ 
+        console.log(queryData)
+        return this._http.get('http://15.185.60.39:3000/getProductsNew/search?',{ 
         params : queryData,
-        headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),}).subscribe(data=>{
-            console.log(data)
-        })
+        headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),})
+    }
+    skusFilter(queryData){
+        return this._http.get('http://15.185.60.39:3000/getProductsNew/searchSku?',{ 
+            params : queryData,
+            headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),})
     }
     addDiscountPersentage(discount, category, rowData) {
         if (!category) {
@@ -107,4 +111,5 @@ export class productService {
       )
     }
     enableProduct(selectedRows) {}
+    
 }

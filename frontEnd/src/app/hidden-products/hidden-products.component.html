@@ -1,11 +1,22 @@
 <app-main-navbar> 
 <div class="container">
-  <div *ngIf="routerParams == 'Nodescription'">
+  <div *ngIf="routerParams == 'noDescription' || routerParams == 'differentLanguages'">
     <h4>No Description Products</h4>
     <div class="row" *ngIf="count != 0">
       <div class="col-md-2"></div>
       <div class="btn-group btn-group-lg col-md-8" >
         <button class="btn pryButton"(click)="addDescription()">Add Description</button>
+     </div>
+    </div>
+  </div>
+  <div *ngIf="routerParams == 'differentPrice'">
+    <h4>Different Price Products</h4>
+    <div class="row" *ngIf="count != 0">
+      <div class="col-md-2"></div>
+      <div class="btn-group btn-group-lg col-md-8" >
+        <button class="btn pryButton"(click)="showSkus()">Show SKUs</button>
+        <button class="btn pryButton" (click)="changePrice()">New Price</button>
+        <button class="btn pryButton"(click)="changePrice()">New Sale Price</button>
      </div>
     </div>
   </div>
@@ -59,15 +70,18 @@
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
    <div class="btn-group btn-group-lg col-md-8" >
-      <button class="btn pryButton"(click)="changeStatus()">change Status</button>
-      <button class="btn pryButton"(click)="enableProduct()">Enable product</button>
+      <button class="btn pryButton"(click)="enableProduct()">Set Instock</button>
    </div>
   </div>
 </div>
 <div class="myCenter col-md-10 col-md-offset-1" id="content"></div>
 <div *ngIf="count != 0">
-<input type="search" (keyup)="applyFilter($event)" class="form-control"  placeholder="Search For products ..">
-<mat-table #table [dataSource]="dataSource" matSort>
+  <div class="custom-group">
+    <input type="search" class="Search-table" placeholder="Search for..." (keyup)="applyFilter($event.target.value)">
+    <button (click)="download()" class="export-button"><i class="material-icons">vertical_align_top
+    </i>Export</button>
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort>
   <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
     <mat-header-cell *cdkHeaderCellDef  mat-sort-header class="checkBox">
       <mat-checkbox *ngIf="column.columnDef == 'Select'" (change)="$event ? masterToggle() : null"

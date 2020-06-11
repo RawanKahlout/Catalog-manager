@@ -16,6 +16,7 @@ export class AddPriceComponent implements OnInit {
     public _dialogRef: MatDialogRef<AddPriceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { this.rowData = data; }
   ngOnInit() {
+    console.log(this.rowData);
   }
   submitData(form: NgForm) {
     this._productService.get("noImages",this.data,form.value.price).subscribe(

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ChangeDetectorRef } from '@angular/core';
 import { productService } from '../product.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,6 +18,7 @@ import { ShowImageComponent } from '../popup/show-image/show-image.component';
 import { SuccessComponent } from '../popup/success/success.component';
 import { AddDiscountPersentageComponent } from '../ProductActions/add-discount-persentage/add-discount-persentage.component';
 import{FilterComponent}from '../popup/filter/filter.component';
+import{dataService}from '../data.service';
 export interface tableCol {
   position: number;
   name: string;
@@ -36,16 +37,17 @@ const ELEMENT_DATA: tableCol[] = []
 export class AllProductsComponent implements OnInit {
   initData = [{ position: 1, name: 'air max', article: 'e1022a013-009', price: 200, gender: 'men', specialprice: 100, image: '1.jpg' }]
   result;
-  displayedColumns: string[] = ['select', 'position', 'name', 'article', 'price', 'gender', 'specialprice', 'image'];
+  displayedColumns: string[] = ['select', 'position', 'name', 'article', 'price', 'gender', 'status', 'image'];
   dataSource = new MatTableDataSource();
   selection = new SelectionModel(true, []);
+  isLoading = false;
   @ViewChild(MatPaginator, { static: false }) set Paginatorcontent(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
   }
   @ViewChild(MatSort, { static: false }) set content(sort: MatSort) {
     this.dataSource.sort = sort;
   }
-  constructor(private _productService: productService, private _dialog: MatDialog) { }
+  constructor(private _dataService : dataService ,private _productService: productService, private _dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef) { }
   ngOnInit() {
     this.dataSource.filterPredicate = (data: tableCol, filter: string): boolean => {
       const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
@@ -118,9 +120,13 @@ export class AllProductsComponent implements OnInit {
     this._productService.searchForAllProduct(ArrayOfArticles).subscribe(data=>{
       this.result = data;
       this.dataSource.data=this.result.data;
+      console.log(this.dataSource.data)
   });
   }
-  openDialog(DialogBodyComponent, data, actionName) {
+  download(){
+    this._dataService.downloadFile(this.result.data, 'Articles');
+  }
+ openDialog(DialogBodyComponent, data, actionName) {
     if (this.checkRows(actionName) != true) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = data;
@@ -175,13 +181,27 @@ export class AllProductsComponent implements OnInit {
       })
     });
   }
-  filter(){
-  this._dialog.open(FilterComponent,
-    {
-    //  panelClass: 'myapp-no-padding-dialog',
-      width : "60%",
-      height:"60%"
+  filter() {
+    let data, count;
+    let dialogRef = this._dialog.open(FilterComponent,
+      {
+        //panelClass: 'myapp-no-padding-dialog',
+        width: "60%",
+        height: "60%",
+        data: "article"
+      })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.isLoading = true;
+        this._productService.filter(result).subscribe(res => {
+          this.result = res;
+          this.dataSource.data = this.result.data;
+          console.log(this.result.data);
+          console.log("hre iam in component", this.dataSource.data)
+          console.log("hre iam in component", result)
+          this.isLoading = false;
+        })
+      }
     })
   }
 }
-

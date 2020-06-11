@@ -40,7 +40,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { HiddenProductsComponent } from './hidden-products/hidden-products.component';
-import { ProductPipe } from './product.pipe';
 import {CdkTableModule}from "@angular/cdk/table";
 import { ShowImageComponent } from './popup/show-image/show-image.component';
 import { SuccessComponent } from './popup/success/success.component';
@@ -54,7 +53,9 @@ import { FilterComponent } from './popup/filter/filter.component';
 import{MatTabsModule}from '@angular/material/tabs'
 import{MatSlideToggleModule}from '@angular/material/slide-toggle';
 import{MatSliderModule}from '@angular/material/slider';
-
+import { ShowSkusComponent } from './ProductActions/show-skus/show-skus.component';
+import { FeaturedActionsComponent } from './ProductActions/featured-actions/featured-actions.component';
+import{MatProgressSpinnerModule}from'@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +77,6 @@ import{MatSliderModule}from '@angular/material/slider';
     WarningComponent,
     MainNavbarComponent,
     HiddenProductsComponent,
-    ProductPipe,
     ShowImageComponent,
     SuccessComponent,
     AddFeaturedProductComponent,
@@ -86,8 +86,8 @@ import{MatSliderModule}from '@angular/material/slider';
     ChangeArticleComponent,
     ChangeSizeComponent,
     FilterComponent,
-    
-    
+    ShowSkusComponent,
+    FeaturedActionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,12 +119,13 @@ import{MatSliderModule}from '@angular/material/slider';
     BrowserModule,
     MatTabsModule,
     MatSlideToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    MatProgressSpinnerModule
   ],
   providers: [MatDialogConfig],
   bootstrap: [AppComponent],
   entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent,SuccessComponent,AddDiscountPersentageComponent
-  ,ChangeArticleComponent,ChangeSizeComponent,FilterComponent] 
+  ,ChangeArticleComponent,ChangeSizeComponent,FilterComponent,ShowSkusComponent,FeaturedActionsComponent] 
 
 })
 export class AppModule { }

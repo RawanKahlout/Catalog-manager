@@ -1,0 +1,12 @@
+<mat-toolbar *ngIf="rowData.action == 'addFeatured'">
+    <span>Featured product</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+<form #addsorting="ngForm" (ngSubmit)="submitSortingData(addsorting)" class="pageCenter">
+    <label>write sorting Algorithm</label>
+    <input type="text" name="Sorting" class="form-control dfields" ngModel>
+    <button type="submit" class="btn pryButton">Submit</button>
+</form>

@@ -1,8 +1,18 @@
 <span><h5>Filter By</h5></span>
 <hr>
-<form #filter="ngForm" (ngSubmit)="submitData(filter)"  class="center-form">
+
+<form *ngIf='requestSource =="article"' #filter="ngForm" (ngSubmit)="submitArticleData(filter)"  class="center-form">
  <div>
-    <label>Enable Product</label>
+    <label class="toggle-label">Image</label>
+    <mat-slide-toggle
+       [(ngModel)]="Image"
+       class="example-margin"
+       [color]="color"
+       name="Status"
+       [checked]="image"
+       >
+    </mat-slide-toggle>
+    <label class="toggle-label">Enable</label>
     <mat-slide-toggle
        [(ngModel)]="enabled"
        class="example-margin"
@@ -13,84 +23,47 @@
     
     <label>Product Status</label>
     <mat-slide-toggle
-       [(ngModel)]="Status"
+       [(ngModel)]="status"
        class="example-margin"
        [color]="color"
        name="Status"
        >
     </mat-slide-toggle>
  </div>   
+ <div>
+    <label >Has Arabic Description</label>
+    <mat-slide-toggle
+       [(ngModel)]="arabicDescription"
+       class="example-margin"
+       [color]="color"
+       name="Status"
+       >
+    </mat-slide-toggle>
+    <label >Has English Description</label>
+    <mat-slide-toggle
+       [(ngModel)]="englishDescription"
+       class="example-margin"
+       [color]="color"
+       name="enabled"
+       >
+    </mat-slide-toggle>
 
+ </div> 
 <br>
 <div class="form-block">
     <label class="radio-label">Gender</label>
-    <input type="radio" name="gender id" value="136" ngModel>
+    <input type="radio" name="genderId" value="136" ngModel>
     Men
-    <input type="radio" name="gender id" value="137" ngModel>
+    <input type="radio" name="genderId" value="137" ngModel>
     Women
-    <input type="radio"  name="gender id" value="138" ngModel>
+    <input type="radio"  name="genderId" value="138" ngModel>
     Unisex
 </div>
 <br>
-<div class="form-block">
-    <label>Size</label>
-    <select name="size"  ngModel class="form-field">
-        <option  hidden value="null">Select size</option>
-        <option value="34.5">34.5</option>
-        <option value="35">35</option>
-        <option value="35.3">35.3</option>
-        <option value="35.5">35.5</option>
-        <option value="36">36</option>
-        <option value="36.5">36.5</option>
-        <option value="36.7">36.7</option>
-        <option value="37">37</option>
-        <option value="37.3">37.3</option>
-        <option value="37.5">37.5</option>
-        <option value="38">38</option>
-        <option value="38.3">38.3</option>
-        <option value="38.5">38.5</option>
-        <option value="39">39</option>
-        <option value="39.3">39.3</option>
-        <option value="39.5">39.5</option>
-        <option value="39.7">39.7</option>
-        <option value="40">40</option>
-        <option value="40.5">40.5</option>
-        <option value="40.7">40.7</option>
-        <option value="41">41</option>
-        <option value="41.3">41.3</option>
-        <option value="41.5">41.5</option>
-        <option value="41.7">41.7</option>
-        <option value="42">42</option>
-        <option value="42.5">42.5</option>
-        <option value="42.7">42.7</option>
-        <option value="43">43</option>
-        <option value="43.3">43.3</option>
-        <option value="43.5">43.5</option>
-        <option value="44">44</option>
-        <option value="44.5">44.5</option>
-        <option value="44.7">44.7</option>
-        <option value="45">45</option>
-        <option value="45.3">45.3</option>
-        <option value="45.5">45.5</option>
-        <option value="46">46</option>
-        <option value="46.3">46.3</option>
-        <option value="46.5">46.5</option> 
-        <option value="46.7">46.7</option> 
-        <option value="47">47</option>
-        <option value="47.3">47.3</option>
-        <option value="47.5">47.5</option> 
-        <option value="47.7">47.7</option> 
-        <option value="48">48</option>
-        <option value="48.5">48.5</option> 
-        <option value="48.7">48.7</option> 
-        <option value="49">49</option> 
-        <option value="49.3">49.3</option> 
-    </select>
-    </div>
-    <br>
+
     <div class="form-block">
     <label>Category</label>
-    <select name="categories ids"  ngModel  class="form-field">
+    <select name="categoriesId"  ngModel  class="form-field">
         <option  hidden value="null">Select Category</option>
         <option value="57">Men</option>
         <option value="58">Women</option>
@@ -102,20 +75,9 @@
     <br>
     <div class="form-block">
     <label>Brand</label>
-    <select name="brand id" ngModel  class="form-field">
+    <select name="brandId" ngModel  class="form-field">
         <option  hidden value="null">Select Brand</option>
-        <option value="57">Adidas</option>
-        <option value="58">Nike</option>
-        <option value="8">Rebook</option>
-        <option value="9">Puma</option>
-        <option value="159">Converse</option>
-        <option value="7">newBalance</option>
-        <option value="103">Asics</option>
-        <option value="92">Vans</option>
-        <option value="154">Adidas Originals</option>
-
-       
-
+        <option *ngFor="let entry of brandOptitons" value={{entry.option_id}}>{{entry.value}}</option>
     </select> 
 </div>
 
@@ -124,12 +86,7 @@
 <label>Type</label>
 <select name="selectType" ngModel class="form-field">
     <option  hidden value="null">Select Type</option>
-    <option value="57">Fashion</option>
-    <option value="58">Training</option>
-    <option value="61">Runing</option>
-    <option value="60">Skateboard</option>
-    <option value="92">Tennise</option>
-    <option value="92">Basketball</option>
+    <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
 </select>
 </div>
 <br>
@@ -137,25 +94,120 @@
 <label>Visibility</label>
 <select name="selectvisibility"  ngModel class="form-field" >
     <option  hidden value="null">Select Visibility</option>
-    <option value="57">Catlog and serach</option>
-    <option value="58">Search</option>
-    <option value="61">Not visibale individually</option>
-    <option value="60">Catlog</option>
+    <option value="4">Catlog and serach</option>
+    <option value="3">Search</option>
+    <option value="1">Not visibale individually</option>
+    <option value="2">Catlog</option>
 </select>
 </div>
 <br>
-<div class="form-block">
-<label class="radio-label">Quantity</label>
-From <input type="text" name="fromQ" ngModel>  To   <input type="text" name="ToQ" ngModel >
+<br>
+<div class="buttons">
+    <button type="submit"class="btn btn-primary" >Submit</button>
+    <a type="reset"(click)="reset(filter)">Reset</a>
 </div>
-<br>
-<div class="form-block">
-<label class="radio-label">Price</label>
-From <input type="text" name="fromP" ngModel>  To  <input type="text" name="ToP" ngModel >
-</div>
-<br>
-<br>
-<a type="reset"(click)="reset(filter)">Reset</a>
-<br>
-<button type="submit"class="btn btn-primary" >Submit</button>
+</form>
+<form *ngIf='requestSource =="skus"' #filter="ngForm" (ngSubmit)="submiskutData(filter)"  class="center-form">
+    <div>
+       <label class="toggle-label">Image</label>
+       <mat-slide-toggle
+          [(ngModel)]="Image"
+          class="example-margin"
+          [color]="color"
+          name="Status"
+          [checked]="image"
+          >
+       </mat-slide-toggle>
+       <label class="toggle-label">Enable</label>
+       <mat-slide-toggle
+          [(ngModel)]="enabled"
+          class="example-margin"
+          [color]="color"
+          name="enabled"
+          >
+       </mat-slide-toggle>
+       
+       <label>Product Status</label>
+       <mat-slide-toggle
+          [(ngModel)]="status"
+          class="example-margin"
+          [color]="color"
+          name="Status"
+          >
+       </mat-slide-toggle>
+    </div>   
+   <br>
+   <div class="form-block">
+       <label class="radio-label">Gender</label>
+       <input type="radio" name="genderId" value="136" ngModel>
+       Men
+       <input type="radio" name="genderId" value="137" ngModel>
+       Women
+       <input type="radio"  name="genderId" value="138" ngModel>
+       Unisex
+   </div>
+   <br>
+   <div class="form-block">
+       <label>Size</label>
+       <select name="sizeId"  ngModel class="form-field">
+           <option  hidden value="null">Select size</option>
+           <option value={{entry.option_id}} *ngFor="let entry of sizeOptions">{{entry.value}}</option>
+       </select>
+       </div>
+       <br>
+       <div class="form-block">
+       <label>Category</label>
+       <select name="categoriesId"  ngModel  class="form-field">
+           <option  hidden value="null">Select Category</option>
+           <option value="57">Men</option>
+           <option value="58">Women</option>
+           <option value="61">Sale</option>
+           <option value="60">New arrival</option>
+           <option value="92">Yeezy</option>
+       </select>
+       </div>
+       <br>
+       <div class="form-block">
+       <label>Brand</label>
+       <select name="brandId" ngModel  class="form-field">
+           <option  hidden value="null">Select Brand</option>
+           <option *ngFor="let entry of typeOptions" value={{entry.option_id}}>{{entry.value}}</option>
+       </select> 
+   </div>
+   
+   <br>
+   <div class="form-block">
+   <label>Type</label>
+   <select name="selectType" ngModel class="form-field">
+       <option  hidden value="null">Select Type</option>
+       <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
+   </select>
+   </div>
+   <br>
+   <div class="form-block">
+   <label>Visibility</label>
+   <select name="selectvisibility"  ngModel class="form-field" >
+    <option  hidden value="null">Select Visibility</option>
+    <option value="4">Catlog and serach</option>
+    <option value="3">Search</option>
+    <option value="1">Not visibale individually</option>
+    <option value="2">Catlog</option>
+   </select>
+   </div>
+   <br>
+   <div class="form-block">
+   <label class="radio-label">Quantity</label>
+   From <input type="text" name="fromQ" ngModel>  To   <input type="text" name="ToQ" ngModel >
+   </div>
+   <br>
+   <div class="form-block">
+   <label class="radio-label">Price</label>
+   From <input type="text" name="fromP" ngModel>  To  <input type="text" name="ToP" ngModel >
+   </div>
+   <br>
+   <br>
+   <div class="buttons">
+       <button type="submit"class="btn btn-primary" >Submit</button>
+       <a type="reset"(click)="reset(filter)">Reset</a>
+   </div>
 </form>

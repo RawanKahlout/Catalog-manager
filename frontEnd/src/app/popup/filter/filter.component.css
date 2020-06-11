@@ -13,7 +13,7 @@ border: solid #D3D3D3	;
 }
 .center-form{
     padding-top: 60px;
-    margin-right: 200px;
+    margin-right:150px;
     text-align: center;
     overflow: hidden;
 }
@@ -51,10 +51,25 @@ button[type =submit]{
     background-color: black;
     border: 1.5px solid  #FBAD18;
     width: 25%;
-    margin-right: auto;
     display: inline-block;
+    margin: 10px;
 }
 a{
     color:#FBAD18 ;
     border: none;
+}
+.toggle-label{
+    width: 100px;
+}
+mat-slide-toggle{
+    margin-bottom: 25px;
+}
+:host /deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: green;
+}
+:host /deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: white;
+}
+.buttons{
+    margin-left: 200px;
 }

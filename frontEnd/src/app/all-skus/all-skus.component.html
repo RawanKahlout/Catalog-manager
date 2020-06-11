@@ -1,4 +1,9 @@
 <app-main-navbar>
+  <mat-spinner
+  style="position:fixed;top:50%;left:50%;margin:0 auto;"
+  mode="indeterminate"
+  *ngIf="isLoading"
+></mat-spinner>
     <div class="row">
       <div class="col-md-2"></div>
      <div class="btn-group btn-group-lg col-md-8" >
@@ -8,16 +13,29 @@
         <button class="btn pryButton "(click)="disable()">Disable</button>
     </div>
     </div>
-    <div class="container"  *ngIf="!result">
-      <form #searchForm = ngForm (ngSubmit)="onSearch(searchForm)" >
-        <div class="form-group">
-          <input type="search" name="search" #search="ngModel" class="form-control origin" placeholder="Search for product" ngModel>
+    <div class="container">
+      <div class="row">
+        <div class="col-10">
+          <form #searchForm = ngForm (ngSubmit)="onSearch(searchForm)" >
+            <div class="form-group">
+              <input type="search" name="search" #search="ngModel" class="search" placeholder="Search for product" ngModel>
+            </div>
+         </form>
         </div>
-     </form>
+        <div class="col">
+          <div class="form-group">
+           <button (click)="filter()"><i class="material-icons">filter_alt</i></button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="container" *ngIf="result">
-      <input type="search"class="form-control" placeholder="Search for..." (keyup)="applyFilter($event.target.value)">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <div class="custom-group">
+        <input type="search" class="Search-table" placeholder="Search for..." (keyup)="applyFilter($event.target.value)">
+        <button (click)="download()" class="export-button"><i class="material-icons">vertical_align_top
+        </i>Export</button>
+      </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" *ngIf="!isLoading">
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
               <mat-checkbox (change)="$event ? masterToggle() : null"

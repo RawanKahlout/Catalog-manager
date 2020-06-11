@@ -39,3 +39,8 @@ h4{
   .origin{
     width: 100%;
   }
+  .sort{
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+  }

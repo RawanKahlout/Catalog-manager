@@ -10,7 +10,11 @@
                 </div>
               </div>
             </div> -->
-          <input type="search" (keyup)="applyFilter($event)" class="form-control"  placeholder="Search For products ..">
+            <div class="custom-group">
+              <input type="search" class="Search-table" placeholder="Search for..." (keyup)="applyFilter($event.target.value)">
+              <button (click)="download()" class="export-button"><i class="material-icons">vertical_align_top
+              </i>Export</button>
+            </div>
           <mat-table #table [dataSource]="dataSource" matSort>  
             <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
               <mat-header-cell *cdkHeaderCellDef  mat-sort-header class="checkBox">

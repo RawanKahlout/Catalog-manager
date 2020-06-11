@@ -11,6 +11,8 @@ import { Params, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import{WarningComponent}from'../../popup/warning/warning.component';
 import{SuccessComponent}from '../../popup/success/success.component';
+import{AddPriceComponent}from '../../ProductActions/add-price/add-price.component';
+import { FeaturedActionsComponent } from 'src/app/ProductActions/featured-actions/featured-actions.component';
 
 export interface tableCol {
   ParentSky: string;
@@ -135,8 +137,14 @@ constructor(private _productService: productService, private _dialog: MatDialog,
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   addFeatured(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      rows : this.selection.selected,
+      action: "addFeatured"
+    }
+    dialogConfig.width="60%";
     if (this.checkRows() != true) {
-      this._dialog.open(SuccessComponent);
+      this._dialog.open(FeaturedActionsComponent,dialogConfig);
       this._productService.submitFeaturedProduct(this.selection.selected);
     }
     console.log(this.selection.selected)

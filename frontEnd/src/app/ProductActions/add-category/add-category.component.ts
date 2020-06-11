@@ -12,6 +12,7 @@ import { Inject } from '@angular/core';
 
 export class AddCategoryComponent implements OnInit {
   rowData;
+  addPrice
   constructor(public _dialogRef: MatDialogRef<AddCategoryComponent>, private _productService: productService,
     @Inject(MAT_DIALOG_DATA) public data: any) { this.rowData = data; }
   ngOnInit() { }
@@ -19,6 +20,9 @@ export class AddCategoryComponent implements OnInit {
   submitData(form: NgForm) {
     this._productService.updateCategory(form.value.selectCategory, this.rowData);
     this.onClose();
+  }
+  callPrice(){
+    this.addPrice = 1;
   }
   onClose() {
     this._dialogRef.close();

@@ -1,5 +1,6 @@
 .container{
   padding-top: 100px;
+  margin-bottom: 100px;
 }
 .form-control{
   width: 40%;
@@ -34,6 +35,7 @@ h4{
   }
   .myCenter{
     color: black;
+    margin-bottom: 80px;
   }
   .centerThing{
     margin-top: 100px;

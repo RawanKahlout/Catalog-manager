@@ -11,7 +11,7 @@ import { Params, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { WarningComponent } from '../../popup/warning/warning.component';
 import { SuccessComponent } from '../../popup/success/success.component';
-
+import{dataService}from '../../data.service';
 export interface tableCol {
   ParentSky: string;
   specialprice: number;
@@ -95,7 +95,8 @@ export class EditFeaturedProductComponent implements OnInit {
   routerParams: Params;
   result;
   count;
-  constructor(private _changeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute) {
+  constructor(private _changeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router,
+     private _dataService:dataService,private _ActivatedRoute: ActivatedRoute) {
 
   }
   ngOnInit() {
@@ -165,6 +166,9 @@ export class EditFeaturedProductComponent implements OnInit {
     this.dataSource.data = data;
     //this._changeDetectorRef.detectChanges();
     this._productService.deleteOneFeaturedProduct(row);
+  }
+  download(){
+    this._dataService.downloadFile(this.result.data,"Featured Product");
   }
 }
 function mapper(type, value) {
