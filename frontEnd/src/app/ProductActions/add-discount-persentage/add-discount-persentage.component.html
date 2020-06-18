@@ -1,27 +1,26 @@
-<mat-toolbar>
-    <span>Add price</span>
-    <span class="fill-remaining-space"></span>
-    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-    </mat-toolbar>
-      <form #addPrice="ngForm" (ngSubmit)="submitData(addPrice)"  class="pageCenter">
-          <label>Add Discount Percentage</label>
-          <input type="text" name="price" class="form-control dfields" ngModel>
-          <div class="checked">
-            <input  type="checkbox" name="agree" value="yes" ngModel (click)=callCategory()>Do you need to change category ?
-          </div>
-          <br>
-          <br>
-          <div *ngIf="addCategory == 1">
-          <label>Select category</label>
-          <select name="selectCategory" class="form-control fields"  ngModel >
-            <option value="sale">sale</option>
-            <option value="limitedEddition">limitedEddition</option>
-            <option value="designer">designer</option>
-            <option value="women">women</option>
-          </select>
-        </div>
-          <br>
-          <button type="submit" class="btn pryButton">Submit</button>
-
-      </form>
-     
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+  <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+  <img src="../../../assets/persentage.svg" class="dialog-icon-form">
+  <h3>New Discount Percentage</h3>
+  <span class="fill-remaining-space"></span>
+</div>
+<form #addPrice="ngForm" (ngSubmit)="submitData(addPrice)" class="pageCenter">
+  <label class="form-label">Add Discount Percentage</label>
+  <input type="text" name="price" class="fields form-fields" ngModel>
+  <div class="checked">
+    <input type="checkbox" name="agree" value="yes" ngModel (click)=callCategory()>Do you need to change category ?
+  </div>
+  <div *ngIf="addCategory == 1">
+    <label class="form-label">Select category</label>
+    <select name="selectCategory" class="fields sub-form-fields" ngModel>
+      <option value="sale">sale</option>
+      <option value="limitedEddition">limitedEddition</option>
+      <option value="designer">designer</option>
+      <option value="women">women</option>
+    </select>
+  </div>
+  <br>
+  <button type="submit" class="btn pryButton">Submit</button>
+</form>

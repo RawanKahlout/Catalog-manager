@@ -83,11 +83,12 @@ export class AllSkusComponent implements OnInit{
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = data;
       dialogConfig.width = "60%";
+      dialogConfig.height="60%"
+      dialogConfig.panelClass = "myapp-no-padding-dialog"
       let dialogRef = this._dialog.open(DialogBodyComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.updateTableValues(data, actionName)
-          console.log("yesssssssssssssssssssssssssss");
         }
       });
     }
@@ -132,10 +133,10 @@ export class AllSkusComponent implements OnInit{
     });
   }
   onImage(element) {
-    console.log(element.imageUrl)
     this._dialog.open(ShowImageComponent, {
       width: "60%",
-      data: element.imageUrl
+      data: element.imageUrl,
+      panelClass:"myapp-no-padding-dialog"
     })
   }
   changeSize(){
@@ -148,9 +149,9 @@ export class AllSkusComponent implements OnInit{
     let data,count;
     let dialogRef =  this._dialog.open(FilterComponent,
     {
-    //  panelClass: 'myapp-no-padding-dialog',
-      width : "60%",
-      height:"60%",
+      panelClass: 'myapp-no-padding-dialog',
+      width : "45%",
+      height:"95%",
       data: "skus"
     })
     dialogRef.afterClosed().subscribe(result=>{

@@ -1,15 +1,18 @@
-<mat-toolbar>
-    <span>Add Description</span>
-    <span class="fill-remaining-space"></span>
-    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-    </mat-toolbar>
-      <form #descriptions="ngForm" (ngSubmit)="submitData(descriptions)"  class="pageCenter">
-        <label>Arabic Description</label>
-        <textarea class="form-control" name="arabic" rows="4" cols="50" ngModel></textarea>
-        <br>
-        <label>English Description</label>
-        <textarea class="form-control" name="english" rows="4" cols="50" ngModel></textarea>
-        <br>
-        <button type="submit" class="btn pryButton">Submit</button>
-      </form>
-     
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+  <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+  <img src="../../../assets/category.svg" class="dialog-icon-form">
+  <h3>New Description</h3>
+  <span class="fill-remaining-space"></span>
+</div>
+<form #descriptions="ngForm" (ngSubmit)="submitData(descriptions)" class="pageCenter">
+  <label class="form-label">Arabic Description</label>
+  <textarea class="fields " name="arabic" rows="3" cols="50" ngModel></textarea>
+  <br>
+  <label class="form-label">English Description</label>
+  <textarea class="fields " name="english" rows="3" cols="50" ngModel></textarea>
+  <br>
+  <br>
+  <button type="submit" class="btn pryButton">Submit</button>
+</form>

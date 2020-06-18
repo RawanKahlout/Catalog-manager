@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { productService } from '../product.service';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
@@ -13,8 +13,10 @@ import { AddPriceComponent } from '../ProductActions/add-price/add-price.compone
 import { ProductStatusComponent } from '../ProductActions/product-status/product-status.component';
 import { WarningComponent } from '../popup/warning/warning.component';
 import { SuccessComponent } from '../popup/success/success.component';
-import{ShowSkusComponent} from '../ProductActions/show-skus/show-skus.component';
-import{dataService}from '../data.service';
+import { DataTableFilterComponent } from '../popup/data-table-filter/data-table-filter.component';
+import { ShowSkusComponent } from '../ProductActions/show-skus/show-skus.component';
+import { dataService } from '../data.service';
+import { NgForm } from '@angular/forms';
 export interface tableCol {
   ParentSky: string;
   specialprice: number;
@@ -53,21 +55,15 @@ export interface tableCol {
   styleUrls: ['./hidden-products.component.css']
 })
 export class HiddenProductsComponent implements OnInit {
-  returnedValue;
-  dataSource = new MatTableDataSource();
-  displayedColumns;
-  routerParams: Params;
-  result;count;
+  returnedValue; dataSource = new MatTableDataSource(); displayedColumns; routerParams: Params; result; count; filterForm: any;
   constructor(private _MatDialogConfig: MatDialogConfig, private _ChangeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute,
-    private _dataService : dataService ) {
+    private _dataService: dataService) {
     this._router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
     this._router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
-        // trick the Router into believing it's last link wasn't previously loaded
         this._router.navigated = false;
-        // if you need to scroll back to top, here is the right place
         window.scrollTo(0, 0);
       }
     });
@@ -75,15 +71,23 @@ export class HiddenProductsComponent implements OnInit {
   ngOnInit() {
     this.getParams();
     this.displayedColumns = this.getTableHeader(this.routerParams);
-    this.dataSource.filterPredicate = (data: tableCol, filter: string): boolean => {
-      const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
-        return (currentTerm + (data as { [key: string]: any })[key]);
-      }, '').toLowerCase();
-      let terms = filter.replace(/\s/g, "|");
-      let regEx = new RegExp(terms);
-
-      return regEx.test(dataStr);
-    }
+    this.dataSource.filterPredicate = ((data, filter) => {
+      const a = !filter.owner || data.owner.toLowerCase().includes(filter.owner.toLowerCase());
+      const c = !filter.price || data.price === parseInt(filter.price);
+      const d = !filter.genderId || data.genderId === parseInt(filter.genderId);
+      const e = !filter.categoriesId || data.categoriesId === parseInt(filter.categoriesId);
+      const f = !filter.typeId || data.typeId === parseInt(filter.typeId)
+      const h = !filter.quantity || data.quantity === parseInt(filter.quantity)
+      const g = !filter.stockStatusId || data.stockStatusId === filter.stockStatusId;
+      if (!filter.flag) {
+        const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
+          return (currentTerm + (data as { [key: string]: any })[key]);
+        }, '').toLowerCase();
+        let terms = filter.replace(/\s/g, "|");
+        let regEx = new RegExp(terms);
+      }
+      return a && c && d && e && f && g && h;
+    }) as (PeriodicElement, string) => boolean;
   }
   @ViewChild(MatPaginator, { static: false }) set Paginatorcontent(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
@@ -128,28 +132,29 @@ export class HiddenProductsComponent implements OnInit {
     { columnDef: 'visiblityId', header: 'visiblityId', cell: (element: any) => mapper("", element.visiblityId) }
   ];
   common = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner'];
-  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; noDescription = this.common;disabledToParent = this.common;differentLanguages=this.common;
-  outOfStockToParent=this.common;differentPrice=this.common;
+  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; noDescription = this.common; disabledToParent = this.common; differentLanguages = this.common;
+  outOfStockToParent = this.common; differentPrice = this.common;
   NoImage = ['Select', 'parentId', 'parentSku', 'price', 'owner'];
   Noprice = ['Select', 'parentId', 'parentSku', 'brand', 'owner', 'thumbnailImageUrl'];
-  download(){
+  download() {
     this._dataService.downloadFile(this.result.data, 'Hidden Articles');
   }
   getTableData(issueName) {
     this._productService.getDaynamic(issueName).subscribe(
-    data => {
-    this.result = data;
-           this.count=this.result.count;
-            if (this.count == 0){
-              const text = document.getElementById('content');
-              text.innerHTML += "<p style='padding-top:100px;font-size:30px;text-align:center;font-weight:bolder;class=centerThing'>No product here !</p>"
-              return}
-             this.dataSource.data = this.result.data;
-          },
-          error => {
-            console.log("ERROR", error)
-         }
-        )
+      data => {
+        this.result = data;
+        this.count = this.result.count;
+        if (this.count == 0) {
+          const text = document.getElementById('content');
+          text.innerHTML += "<p style='padding-top:100px;font-size:30px;text-align:center;font-weight:bolder;class=centerThing'>No product here !</p>"
+          return
+        }
+        this.dataSource.data = this.result.data;
+      },
+      error => {
+        console.log("ERROR", error)
+      }
+    )
   }
   getTableHeader(tableName) {
     switch (tableName) {
@@ -200,7 +205,7 @@ export class HiddenProductsComponent implements OnInit {
         this.getTableData('differentPrice')
         return this.differentPrice;
       }
-      case "differentLanguages":{
+      case "differentLanguages": {
         this.getTableData('noDescription')
         return this.differentLanguages
       }
@@ -224,16 +229,16 @@ export class HiddenProductsComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    return this.dataSource.filter = filterValue;
   }
   onImage(row) {
     this._dialog.open(ShowImageComponent, {
       width: "60%",
-      data: row.imageUrl
+      data: row.imageUrl,
+      panelClass:"myapp-no-padding-dialog"
     })
   }
   getParams() {
@@ -263,7 +268,7 @@ export class HiddenProductsComponent implements OnInit {
   }
   checkRows() {
     if (this.routerParams.toString() == 'noDescription' || this.routerParams.toString() == 'differentLanguages' && this.selection.selected.length > 1) {
-    if (this.selection.selected.length > 1) {
+      if (this.selection.selected.length > 1) {
         this._dialog.open(WarningComponent, {
           width: "60%",
           data: {
@@ -289,11 +294,11 @@ export class HiddenProductsComponent implements OnInit {
       dialogConfig.data = data;
       dialogConfig.width = "60%";
       dialogConfig.height = "60%";
+      dialogConfig.panelClass = "myapp-no-padding-dialog";
       let dialogRef = this._dialog.open(DialogBodyComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.deleteRow(this.selection.selected);
-          console.log("yesssssssssssssssssssssssssss");
         }
       });
     }
@@ -308,10 +313,28 @@ export class HiddenProductsComponent implements OnInit {
     this._ChangeDetectorRef.detectChanges();
     this.selection = new SelectionModel(true, []);
   }
-  showSkus(){
-   // if (this.checkRows() != true) {
-      this.openDialog(ShowSkusComponent, this.selection.selected)
-   // }
+  showSkus() {
+  this.openDialog(ShowSkusComponent, this.selection.selected)
+  }
+  filter() {
+    let dialogRef = this._dialog.open(DataTableFilterComponent,
+      { 
+        panelClass: 'myapp-no-padding-dialog',
+        width: "45%",
+        height: "80%",
+        data: "article"
+      })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.filterForm = result
+        const filter = {
+          owner: this.filterForm.owner, price: this.filterForm.price, typeId: this.filterForm.typeId,
+          genderId: this.filterForm.genderId, categoriesId: this.filterForm.categoriesId, quantity: this.filterForm.quantity,
+          stockStatusId: this.filterForm.stockStatusId
+        } as unknown as string;
+        this.dataSource.filter = this.filterForm
+      }
+    })
   }
 }
 function mapper(type, value) {

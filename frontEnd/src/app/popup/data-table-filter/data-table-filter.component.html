@@ -1,0 +1,68 @@
+<form #filter="ngForm" (ngSubmit)="submitData(filter)"  class="center-form">
+    <div>
+       <label class="filter-label">Product Status</label>
+       <mat-slide-toggle
+          [(ngModel)]="stockStatusId"
+          class="example-margin"
+          [color]="color"
+          name="stockStatusId"
+          >
+       </mat-slide-toggle>
+    </div>   
+   <br>
+   <div class="form-block">
+       <label class="radio-label">Gender</label>
+       <input type="radio" name="genderId" value="136" ngModel>
+       Men
+       <input type="radio" name="genderId" value="137" ngModel>
+       Women
+       <input type="radio"  name="genderId" value="138" ngModel>
+       Unisex
+   </div>
+   <br>
+       <br>
+       <div class="form-block">
+       <label class="filter-label">Category</label>
+       <select name="categoriesId"  ngModel  class="form-field">
+           <option  hidden value="null">Select Category</option>
+           <option value="57">Men</option>
+           <option value="58">Women</option>
+           <option value="61">Sale</option>
+           <option value="60">New arrival</option>
+           <option value="92">Yeezy</option>
+       </select>
+       </div>
+       <br>
+       <div class="form-block">
+       <label class="filter-label">Brand</label>
+       <select name="brandId" ngModel  class="form-field">
+           <option  hidden value="null">Select Brand</option>
+           <option *ngFor="let entry of typeOptions" value={{entry.option_id}}>{{entry.value}}</option>
+       </select> 
+   </div>
+   
+   <br>
+   <div class="form-block">
+   <label class="filter-label">Type</label>
+   <select name="typeId" ngModel class="form-field">
+       <option  hidden value="null">Select Type</option>
+       <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
+   </select>
+   </div>
+   <br>
+   <div class="form-blocks">
+   <label class="radio-label-data-table">Quantity</label>
+    <input type="text" name="quantity" class="filter-text" ngModel>
+   </div>
+   <br>
+   <div class="form-blocks">
+   <label class="radio-label-data-table">Price</label>
+   <input type="text" name="price" class="filter-text"ngModel>
+   </div>
+   <br>
+   <br>
+   <div class="buttons">
+       <button type="submit"class="btn btn-primary" >Submit</button>
+       <a type="reset"(click)="reset(filter)">Reset</a>
+   </div>
+</form>

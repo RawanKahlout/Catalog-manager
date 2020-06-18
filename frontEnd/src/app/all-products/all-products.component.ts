@@ -19,6 +19,7 @@ import { SuccessComponent } from '../popup/success/success.component';
 import { AddDiscountPersentageComponent } from '../ProductActions/add-discount-persentage/add-discount-persentage.component';
 import{FilterComponent}from '../popup/filter/filter.component';
 import{dataService}from '../data.service';
+import {Overlay} from '@angular/cdk/overlay';
 export interface tableCol {
   position: number;
   name: string;
@@ -47,7 +48,8 @@ export class AllProductsComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) set content(sort: MatSort) {
     this.dataSource.sort = sort;
   }
-  constructor(private _dataService : dataService ,private _productService: productService, private _dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private _dataService : dataService ,private _productService: productService, private _dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef 
+  ) { }
   ngOnInit() {
     this.dataSource.filterPredicate = (data: tableCol, filter: string): boolean => {
       const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
@@ -109,11 +111,12 @@ export class AllProductsComponent implements OnInit {
     this.openDialog(AddCategoryComponent, this.selection.selected,"updateCategory")
   }
   onImage(element) {
-    console.log(element.imageUrl)
-    this._dialog.open(ShowImageComponent, {
-      width: "60%",
-      data: element.imageUrl
-    })
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = element.imageUrl;
+    dialogConfig.width = "50%";
+    dialogConfig.height = "70%";
+    dialogConfig.panelClass = "myapp-no-padding-dialog";
+    this._dialog.open(ShowImageComponent,dialogConfig)
   }
   onSearch(form: NgForm) {
     var ArrayOfArticles = form.value.search.split(/\s/).join(',');
@@ -130,12 +133,13 @@ export class AllProductsComponent implements OnInit {
     if (this.checkRows(actionName) != true) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = data;
-      dialogConfig.width = "60%";
+        dialogConfig.width = "60%";
+      dialogConfig.height = "60%";
+      dialogConfig.panelClass = "myapp-no-padding-dialog";
       let dialogRef = this._dialog.open(DialogBodyComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.updateTableValues(data, actionName)
-          console.log("yesssssssssssssssssssssssssss");
         }
       });
     }
@@ -185,10 +189,10 @@ export class AllProductsComponent implements OnInit {
     let data, count;
     let dialogRef = this._dialog.open(FilterComponent,
       {
-        //panelClass: 'myapp-no-padding-dialog',
-        width: "60%",
-        height: "60%",
-        data: "article"
+        panelClass: 'myapp-no-padding-dialog',
+        width: "45%",
+        height: "80%",
+        data: "article",
       })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -196,9 +200,6 @@ export class AllProductsComponent implements OnInit {
         this._productService.filter(result).subscribe(res => {
           this.result = res;
           this.dataSource.data = this.result.data;
-          console.log(this.result.data);
-          console.log("hre iam in component", this.dataSource.data)
-          console.log("hre iam in component", result)
           this.isLoading = false;
         })
       }

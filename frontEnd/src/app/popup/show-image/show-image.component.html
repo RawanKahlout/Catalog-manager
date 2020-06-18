@@ -1,8 +1,9 @@
-<mat-toolbar>
-    <span>Image</span>
+    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon >clear</mat-icon></button>
+    <div class="main-dev">
+    <img class="dialog-icon-img"src="../../../assets/image.svg">
+    <h3>Image</h3> 
     <span class="fill-remaining-space"></span>
-    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-    </mat-toolbar>
+    </div>
     <div><img src={{imageUrl}} class="popup-img"></div>
     
      

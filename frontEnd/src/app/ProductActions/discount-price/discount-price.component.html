@@ -1,11 +1,15 @@
-<mat-toolbar>
-    <span>Add price</span>
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+    <img src="../../../assets/price2.svg" class="dialog-icon-form">
+    <h3>New Discount Price</h3>
     <span class="fill-remaining-space"></span>
-    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-    </mat-toolbar>
-      <form #addPrice="ngForm" (ngSubmit)="submitData(addPrice)"  class="pageCenter">
-          <label>Add DiscountPrice</label>
-          <input type="text" name="price" class="form-control dfields" ngModel>
-          <button type="submit" class="btn pryButton">Submit</button>
-      </form>
-     
+</div>
+<form #addPrice="ngForm" (ngSubmit)="submitData(addPrice)" class="pageCenter">
+    <label class="form-label">Add DiscountPrice</label>
+    <input type="text" name="price" class="fields form-fields" ngModel>
+    <br>
+    <br>
+    <button type="submit" class="btn pryButton">Submit</button>
+</form>

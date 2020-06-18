@@ -142,7 +142,9 @@ constructor(private _productService: productService, private _dialog: MatDialog,
       rows : this.selection.selected,
       action: "addFeatured"
     }
+    dialogConfig.panelClass = "myapp-no-padding-dialog",
     dialogConfig.width="60%";
+    dialogConfig.height="60%";
     if (this.checkRows() != true) {
       this._dialog.open(FeaturedActionsComponent,dialogConfig);
       this._productService.submitFeaturedProduct(this.selection.selected);
@@ -161,6 +163,7 @@ constructor(private _productService: productService, private _dialog: MatDialog,
   }
   onImage(row) {
     this._dialog.open(ShowImageComponent, {
+      panelClass : "myapp-no-padding-dialog",
       width: "60%",
       data: row.imageUrl
     })

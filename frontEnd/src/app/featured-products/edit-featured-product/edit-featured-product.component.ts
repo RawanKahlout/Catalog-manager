@@ -146,8 +146,8 @@ export class EditFeaturedProductComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter(event: String) {
+    const filterValue = event
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   deleteFeatured(row) {
@@ -156,6 +156,7 @@ export class EditFeaturedProductComponent implements OnInit {
   onImage(row) {
     this._dialog.open(ShowImageComponent, {
       width: "60%",
+      panelClass : "myapp-no-padding-dialog",
       data: row.imageUrl
     })
   }

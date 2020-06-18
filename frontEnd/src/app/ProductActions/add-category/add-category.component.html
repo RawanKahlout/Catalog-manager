@@ -1,26 +1,27 @@
-<mat-toolbar>
-  <span>Select category</span>
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+  <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+  <img src="../../../assets/descriptions.svg" class="dialog-icon-form">
+  <h3>New Category</h3>
   <span class="fill-remaining-space"></span>
-  <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
-    <mat-icon>clear</mat-icon>
-  </button>
-</mat-toolbar>
+</div>
+
 <form #category="ngForm" (ngSubmit)="submitData(category)" class="pageCenter">
-  <label>Select category</label>
-  <select name="selectCategory" id="#" class="form-control fields" ngModel>
+  <label class="form-label">Select category</label>
+  <select name="selectCategory" id="#" class="fields form-fields" ngModel>
     <option value="sale">sale</option>
     <option value="limitedEddition">limitedEddition</option>
     <option value="designer">designer</option>
     <option value="women">women</option>
   </select>
+
   <div class="checked">
     <input type="checkbox" name="agree" value="yes" ngModel (click)="callPrice()">Do you need to add discount price ?
   </div>
-  <br>
-  <br>
   <div *ngIf="addPrice == 1">
-    <label>Select category</label>
-    <input type="text" name="category">
+    <label class="form-label">Discount Price</label>
+    <input type="text" name="category" class="fields sub-form-fields">
   </div>
   <br>
   <button type="submit" class="btn pryButton">Submit</button>

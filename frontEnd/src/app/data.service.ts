@@ -4,7 +4,7 @@ import{Router}from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class dataService {
-temp : any;
+    temp : any;
     constructor(private _http: HttpClient , private _router : Router) { }
     getStatistics(){
      return this._http.get('http://15.185.60.39:3000/getProductsNew/stats',{
@@ -37,7 +37,6 @@ temp : any;
         dwldLink.click();
         document.body.removeChild(dwldLink);
     }
-
     ConvertToCSV(objArray, headerList) {
          let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
          let str = '';
@@ -58,5 +57,11 @@ temp : any;
              str += line + '\r\n';
          }
          return str;
-     }
-}
+    }
+
+    }
+     
+                
+                
+                
+                

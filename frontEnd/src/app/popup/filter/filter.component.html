@@ -1,213 +1,161 @@
-<span><h5>Filter By</h5></span>
-<hr>
+<form *ngIf='requestSource =="article"' #filter="ngForm" (ngSubmit)="submitArticleData(filter)" class="center-form">
+    <div>
+        <label class="toggle-label">Image</label>
+        <mat-slide-toggle [(ngModel)]="Image" class="example-margin" [color]="color" name="Status" [checked]="image">
+        </mat-slide-toggle>
+        <label class="toggle-label">Enable</label>
+        <mat-slide-toggle [(ngModel)]="enabled" class="example-margin" [color]="color" name="enabled">
+        </mat-slide-toggle>
 
-<form *ngIf='requestSource =="article"' #filter="ngForm" (ngSubmit)="submitArticleData(filter)"  class="center-form">
- <div>
-    <label class="toggle-label">Image</label>
-    <mat-slide-toggle
-       [(ngModel)]="Image"
-       class="example-margin"
-       [color]="color"
-       name="Status"
-       [checked]="image"
-       >
-    </mat-slide-toggle>
-    <label class="toggle-label">Enable</label>
-    <mat-slide-toggle
-       [(ngModel)]="enabled"
-       class="example-margin"
-       [color]="color"
-       name="enabled"
-       >
-    </mat-slide-toggle>
-    
-    <label>Product Status</label>
-    <mat-slide-toggle
-       [(ngModel)]="status"
-       class="example-margin"
-       [color]="color"
-       name="Status"
-       >
-    </mat-slide-toggle>
- </div>   
- <div>
-    <label >Has Arabic Description</label>
-    <mat-slide-toggle
-       [(ngModel)]="arabicDescription"
-       class="example-margin"
-       [color]="color"
-       name="Status"
-       >
-    </mat-slide-toggle>
-    <label >Has English Description</label>
-    <mat-slide-toggle
-       [(ngModel)]="englishDescription"
-       class="example-margin"
-       [color]="color"
-       name="enabled"
-       >
-    </mat-slide-toggle>
+        <label class="filter-label">Product Status</label>
+        <mat-slide-toggle [(ngModel)]="status" class="example-margin" [color]="color" name="Status">
+        </mat-slide-toggle>
+    </div>
+    <div>
+        <label class="filter-label">Has Arabic Description</label>
+        <mat-slide-toggle [(ngModel)]="arabicDescription" class="example-margin" [color]="color" name="Status">
+        </mat-slide-toggle>
+        <label>Has English Description</label>
+        <mat-slide-toggle [(ngModel)]="englishDescription" class="example-margin" [color]="color" name="enabled">
+        </mat-slide-toggle>
 
- </div> 
-<br>
-<div class="form-block">
-    <label class="radio-label">Gender</label>
-    <input type="radio" name="genderId" value="136" ngModel>
-    Men
-    <input type="radio" name="genderId" value="137" ngModel>
-    Women
-    <input type="radio"  name="genderId" value="138" ngModel>
-    Unisex
-</div>
-<br>
-
-    <div class="form-block">
-    <label>Category</label>
-    <select name="categoriesId"  ngModel  class="form-field">
-        <option  hidden value="null">Select Category</option>
-        <option value="57">Men</option>
-        <option value="58">Women</option>
-        <option value="61">Sale</option>
-        <option value="60">New arrival</option>
-        <option value="92">Yeezy</option>
-    </select>
     </div>
     <br>
     <div class="form-block">
-    <label>Brand</label>
-    <select name="brandId" ngModel  class="form-field">
-        <option  hidden value="null">Select Brand</option>
-        <option *ngFor="let entry of brandOptitons" value={{entry.option_id}}>{{entry.value}}</option>
-    </select> 
-</div>
+        <label class="radio-label">Gender</label>
+        <input type="radio" name="genderId" value="136" ngModel>
+        Men
+        <input type="radio" name="genderId" value="137" ngModel>
+        Women
+        <input type="radio" name="genderId" value="138" ngModel>
+        Unisex
+    </div>
+    <br>
 
-<br>
-<div class="form-block">
-<label>Type</label>
-<select name="selectType" ngModel class="form-field">
-    <option  hidden value="null">Select Type</option>
-    <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
-</select>
-</div>
-<br>
-<div class="form-block">
-<label>Visibility</label>
-<select name="selectvisibility"  ngModel class="form-field" >
-    <option  hidden value="null">Select Visibility</option>
-    <option value="4">Catlog and serach</option>
-    <option value="3">Search</option>
-    <option value="1">Not visibale individually</option>
-    <option value="2">Catlog</option>
-</select>
-</div>
-<br>
-<br>
-<div class="buttons">
-    <button type="submit"class="btn btn-primary" >Submit</button>
-    <a type="reset"(click)="reset(filter)">Reset</a>
-</div>
+    <div class="form-block">
+        <label class="filter-label">Category</label>
+        <select name="categoriesId" ngModel class="form-field">
+            <option hidden value="null">Select Category</option>
+            <option value="57">Men</option>
+            <option value="58">Women</option>
+            <option value="61">Sale</option>
+            <option value="60">New arrival</option>
+            <option value="92">Yeezy</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Brand</label>
+        <select name="brandId" ngModel class="form-field">
+            <option hidden value="null">Select Brand</option>
+            <option *ngFor="let entry of brandOptitons" value={{entry.option_id}}>{{entry.value}}</option>
+        </select>
+    </div>
+
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Type</label>
+        <select name="selectType" ngModel class="form-field">
+            <option hidden value="null">Select Type</option>
+            <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Visibility</label>
+        <select name="selectvisibility" ngModel class="form-field">
+            <option hidden value="null">Select Visibility</option>
+            <option value="4">Catlog and serach</option>
+            <option value="3">Search</option>
+            <option value="1">Not visibale individually</option>
+            <option value="2">Catlog</option>
+        </select>
+    </div>
+    <div class="buttons">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a type="reset" (click)="reset(filter)">Reset</a>
+    </div>
 </form>
-<form *ngIf='requestSource =="skus"' #filter="ngForm" (ngSubmit)="submiskutData(filter)"  class="center-form">
+<form *ngIf='requestSource =="skus"' #filter="ngForm" (ngSubmit)="submiskutData(filter)" class="center-form">
     <div>
-       <label class="toggle-label">Image</label>
-       <mat-slide-toggle
-          [(ngModel)]="Image"
-          class="example-margin"
-          [color]="color"
-          name="Status"
-          [checked]="image"
-          >
-       </mat-slide-toggle>
-       <label class="toggle-label">Enable</label>
-       <mat-slide-toggle
-          [(ngModel)]="enabled"
-          class="example-margin"
-          [color]="color"
-          name="enabled"
-          >
-       </mat-slide-toggle>
-       
-       <label>Product Status</label>
-       <mat-slide-toggle
-          [(ngModel)]="status"
-          class="example-margin"
-          [color]="color"
-          name="Status"
-          >
-       </mat-slide-toggle>
-    </div>   
-   <br>
-   <div class="form-block">
-       <label class="radio-label">Gender</label>
-       <input type="radio" name="genderId" value="136" ngModel>
-       Men
-       <input type="radio" name="genderId" value="137" ngModel>
-       Women
-       <input type="radio"  name="genderId" value="138" ngModel>
-       Unisex
-   </div>
-   <br>
-   <div class="form-block">
-       <label>Size</label>
-       <select name="sizeId"  ngModel class="form-field">
-           <option  hidden value="null">Select size</option>
-           <option value={{entry.option_id}} *ngFor="let entry of sizeOptions">{{entry.value}}</option>
-       </select>
-       </div>
-       <br>
-       <div class="form-block">
-       <label>Category</label>
-       <select name="categoriesId"  ngModel  class="form-field">
-           <option  hidden value="null">Select Category</option>
-           <option value="57">Men</option>
-           <option value="58">Women</option>
-           <option value="61">Sale</option>
-           <option value="60">New arrival</option>
-           <option value="92">Yeezy</option>
-       </select>
-       </div>
-       <br>
-       <div class="form-block">
-       <label>Brand</label>
-       <select name="brandId" ngModel  class="form-field">
-           <option  hidden value="null">Select Brand</option>
-           <option *ngFor="let entry of typeOptions" value={{entry.option_id}}>{{entry.value}}</option>
-       </select> 
-   </div>
-   
-   <br>
-   <div class="form-block">
-   <label>Type</label>
-   <select name="selectType" ngModel class="form-field">
-       <option  hidden value="null">Select Type</option>
-       <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
-   </select>
-   </div>
-   <br>
-   <div class="form-block">
-   <label>Visibility</label>
-   <select name="selectvisibility"  ngModel class="form-field" >
-    <option  hidden value="null">Select Visibility</option>
-    <option value="4">Catlog and serach</option>
-    <option value="3">Search</option>
-    <option value="1">Not visibale individually</option>
-    <option value="2">Catlog</option>
-   </select>
-   </div>
-   <br>
-   <div class="form-block">
-   <label class="radio-label">Quantity</label>
-   From <input type="text" name="fromQ" ngModel>  To   <input type="text" name="ToQ" ngModel >
-   </div>
-   <br>
-   <div class="form-block">
-   <label class="radio-label">Price</label>
-   From <input type="text" name="fromP" ngModel>  To  <input type="text" name="ToP" ngModel >
-   </div>
-   <br>
-   <br>
-   <div class="buttons">
-       <button type="submit"class="btn btn-primary" >Submit</button>
-       <a type="reset"(click)="reset(filter)">Reset</a>
-   </div>
+        <label class="toggle-label">Enable</label>
+        <mat-slide-toggle [(ngModel)]="enabled" class="example-margin" [color]="color" name="enabled">
+        </mat-slide-toggle>
+
+        <label>Product Status</label>
+        <mat-slide-toggle [(ngModel)]="status" class="example-margin" [color]="color" name="Status">
+        </mat-slide-toggle>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="radio-label">Gender</label>
+        <input type="radio" name="genderId" value="136" ngModel>
+        Men
+        <input type="radio" name="genderId" value="137" ngModel>
+        Women
+        <input type="radio" name="genderId" value="138" ngModel>
+        Unisex
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Size</label>
+        <select name="sizeId" ngModel class="form-field">
+            <option hidden value="null">Select size</option>
+            <option value={{entry.option_id}} *ngFor="let entry of sizeOptions">{{entry.value}}</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Category</label>
+        <select name="categoriesId" ngModel class="form-field">
+            <option hidden value="null">Select Category</option>
+            <option value="57">Men</option>
+            <option value="58">Women</option>
+            <option value="61">Sale</option>
+            <option value="60">New arrival</option>
+            <option value="92">Yeezy</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Brand</label>
+        <select name="brandId" ngModel class="form-field">
+            <option hidden value="null">Select Brand</option>
+            <option *ngFor="let entry of typeOptions" value={{entry.option_id}}>{{entry.value}}</option>
+        </select>
+    </div>
+
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Type</label>
+        <select name="selectType" ngModel class="form-field">
+            <option hidden value="null">Select Type</option>
+            <option value={{entry.option_id}} *ngFor="let entry of typeOptions">{{entry.value}}</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="filter-label">Visibility</label>
+        <select name="selectvisibility" ngModel class="form-field">
+            <option hidden value="null">Select Visibility</option>
+            <option value="4">Catlog and serach</option>
+            <option value="3">Search</option>
+            <option value="1">Not visibale individually</option>
+            <option value="2">Catlog</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="radio-label">Quantity</label>
+        From <input type="text" name="fromQ" ngModel class="filter-text"> To <input type="text" name="ToQ" class="filter-text" ngModel>
+    </div>
+    <br>
+    <div class="form-block">
+        <label class="radio-label">Price</label>
+        From <input type="text" name="fromP" ngModel class="filter-text"> To <input type="text" name="ToP" class="filter-text" ngModel>
+    </div>
+    <div class="buttons">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a type="reset" (click)="reset(filter)">Reset</a>
+    </div>
 </form>

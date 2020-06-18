@@ -56,6 +56,7 @@ import{MatSliderModule}from '@angular/material/slider';
 import { ShowSkusComponent } from './ProductActions/show-skus/show-skus.component';
 import { FeaturedActionsComponent } from './ProductActions/featured-actions/featured-actions.component';
 import{MatProgressSpinnerModule}from'@angular/material/progress-spinner';
+import { DataTableFilterComponent } from './popup/data-table-filter/data-table-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,6 +89,7 @@ import{MatProgressSpinnerModule}from'@angular/material/progress-spinner';
     FilterComponent,
     ShowSkusComponent,
     FeaturedActionsComponent,
+    DataTableFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,7 +127,7 @@ import{MatProgressSpinnerModule}from'@angular/material/progress-spinner';
   providers: [MatDialogConfig],
   bootstrap: [AppComponent],
   entryComponents:[AddCategoryComponent,AddGenderComponent,AddDescriptionComponent,AddPriceComponent,DiscountPriceComponent,ProductStatusComponent,WarningComponent,ShowImageComponent,SuccessComponent,AddDiscountPersentageComponent
-  ,ChangeArticleComponent,ChangeSizeComponent,FilterComponent,ShowSkusComponent,FeaturedActionsComponent] 
+  ,ChangeArticleComponent,ChangeSizeComponent,FilterComponent,ShowSkusComponent,FeaturedActionsComponent,DataTableFilterComponent] 
 
 })
 export class AppModule { }
