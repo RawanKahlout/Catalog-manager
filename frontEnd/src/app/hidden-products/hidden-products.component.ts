@@ -319,7 +319,7 @@ export class HiddenProductsComponent implements OnInit {
   filter() {
     let dialogRef = this._dialog.open(DataTableFilterComponent,
       { 
-        panelClass: 'myapp-no-padding-dialog',
+        panelClass: 'myapp-filter-dialog',
         width: "45%",
         height: "80%",
         data: "article"

@@ -1,6 +1,6 @@
 <form #filter="ngForm" (ngSubmit)="submitData(filter)"  class="center-form">
     <div>
-       <label class="filter-label">Product Status</label>
+       <label class=".toggle-filter-label">Product Status</label>
        <mat-slide-toggle
           [(ngModel)]="stockStatusId"
           class="example-margin"
@@ -62,7 +62,7 @@
    <br>
    <br>
    <div class="buttons">
-       <button type="submit"class="btn btn-primary" >Submit</button>
+       <button type="submit"class="btn btn-primary-filter" >Submit</button>
        <a type="reset"(click)="reset(filter)">Reset</a>
    </div>
 </form>

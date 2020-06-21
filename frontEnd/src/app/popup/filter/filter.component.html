@@ -7,15 +7,15 @@
         <mat-slide-toggle [(ngModel)]="enabled" class="example-margin" [color]="color" name="enabled">
         </mat-slide-toggle>
 
-        <label class="filter-label">Product Status</label>
+        <label class=".toggle-filter-label">Product Status</label>
         <mat-slide-toggle [(ngModel)]="status" class="example-margin" [color]="color" name="Status">
         </mat-slide-toggle>
     </div>
     <div>
-        <label class="filter-label">Has Arabic Description</label>
+        <label class="toggle-filter-label">Arabic Description</label>
         <mat-slide-toggle [(ngModel)]="arabicDescription" class="example-margin" [color]="color" name="Status">
         </mat-slide-toggle>
-        <label>Has English Description</label>
+        <label class="toggle-filter-label">English Description</label>
         <mat-slide-toggle [(ngModel)]="englishDescription" class="example-margin" [color]="color" name="enabled">
         </mat-slide-toggle>
 
@@ -72,7 +72,7 @@
         </select>
     </div>
     <div class="buttons">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary-filter">Submit</button>
         <a type="reset" (click)="reset(filter)">Reset</a>
     </div>
 </form>
@@ -82,7 +82,7 @@
         <mat-slide-toggle [(ngModel)]="enabled" class="example-margin" [color]="color" name="enabled">
         </mat-slide-toggle>
 
-        <label>Product Status</label>
+        <label class="toggle-label">Status</label>
         <mat-slide-toggle [(ngModel)]="status" class="example-margin" [color]="color" name="Status">
         </mat-slide-toggle>
     </div>
@@ -155,7 +155,7 @@
         From <input type="text" name="fromP" ngModel class="filter-text"> To <input type="text" name="ToP" class="filter-text" ngModel>
     </div>
     <div class="buttons">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary-filter">Submit</button>
         <a type="reset" (click)="reset(filter)">Reset</a>
     </div>
 </form>

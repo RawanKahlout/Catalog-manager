@@ -149,7 +149,7 @@ export class AllSkusComponent implements OnInit{
     let data,count;
     let dialogRef =  this._dialog.open(FilterComponent,
     {
-      panelClass: 'myapp-no-padding-dialog',
+      panelClass: 'myapp-filter-dialog',
       width : "45%",
       height:"95%",
       data: "skus"
