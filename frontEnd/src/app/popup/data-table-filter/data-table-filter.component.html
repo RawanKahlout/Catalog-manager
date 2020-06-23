@@ -50,15 +50,30 @@
    </select>
    </div>
    <br>
-   <div class="form-blocks">
-   <label class="radio-label-data-table">Quantity</label>
-    <input type="text" name="quantity" class="filter-text" ngModel>
+   <br>
+   <div class="form-block">
+       <label class="radio-label">Quantity</label>
+        <select name="fromQ" ngModel class="filter-text">
+           <option hidden value="null">Select operator</option>
+           <option value="<">Greater than</option>
+           <option value=">">Smaller than</option>
+           <option value="=">Equal to</option>  
+        </select>  
+        {{value}}
+       <input type="text" name="quantity" class="filter-text" placeholder="write the quantity" ngModel>
    </div>
    <br>
-   <div class="form-blocks">
-   <label class="radio-label-data-table">Price</label>
-   <input type="text" name="price" class="filter-text"ngModel>
+   <div class="form-block">
+       <label class="radio-label">Price</label>
+       <select name="fromP" ngModel class="filter-text">
+           <option hidden value="null">Select operator</option>
+           <option value="<">Greater than</option>
+           <option value=">">Smaller than</option>
+           <option value="=">Equal to</option>  
+       </select>  
+       <input type="text" name="price" class="filter-text" ngModel>
    </div>
+  
    <br>
    <br>
    <div class="buttons">

@@ -8,12 +8,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class WarningComponent implements OnInit {
 message;
   constructor(public _dialogRef: MatDialogRef<WarningComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { this.message = data.message; }
-
-  ngOnInit() {
+  @Inject(MAT_DIALOG_DATA) public data: any) { this.message = data}
+  ngOnInit() {}
+  onClose() {this._dialogRef.close();
   }
-  onClose() {
-   this._dialogRef.close();
-  }
-
 }

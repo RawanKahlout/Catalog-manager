@@ -40,13 +40,41 @@ export class FilterComponent implements OnInit {
       if (form.value.hasOwnProperty(key)) {
         var val = form.value[key];
         if (val == true) {
-          this.queryData[key] = key;
+          switch (key) {
+            case "statusId" :{
+              this.queryData[key]="enabled";
+              break;
+            }
+            case "stockStatusId" :{
+              this.queryData[key]=1;
+              break;
+            }
+            case "hasImage" :{
+              this.queryData[key]="";
+              break;
+            }
+            case "hasArabicDescription":{
+              this.queryData[key]="arabicDescription";
+              break;
+            }
+            case "hasEnglishDescription":{
+              this.queryData[key]="englishDescription";
+              break;
+            }
         }
-        if (val && val != true) {
+        }
+        if (key == "price" ){
+        this.queryData[key] = (form.value.fromP+val);
+        }
+        if(key=="quantity"){
+        this.queryData[key] = (form.value.fromQ+val);
+        }
+        if (val && val != true && key != "quantity" && key != "price" && key != "fromP" && key != "fromQ") {
           this.queryData[key] = val;
         }
       }
     }
+    console.log(this.queryData,"her uam")
   }
   getAttribute(){
     this._dataService.getAttribute(83).subscribe( data => { this.tempp = data; this.brandOptitons=this.tempp.data;

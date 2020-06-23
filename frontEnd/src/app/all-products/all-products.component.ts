@@ -36,9 +36,8 @@ const ELEMENT_DATA: tableCol[] = []
   styleUrls: ['./all-products.component.css']
 })
 export class AllProductsComponent implements OnInit {
-  initData = [{ position: 1, name: 'air max', article: 'e1022a013-009', price: 200, gender: 'men', specialprice: 100, image: '1.jpg' }]
   result;
-  displayedColumns: string[] = ['select', 'position', 'name', 'article', 'price', 'gender', 'status', 'image'];
+  displayedColumns: string[];
   dataSource = new MatTableDataSource();
   selection = new SelectionModel(true, []);
   isLoading = false;
@@ -48,7 +47,7 @@ export class AllProductsComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) set content(sort: MatSort) {
     this.dataSource.sort = sort;
   }
-  constructor(private _dataService : dataService ,private _productService: productService, private _dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef 
+constructor(private _dataService : dataService ,private _productService: productService, private _dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef 
   ) { }
   ngOnInit() {
     this.dataSource.filterPredicate = (data: tableCol, filter: string): boolean => {
@@ -111,16 +110,12 @@ export class AllProductsComponent implements OnInit {
     this.openDialog(AddCategoryComponent, this.selection.selected,"updateCategory")
   }
   onImage(element) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = element.imageUrl;
-    dialogConfig.width = "50%";
-    dialogConfig.height = "70%";
-    dialogConfig.panelClass = "myapp-no-padding-dialog";
-    this._dialog.open(ShowImageComponent,dialogConfig)
+  this._productService.onImage(element);
   }
   onSearch(form: NgForm) {
     var ArrayOfArticles = form.value.search.split(/\s/).join(',');
     this._productService.searchForAllProduct(ArrayOfArticles).subscribe(data=>{
+      this.displayedColumns= this._productService.searchProductHeader;
       this.result = data;
       this.dataSource.data=this.result.data;
       console.log(this.dataSource.data)
@@ -129,11 +124,11 @@ export class AllProductsComponent implements OnInit {
   download(){
     this._dataService.downloadFile(this.result.data, 'Articles');
   }
- openDialog(DialogBodyComponent, data, actionName) {
+  openDialog(DialogBodyComponent, data, actionName) {
     if (this.checkRows(actionName) != true) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = data;
-        dialogConfig.width = "60%";
+      dialogConfig.width = "60%";
       dialogConfig.height = "60%";
       dialogConfig.panelClass = "myapp-no-padding-dialog";
       let dialogRef = this._dialog.open(DialogBodyComponent, dialogConfig);
@@ -145,26 +140,7 @@ export class AllProductsComponent implements OnInit {
     }
   }
   checkRows(actionName) {
-    if (actionName == 'addDescription' && this.selection.selected.length > 1) {
-      if (this.selection.selected.length > 1) {
-        this._dialog.open(WarningComponent, {
-          width: "60%",
-          data: {
-            message: 'Select only one product'
-          }
-        });
-        return true
-      }
-    }
-    else if (this.selection.selected.length == 0) {
-      this._dialog.open(WarningComponent, {
-        width: "60%",
-        data: {
-          message: "You have to select a product before any operation"
-        }
-      });
-      return true
-    }
+    return this._productService.checkRows("NA", this.selection.selected.length,actionName)
   }
   updateTableValues(rowData, operationType) {
     var tempDataSource = this.dataSource.data;

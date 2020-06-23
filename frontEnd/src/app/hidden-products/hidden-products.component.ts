@@ -55,7 +55,16 @@ export interface tableCol {
   styleUrls: ['./hidden-products.component.css']
 })
 export class HiddenProductsComponent implements OnInit {
-  returnedValue; dataSource = new MatTableDataSource(); displayedColumns; routerParams: Params; result; count; filterForm: any;
+  returnedValue; columns; displayedColumns; result; count; filterForm: any;
+  dataSource = new MatTableDataSource();
+  selection = new SelectionModel(true, []);
+  routerParams: Params;
+  @ViewChild(MatPaginator, { static: false }) set Paginatorcontent(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator
+  }
+  @ViewChild(MatSort, { static: false }) set content(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
   constructor(private _MatDialogConfig: MatDialogConfig, private _ChangeDetectorRef: ChangeDetectorRef, private _productService: productService, private _dialog: MatDialog, private _router: Router, private _ActivatedRoute: ActivatedRoute,
     private _dataService: dataService) {
     this._router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -69,6 +78,7 @@ export class HiddenProductsComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.columns = this._productService.columns;
     this.getParams();
     this.displayedColumns = this.getTableHeader(this.routerParams);
     this.dataSource.filterPredicate = ((data, filter) => {
@@ -79,63 +89,18 @@ export class HiddenProductsComponent implements OnInit {
       const f = !filter.typeId || data.typeId === parseInt(filter.typeId)
       const h = !filter.quantity || data.quantity === parseInt(filter.quantity)
       const g = !filter.stockStatusId || data.stockStatusId === filter.stockStatusId;
-      if (!filter.flag) {
+      if (filter.flag != 1) {
+        console.log(filter.flag, "here iam")
         const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
           return (currentTerm + (data as { [key: string]: any })[key]);
         }, '').toLowerCase();
         let terms = filter.replace(/\s/g, "|");
         let regEx = new RegExp(terms);
+        return regEx.test(dataStr);
       }
       return a && c && d && e && f && g && h;
     }) as (PeriodicElement, string) => boolean;
   }
-  @ViewChild(MatPaginator, { static: false }) set Paginatorcontent(paginator: MatPaginator) {
-    this.dataSource.paginator = paginator
-  }
-  @ViewChild(MatSort, { static: false }) set content(sort: MatSort) {
-    this.dataSource.sort = sort;
-  }
-  selection = new SelectionModel(true, []);
-  columns = [
-    { columnDef: 'thumbnailImageUrl', header: 'Thumbnail Image', cell: (element: any) => `${element.thumbnailImageUrl}` },
-    { columnDef: 'parentSku', header: 'Parent Sku', cell: (element: any) => `${element.parentSku}` },
-    { columnDef: 'parentId', header: 'Parent Id', cell: (element: any) => `${element.parentId}` },
-    { columnDef: 'owner', header: 'Owner', cell: (element: any) => mapper("", element.owner) },
-    { columnDef: 'Select', header: 'Select', cell: (element: any) => `${element.Select}` },
-    { columnDef: 'specialprice', header: 'specialprice', cell: (element: any) => mapper("", element.specialprice) },
-    { columnDef: 'position', header: 'position', cell: (element: any) => mapper("", element.position) },
-    { columnDef: 'article', header: 'Articles', cell: (element: any) => mapper("", element.article) },
-    { columnDef: 'entityId', header: 'EntityId', cell: (element: any) => mapper("date", element.entityId) },
-    { columnDef: 'createdAt', header: 'createdAt', cell: (element: any) => mapper("date", element.createdAt) },
-    { columnDef: 'updatedAt', header: 'updatedAt.', cell: (element: any) => mapper("date", element.updatedAt) },
-    { columnDef: 'name', header: 'Name', cell: (element: any) => mapper("", element.name) },
-    { columnDef: 'sku', header: 'sku', cell: (element: any) => mapper("", element.sku) },
-    { columnDef: 'productType', header: 'productType', cell: (element: any) => mapper("", element.productType) },
-    { columnDef: 'price', header: 'Price', cell: (element: any) => mapper("", element.price) },
-    { columnDef: 'salePrice', header: 'Sale Price', cell: (element: any) => mapper("", element.salePrice) },
-    { columnDef: 'discountPercentage', header: 'Discount Percentage', cell: (element: any) => mapper("", element.discountPercentage) },
-    { columnDef: 'quantity', header: 'quantity', cell: (element: any) => mapper("", element.quantity) },
-    { columnDef: 'categoriesId', header: 'categoriesId', cell: (element: any) => mapper("", element.categoriesId) },
-    { columnDef: 'categories', header: 'categories', cell: (element: any) => mapper("", element.categories) },
-    { columnDef: 'imageUrl', header: 'imageUrl', cell: (element: any) => mapper("", element.imageUrl) },
-    { columnDef: 'brand', header: 'brand', cell: (element: any) => mapper("", element.brand) },
-    { columnDef: 'brandId', header: 'brandId', cell: (element: any) => mapper("", element.brandId) },
-    { columnDef: 'gender', header: 'Gender', cell: (element: any) => mapper("", element.gender) },
-    { columnDef: 'genderId', header: 'genderId', cell: (element: any) => mapper("", element.genderId) },
-    { columnDef: 'type', header: 'type', cell: (element: any) => mapper("", element.type) },
-    { columnDef: 'typeId', header: 'typeId', cell: (element: any) => mapper("", element.typeId) },
-    { columnDef: 'description', header: 'description', cell: (element: any) => mapper("", element.description) },
-    { columnDef: 'stockStatusId', header: 'stockStatusId', cell: (element: any) => mapper("", element.stockStatusId) },
-    { columnDef: 'status', header: 'status', cell: (element: any) => mapper("", element.status) },
-    { columnDef: 'statusId', header: 'statusId', cell: (element: any) => mapper("", element.statusId) },
-    { columnDef: 'visibility', header: 'visibility', cell: (element: any) => mapper("", element.visibility) },
-    { columnDef: 'visiblityId', header: 'visiblityId', cell: (element: any) => mapper("", element.visiblityId) }
-  ];
-  common = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner'];
-  Disabled = this.common; Outofstock = this.common; invisible = this.common; Nocategory = this.common; Banned = this.common; noDescription = this.common; disabledToParent = this.common; differentLanguages = this.common;
-  outOfStockToParent = this.common; differentPrice = this.common;
-  NoImage = ['Select', 'parentId', 'parentSku', 'price', 'owner'];
-  Noprice = ['Select', 'parentId', 'parentSku', 'brand', 'owner', 'thumbnailImageUrl'];
   download() {
     this._dataService.downloadFile(this.result.data, 'Hidden Articles');
   }
@@ -161,53 +126,52 @@ export class HiddenProductsComponent implements OnInit {
       case "Disabled":
         {
           this.getTableData('disabled')
-          return this.Disabled;
+          return this._productService.Disabled;
         }
       case "NoImage": {
         this.getTableData('noImages')
-        return this.NoImage;
+        return this._productService.NoImage;
       }
 
       case "Outofstock": {
         this.getTableData('outOfStock');
-        return this.Outofstock;
+        return this._productService.Outofstock;
       }
       case "Noprice": {
         this.getTableData('noPrice');
-        return this.Noprice;
-
+        return this._productService.Noprice;
       }
       case "Nocategory": {
         this.getTableData('noCategories');
-        return this.Nocategory;
+        return this._productService.Nocategory;
       }
       case "Banned": {
         this.getTableData('banned');
-        return this.Banned;
+        return this._productService.Banned;
       }
       case "Invisible": {
         this.getTableData('invisible')
-        return this.invisible;
+        return this._productService.invisible;
       }
       case "disabledToParent": {
         this.getTableData('disabledToParent')
-        return this.disabledToParent;
+        return this._productService.disabledToParent;
       }
       case "outOfStockToParent": {
         this.getTableData('outOfStockToParent')
-        return this.outOfStockToParent;
+        return this._productService.outOfStockToParent;
       }
       case "noDescription": {
         this.getTableData('noDescription')
-        return this.noDescription;
+        return this._productService.noDescription;
       }
       case "differentPrice": {
         this.getTableData('differentPrice')
-        return this.differentPrice;
+        return this._productService.differentPrice;
       }
       case "differentLanguages": {
         this.getTableData('noDescription')
-        return this.differentLanguages
+        return this._productService.differentLanguages;
       }
       default:
         return "No data today"
@@ -235,11 +199,7 @@ export class HiddenProductsComponent implements OnInit {
     return this.dataSource.filter = filterValue;
   }
   onImage(row) {
-    this._dialog.open(ShowImageComponent, {
-      width: "60%",
-      data: row.imageUrl,
-      panelClass:"myapp-no-padding-dialog"
-    })
+    this._productService.onImage(row);
   }
   getParams() {
     this._ActivatedRoute.params.subscribe(params => { this.routerParams = params.issue })
@@ -267,26 +227,7 @@ export class HiddenProductsComponent implements OnInit {
     this.openDialog(AddDescriptionComponent, this.selection.selected);
   }
   checkRows() {
-    if (this.routerParams.toString() == 'noDescription' || this.routerParams.toString() == 'differentLanguages' && this.selection.selected.length > 1) {
-      if (this.selection.selected.length > 1) {
-        this._dialog.open(WarningComponent, {
-          width: "60%",
-          data: {
-            message: 'Select only one product'
-          }
-        });
-        return true
-      }
-    }
-    else if (this.selection.selected.length == 0) {
-      this._dialog.open(WarningComponent, {
-        width: "60%",
-        data: {
-          message: "You have to select a product before any operation"
-        }
-      });
-      return true
-    }
+  return this._productService.checkRows(this.routerParams, this.selection.selected.length,"NA")
   }
   openDialog(DialogBodyComponent, data) {
     if (this.checkRows() != true) {
@@ -314,11 +255,11 @@ export class HiddenProductsComponent implements OnInit {
     this.selection = new SelectionModel(true, []);
   }
   showSkus() {
-  this.openDialog(ShowSkusComponent, this.selection.selected)
+    this.openDialog(ShowSkusComponent, this.selection.selected)
   }
   filter() {
     let dialogRef = this._dialog.open(DataTableFilterComponent,
-      { 
+      {
         panelClass: 'myapp-filter-dialog',
         width: "45%",
         height: "80%",
@@ -337,14 +278,6 @@ export class HiddenProductsComponent implements OnInit {
     })
   }
 }
-function mapper(type, value) {
-  if (!value) return "N/A";
-  if (type == "date") return (new Date(value)).toLocaleDateString();
-  return value;
-}
-
-
-
 
 
 

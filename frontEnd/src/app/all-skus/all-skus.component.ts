@@ -14,16 +14,16 @@ import{ChangeArticleComponent}from '../ProductActions/change-article/change-arti
 import{ChangeSizeComponent}from '../ProductActions/change-size/change-size.component';
 import { FilterComponent } from '../popup/filter/filter.component';
 import {Subject}from 'rxjs';
-
-
 export interface tableCol {
   position: number;
   name: string;
   article: string;
   price: number;
   gender: string;
-  specialprice: number;
-  image: string;
+  salePrice: number;
+  size:number
+  stockStatus:string;
+  quantity:Number
 }
 const ELEMENT_DATA: tableCol[] = []
 @Component({
@@ -32,13 +32,11 @@ const ELEMENT_DATA: tableCol[] = []
   styleUrls: ['./all-skus.component.css']
 })
 export class AllSkusComponent implements OnInit{
-  initData = [{ position: 1, name: 'air max', article: 'e1022a013-009', price: 200, gender: 'men', specialprice: 100, image: '1.jpg' }]
-  result;
-  displayedColumns: string[] = ['select', 'position', 'name', 'article', 'price', 'gender', 'specialprice', 'image'];
+  result; isLoading = false;
+  displayedColumns: string[];
   dataSource = new MatTableDataSource();
   selection = new SelectionModel(true, []);
-  subject = new Subject();
-  isLoading = false;
+
   @ViewChild(MatPaginator, { static: false }) set Paginatorcontent(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
   }
@@ -94,15 +92,7 @@ export class AllSkusComponent implements OnInit{
     }
   }
   checkRows(actionName) {
-  if (this.selection.selected.length == 0) {
-      this._dialog.open(WarningComponent, {
-        width: "60%",
-        data: {
-          message: "You have to select a product before any operation"
-        }
-      });
-      return true
-    }
+   return this._productService.checkRows("NA",this.selection.selected.length,actionName)
   }
   updateTableValues(rowData, operationType) {
     var tempDataSource = this.dataSource.data;
@@ -127,17 +117,11 @@ export class AllSkusComponent implements OnInit{
     var ArrayOfArticles = form.value.search.split(/\s/).join(',');
     this._productService.searchForAllSkus(ArrayOfArticles).subscribe(data => {
       this.isLoading = true;
+      this.displayedColumns=this._productService.searchSkusHeader;
       this.result = data;
       this.dataSource.data = this.result.data;
       this.isLoading = false;
     });
-  }
-  onImage(element) {
-    this._dialog.open(ShowImageComponent, {
-      width: "60%",
-      data: element.imageUrl,
-      panelClass:"myapp-no-padding-dialog"
-    })
   }
   changeSize(){
     this.openDialog(ChangeSizeComponent, this.selection.selected,"changeSize")

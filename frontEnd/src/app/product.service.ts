@@ -1,13 +1,60 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { SuccessComponent } from './popup/success/success.component';
 import { WarningComponent } from './popup/warning/warning.component';
+import { ShowImageComponent } from './popup/show-image/show-image.component';
 @Injectable({ providedIn: 'root' })
 export class productService {
+    columns = [
+        { columnDef: 'delete', header: 'Delete', cell: (element: any) => `${element.delete}` },
+        { columnDef: 'thumbnailImageUrl', header: 'Thumbnail Image', cell: (element: any) => `${element.thumbnailImageUrl}` },
+        { columnDef: 'parentSku', header: 'Parent Sku', cell: (element: any) => `${element.parentSku}` },
+        { columnDef: 'parentId', header: 'Parent Id', cell: (element: any) => `${element.parentId}` },
+        { columnDef: 'owner', header:'Owner', cell: (element: any) => mapper("", element.owner) },
+        { columnDef: 'Select', header: 'Select', cell: (element: any) => `${element.Select}` },
+        { columnDef: 'specialprice', header: 'specialprice', cell: (element: any) => mapper("", element.specialprice) },
+        { columnDef: 'position', header: 'position', cell: (element: any) => mapper("", element.position) },
+        { columnDef: 'article', header: 'Articles', cell: (element: any) => mapper("", element.article) },
+        { columnDef: 'entityId', header: 'EntityId', cell: (element: any) => mapper("date", element.entityId) },
+        { columnDef: 'createdAt', header: 'createdAt', cell: (element: any) => mapper("date", element.createdAt) },
+        { columnDef: 'updatedAt', header: 'updatedAt.', cell: (element: any) => mapper("date", element.updatedAt) },
+        { columnDef: 'name', header: 'Name', cell: (element: any) => mapper("", element.name) },
+        { columnDef: 'sku', header: 'sku', cell: (element: any) => mapper("", element.sku) },
+        { columnDef: 'productType', header: 'productType', cell: (element: any) => mapper("", element.productType) },
+        { columnDef: 'price', header: 'Price', cell: (element: any) => mapper("", element.price) },
+        { columnDef: 'salePrice', header: 'Sale Price', cell: (element: any) => mapper("", element.salePrice) },
+        { columnDef: 'discountPercentage', header: 'Discount Percentage', cell: (element: any) => mapper("", element.discountPercentage) },
+        { columnDef: 'quantity', header: 'quantity', cell: (element: any) => mapper("", element.quantity) },
+        { columnDef: 'categoriesId', header: 'categoriesId', cell: (element: any) => mapper("", element.categoriesId) },
+        { columnDef: 'categories', header: 'categories', cell: (element: any) => mapper("", element.categories) },
+        { columnDef: 'imageUrl', header: 'imageUrl', cell: (element: any) => mapper("", element.imageUrl) },
+        { columnDef: 'brand', header: 'brand', cell: (element: any) => mapper("", element.brand) },
+        { columnDef: 'brandId', header: 'brandId', cell: (element: any) => mapper("", element.brandId) },
+        { columnDef: 'gender', header: 'Gender', cell: (element: any) => mapper("", element.gender) },
+        { columnDef: 'genderId', header: 'genderId', cell: (element: any) => mapper("", element.genderId) },
+        { columnDef: 'type', header: 'type', cell: (element: any) => mapper("", element.type) },
+        { columnDef: 'typeId', header: 'typeId', cell: (element: any) => mapper("", element.typeId) },
+        { columnDef: 'description', header: 'description', cell: (element: any) => mapper("", element.description) },
+        { columnDef: 'stockStatusId', header: 'stockStatusId', cell: (element: any) => mapper("", element.stockStatusId) },
+        { columnDef: 'status', header: 'status', cell: (element: any) => mapper("", element.status) },
+        { columnDef: 'statusId', header: 'statusId', cell: (element: any) => mapper("", element.statusId) },
+        { columnDef: 'visibility', header: 'visibility', cell: (element: any) => mapper("", element.visibility) },
+        { columnDef: 'visiblityId', header: 'visiblityId', cell: (element: any) => mapper("", element.visiblityId) }
+      ];
     temp: any;
     searchedResult
+    searchProductHeader= ['select','image', 'name', 'article', 'price', 'gender', 'status'];
+    searchSkusHeader= ['select', 'quantity', 'sku', 'price', 'stockStatus', 'salePrice','size'];
+    addFeaturedHeader=['Select','thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice','discountPercentage', 'owner'];
+    editeFeaturedHeader= ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner', 'delete'];
+    commonHiddenHeader = ['Select', 'thumbnailImageUrl', 'parentSku', 'parentId', 'price', 'salePrice', 'discountPercentage', 'owner'];
+    Disabled = this.commonHiddenHeader; Outofstock = this.commonHiddenHeader; invisible = this.commonHiddenHeader; Nocategory = this.commonHiddenHeader;
+    Banned = this.commonHiddenHeader; noDescription = this.commonHiddenHeader; disabledToParent = this.commonHiddenHeader; differentLanguages = this.commonHiddenHeader;
+    outOfStockToParent = this.commonHiddenHeader; differentPrice = this.commonHiddenHeader;
+    NoImage = ['Select', 'parentId', 'parentSku', 'price', 'owner'];
+    Noprice = ['Select', 'parentId', 'parentSku', 'brand', 'owner', 'thumbnailImageUrl'];
     constructor(private _http: HttpClient, private _router: Router, private _dialog: MatDialog) { }
     getDaynamic(type) {
         return this._http.get('http://15.185.60.39:3000/getProductsNew/' + type,
@@ -111,5 +158,31 @@ export class productService {
       )
     }
     enableProduct(selectedRows) {}
-    
+    onImage(row) {
+        this._dialog.open(ShowImageComponent, {
+          width: "60%",
+          panelClass: "myapp-no-padding-dialog",
+          data: row.imageUrl})
+    }
+    checkRows(routerParams,selectionLength,actionName){
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.width = "60%";
+      if (selectionLength > 1) {
+        if (routerParams.toString() == 'noDescription' || routerParams.toString() == 'differentLanguages' || actionName == 'addDescription') {
+          dialogConfig.data = "Select only one product"
+          this._dialog.open(WarningComponent, dialogConfig);
+          return true
+        }
+      }
+      else if (selectionLength == 0) {
+        dialogConfig.data = "You have to select a product before any operation"
+        this._dialog.open(WarningComponent, dialogConfig);
+        return true
+      }
+    }
 }
+function mapper(type, value) {
+    if (!value) return "N/A";
+    if (type == "date") return (new Date(value)).toLocaleDateString();
+    return value;
+  }

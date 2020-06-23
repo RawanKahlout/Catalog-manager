@@ -8,12 +8,12 @@
 </div>
 <form #size="ngForm" (ngSubmit)="submitData(size)" class="pageCenter">
   <label class="form-label">Select size</label>
-  <select name="selectCategory" id="#" class="fields form-fields" ngModel>
-    <option value="sale">sale</option>
-    <option value="limitedEddition">limitedEddition</option>
-    <option value="designer">designer</option>
-    <option value="women">women</option>
-  </select>
+  <div class="form-block">
+    <select name="sizeId" ngModel class="fields form-fields">
+        <option hidden value="null">Select size</option>
+        <option value={{entry.option_id}} *ngFor="let entry of sizeOptions">{{entry.value}}</option>
+    </select>
+  </div>
   <br>
   <br>
   <button type="submit" class="btn pryButton">Submit</button>

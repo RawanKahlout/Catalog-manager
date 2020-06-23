@@ -1,22 +1,22 @@
 <form *ngIf='requestSource =="article"' #filter="ngForm" (ngSubmit)="submitArticleData(filter)" class="center-form">
     <div>
         <label class="toggle-label">Image</label>
-        <mat-slide-toggle [(ngModel)]="Image" class="example-margin" [color]="color" name="Status" [checked]="image">
+        <mat-slide-toggle [(ngModel)]="hasImage" class="example-margin" [color]="color" name="hasImage" [checked]="image">
         </mat-slide-toggle>
         <label class="toggle-label">Enable</label>
-        <mat-slide-toggle [(ngModel)]="enabled" class="example-margin" [color]="color" name="enabled">
+        <mat-slide-toggle [(ngModel)]="statusId" class="example-margin" [color]="color" name="statusId">
         </mat-slide-toggle>
 
         <label class=".toggle-filter-label">Product Status</label>
-        <mat-slide-toggle [(ngModel)]="status" class="example-margin" [color]="color" name="Status">
+        <mat-slide-toggle [(ngModel)]="stockStatusId" class="example-margin" [color]="color" name="stockStatusId">
         </mat-slide-toggle>
     </div>
     <div>
         <label class="toggle-filter-label">Arabic Description</label>
-        <mat-slide-toggle [(ngModel)]="arabicDescription" class="example-margin" [color]="color" name="Status">
+        <mat-slide-toggle [(ngModel)]="hasArabicDescription" class="example-margin" [color]="color" name="hasArabicDescription">
         </mat-slide-toggle>
         <label class="toggle-filter-label">English Description</label>
-        <mat-slide-toggle [(ngModel)]="englishDescription" class="example-margin" [color]="color" name="enabled">
+        <mat-slide-toggle [(ngModel)]="hasEnglishDescription" class="example-margin" [color]="color" name="hasEnglishDescription">
         </mat-slide-toggle>
 
     </div>
@@ -147,12 +147,25 @@
     <br>
     <div class="form-block">
         <label class="radio-label">Quantity</label>
-        From <input type="text" name="fromQ" ngModel class="filter-text"> To <input type="text" name="ToQ" class="filter-text" ngModel>
+         <select name="fromQ" ngModel class="filter-text">
+            <option hidden value="null">Select operator</option>
+            <option value="<">Greater than</option>
+            <option value=">">Smaller than</option>
+            <option value="=">Equal to</option>  
+         </select>  
+         {{value}}
+        <input type="text" name="quantity" class="filter-text" placeholder="write the quantity" ngModel>
     </div>
     <br>
     <div class="form-block">
         <label class="radio-label">Price</label>
-        From <input type="text" name="fromP" ngModel class="filter-text"> To <input type="text" name="ToP" class="filter-text" ngModel>
+        <select name="fromP" ngModel class="filter-text">
+            <option hidden value="null">Select operator</option>
+            <option value="<">Greater than</option>
+            <option value=">">Smaller than</option>
+            <option value="=">Equal to</option>  
+        </select>  
+        <input type="text" name="price" class="filter-text" ngModel>
     </div>
     <div class="buttons">
         <button type="submit" class="btn btn-primary-filter">Submit</button>

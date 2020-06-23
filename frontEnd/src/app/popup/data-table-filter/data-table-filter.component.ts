@@ -35,11 +35,18 @@ export class DataTableFilterComponent implements OnInit {
         if (val == true) {
           this.queryData[key] = 1;
         }
-        if (val && val != true) {
-          this.queryData[key] = val;
-        }
+        if (key == "price" ){
+          this.queryData[key] = (form.value.fromP+val);
+          }
+          if(key=="quantity"){
+          this.queryData[key] = (form.value.fromQ+val);
+          }
+          if (val && val != true && key != "quantity" && key != "price" && key != "fromP" && key != "fromQ") {
+            this.queryData[key] = val;
+          }
       }
     }
+    console.log(this.queryData)
   }
   getAttribute() {
     this._dataService.getAttribute(83).subscribe(data => {
