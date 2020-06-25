@@ -13,7 +13,6 @@ import { WarningComponent } from '../../popup/warning/warning.component';
 import { SuccessComponent } from '../../popup/success/success.component';
 import { AddPriceComponent } from '../../ProductActions/add-price/add-price.component';
 import { FeaturedActionsComponent } from 'src/app/ProductActions/featured-actions/featured-actions.component';
-
 export interface tableCol {
   ParentSky: string;
   specialprice: number;

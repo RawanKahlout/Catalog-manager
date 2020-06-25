@@ -5,6 +5,8 @@ import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { SuccessComponent } from './popup/success/success.component';
 import { WarningComponent } from './popup/warning/warning.component';
 import { ShowImageComponent } from './popup/show-image/show-image.component';
+import { environment } from 'src/environments/environment';
+const apiUrl = environment.apiUrl;
 @Injectable({ providedIn: 'root' })
 export class productService {
     columns = [
@@ -57,7 +59,7 @@ export class productService {
     Noprice = ['Select', 'parentId', 'parentSku', 'brand', 'owner', 'thumbnailImageUrl'];
     constructor(private _http: HttpClient, private _router: Router, private _dialog: MatDialog) { }
     getDaynamic(type) {
-        return this._http.get('http://15.185.60.39:3000/getProductsNew/' + type,
+        return this._http.get(apiUrl + type,
             {
                 headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),
 
@@ -67,13 +69,13 @@ export class productService {
     console.log("here in service");
     console.log(data);
     console.log(price);
-    return this._http.get('http://localhost:3000/api/uploadProduectReport')
+    return this._http.get(apiUrl+'/uploadProduectReport')
 }
     searchForAllProduct(serchedValue) {
         let params = new HttpParams();
         params = params.append('sku', serchedValue);
     
-      return this._http.get('http://15.185.60.39:3000/getProductsNew/search?',
+      return this._http.get(apiUrl+'search?',
             {
                 params: params,
                 headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),
@@ -83,12 +85,12 @@ export class productService {
     }
     filter(queryData){
         console.log(queryData)
-        return this._http.get('http://15.185.60.39:3000/getProductsNew/search?',{ 
+        return this._http.get(apiUrl+'search?',{ 
         params : queryData,
         headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),})
     }
     skusFilter(queryData){
-        return this._http.get('http://15.185.60.39:3000/getProductsNew/searchSku?',{ 
+        return this._http.get(apiUrl+'searchSku?',{ 
             params : queryData,
             headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),})
     }
@@ -149,7 +151,7 @@ export class productService {
         let params = new HttpParams();
         params = params.append('parentSku', serchedValue);
     
-      return this._http.get('http://15.185.60.39:3000/getProductsNew/searchSku?',
+      return this._http.get(apiUrl+'searchSku?',
             {
                 params: params,
                 headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),

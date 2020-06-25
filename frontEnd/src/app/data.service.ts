@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpParams, HttpHeaders } from '@angular/common/http';
 import{Router}from '@angular/router';
-
+import {environment}from '../environments/environment';
+const apiUrl = environment.apiUrl;
 @Injectable({ providedIn: 'root' })
 export class dataService {
     temp : any;
@@ -13,7 +14,7 @@ export class dataService {
     }
     getAttribute(actionId){
         
-        return this._http.get('http://15.185.60.39:3000/getAttributeValues/'+ actionId ,{
+        return this._http.get(apiUrl+ actionId ,{
         headers : new HttpHeaders().set('authorization','AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8')
         })
     }

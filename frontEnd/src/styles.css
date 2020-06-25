@@ -4,6 +4,73 @@ html, body { height: 100%;
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   overflow-y: hidden;
 }
+
+/*UPLOAD PAGES*/
+.innerDiv{
+  padding-top:100px;
+  padding-bottom:100px;
+  padding-right:50px;
+  padding-left:50px;
+  margin:auto;
+  }
+  .outerDiv{
+    margin-top: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float: none; 
+  }
+  .centerElement{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  float: none;
+  padding: 50px;
+  }
+  .pryButton{
+  text-align: center;
+  color:#FBAD18;
+  border: 2px solid black;
+  border-radius: 0px 8px 0px 8px;
+  background-color: black;
+  width :30%;
+  font-weight: bold;
+  padding: 1px;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
+  display: block;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+  }
+  .upload-header{
+    font-size: 22px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+    margin-top: 0px;
+  
+  }
+/*Header*/
+.hidden-header{
+  font-size: 27px;
+  text-align: left; 
+  font-weight: bold;
+  color: black;
+  margin-top: 0px;
+  margin-bottom: 50px;
+  margin-left: 20px;
+}
+h2{
+  font-size: 25px;
+  text-align: left; 
+  font-weight: bold;
+  color: black;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 20px;
+}
+/*Dialog*/
 .myapp-no-padding-dialog .mat-dialog-container {
     padding: 0;
     background-color: black;

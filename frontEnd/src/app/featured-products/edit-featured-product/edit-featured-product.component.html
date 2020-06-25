@@ -1,6 +1,6 @@
 <app-main-navbar>
     <div class="container">
-        <h4>Edit Featured Product</h4> 
+        <h2>Edit Featured Product</h2> 
          <!---- <div class="container">
             <div>
               <div class="row">
@@ -33,7 +33,7 @@
                 </mat-checkbox>
                 <div *ngIf="column.columnDef =='thumbnailImageUrl'" > <img src = {{column.cell(row)}}  class="matTable-img" (click)="onImage(row)"></div>
                 <div *ngIf="column.columnDef !== 'Select' && column.columnDef !== 'thumbnailImageUrl' && column.columnDef !== 'delete' "> {{ column.cell(row) }}</div>
-                <div *ngIf="column.columnDef == 'delete' "><button (click)="deleteFeatured(row)" class="pryButton">Remove</button></div>
+                <div *ngIf="column.columnDef == 'delete' "><button (click)="deleteFeatured(row)" class="table-pryButton">Remove</button></div>
               </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

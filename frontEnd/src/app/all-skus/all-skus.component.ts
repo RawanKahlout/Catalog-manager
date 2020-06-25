@@ -29,7 +29,7 @@ const ELEMENT_DATA: tableCol[] = []
 @Component({
   selector: 'app-all-skus',
   templateUrl: './all-skus.component.html',
-  styleUrls: ['./all-skus.component.css']
+  styleUrls: ['../all-products/all-products.component.css']
 })
 export class AllSkusComponent implements OnInit{
   result; isLoading = false;

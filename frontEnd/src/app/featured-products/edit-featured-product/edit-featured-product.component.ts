@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 import { WarningComponent } from '../../popup/warning/warning.component';
 import { SuccessComponent } from '../../popup/success/success.component';
 import { dataService } from '../../data.service';
+
 export interface tableCol {
   ParentSky: string;
   specialprice: number;
@@ -48,7 +49,7 @@ export interface tableCol {
 @Component({
   selector: 'app-edit-featured-product',
   templateUrl: './edit-featured-product.component.html',
-  styleUrls: ['./edit-featured-product.component.css']
+  styleUrls: ['../add-featured-product/add-featured-product.component.css']
 })
 export class EditFeaturedProductComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

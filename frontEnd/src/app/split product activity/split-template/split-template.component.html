@@ -2,9 +2,11 @@
 <div class=" outerDiv col-md-10 col-md-offset-1 card" >
    <div class="innerDiv">
     <mat-divider></mat-divider>
-       <h4>Upload split</h4>
-       <input class="centerElement element" type="file" name="file" (change)="fileObject($event)"/>
-       <button class="pryButton" type="submit" name="submit" (click)="onUpload()" >Upload</button>
+       <h2 class="upload-header">Upload split</h2>
+       <div class="upload-form-group">  
+         <input class="centerElement element" type="file" name="file" (change)="fileObject($event)"/>
+         <button class="pryButton" type="submit" name="submit" (click)="onUpload()" >Upload</button>
+      </div>
     </div>
 </div> 
 </app-main-navbar>

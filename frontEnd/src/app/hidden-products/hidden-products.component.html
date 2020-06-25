@@ -1,7 +1,7 @@
 <app-main-navbar> 
 <div class="container">
   <div *ngIf="routerParams == 'noDescription' || routerParams == 'differentLanguages'">
-    <h4>No Description Products</h4>
+    <h2 class="hidden-header">No Description Products</h2>
     <div class="row" *ngIf="count != 0">
       <div class="col-md-2"></div>
       <div class="btn-group btn-group-lg col-md-8" >
@@ -10,7 +10,7 @@
     </div>
   </div>
   <div *ngIf="routerParams == 'differentPrice'">
-    <h4>Different Price Products</h4>
+    <h2 class="hidden-header">Different Price Products</h2>
     <div class="row" *ngIf="count != 0">
       <div class="col-md-2"></div>
       <div class="btn-group btn-group-lg col-md-8" >
@@ -21,7 +21,7 @@
     </div>
   </div>
 <div *ngIf="routerParams == 'Disabled'">
-  <h4>Disabled Product</h4>
+  <h2 class="hidden-header">Disabled Product</h2>
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
     <div class="btn-group btn-group-lg col-md-8" >
@@ -29,7 +29,7 @@
    </div>
   </div>
 </div>
-<div *ngIf="routerParams == 'Banned'"><h4>Banned Product</h4>
+<div *ngIf="routerParams == 'Banned'"><h2>Banned Product</h2>
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
     <div class="btn-group btn-group-lg col-md-8" >
@@ -38,7 +38,7 @@
   </div>
 </div>
 <div *ngIf="routerParams == 'Invisible'">
-  <h4>Invisible Product</h4>
+  <h2 class="hidden-header">Invisible Product</h2>
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
     <div class="btn-group btn-group-lg col-md-8" >
@@ -46,7 +46,7 @@
    </div>
   </div>
 </div>
-<div *ngIf="routerParams =='Nocategory'"><h4>No Category Product</h4>
+<div *ngIf="routerParams =='Nocategory'"><h2 class="hidden-header">No Category Product</h2>
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
    <div class="btn-group btn-group-lg col-md-8" >
@@ -54,10 +54,10 @@
    </div>
   </div>
 </div>
-<div *ngIf="routerParams == 'NoImage'"><h4>No Image Product</h4></div>
+<div *ngIf="routerParams == 'NoImage'"><h2 class="hidden-header">No Image Product</h2></div>
 
 <div *ngIf="routerParams =='Noprice'">
-  <h4>No Price Product</h4>
+  <h2 class="hidden-header">No Price Product</h2>
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
    <div class="btn-group btn-group-lg col-md-8" >
@@ -66,7 +66,7 @@
   </div>
 </div>
 <div *ngIf="routerParams =='Outofstock'">
-  <h4>Out Of Stock Product</h4>
+  <h2 class="hidden-header">Out Of Stock Product</h2>
   <div class="row" *ngIf="count != 0">
     <div class="col-md-2"></div>
    <div class="btn-group btn-group-lg col-md-8" >
@@ -85,7 +85,7 @@
   
   <mat-table #table [dataSource]="dataSource" matSort>
   <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
-    <mat-header-cell *cdkHeaderCellDef  mat-sort-header class="checkBox">
+    <mat-header-cell *cdkHeaderCellDef  mat-sort-header class="checkBox-header">
       <mat-checkbox *ngIf="column.columnDef == 'Select'" (change)="$event ? masterToggle() : null"
       [checked]="selection.hasValue() && isAllSelected()"
       [indeterminate]="selection.hasValue() && !isAllSelected()"
