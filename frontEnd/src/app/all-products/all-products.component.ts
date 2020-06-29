@@ -166,8 +166,8 @@ constructor(private _dataService : dataService ,private _productService: product
     let dialogRef = this._dialog.open(FilterComponent,
       {
         panelClass: 'myapp-filter-dialog',
-        width: "45%",
-        height: "80%",
+        width: "50%",
+        height: "auto",
         data: "article",
       })
     dialogRef.afterClosed().subscribe(result => {

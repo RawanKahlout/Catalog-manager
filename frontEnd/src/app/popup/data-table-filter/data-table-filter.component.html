@@ -1,4 +1,9 @@
 <form #filter="ngForm" (ngSubmit)="submitData(filter)"  class="center-form">
+    <div class="main-dev">
+        <img src="../../../assets/filter.svg" class="filter-icon">
+        <h3 class="head-filter">Filter By</h3>
+        <span class="fill-remaining-space"></span>
+      </div>
     <div>
        <label class=".toggle-filter-label">Product Status</label>
        <mat-slide-toggle
@@ -52,7 +57,7 @@
    <br>
    <br>
    <div class="form-block">
-       <label class="radio-label">Quantity</label>
+       <label class="radio-label-sku">Quantity</label>
         <select name="fromQ" ngModel class="filter-text">
            <option hidden value="null">Select operator</option>
            <option value="<">Greater than</option>
@@ -64,7 +69,7 @@
    </div>
    <br>
    <div class="form-block">
-       <label class="radio-label">Price</label>
+       <label class="radio-label-sku">Price</label>
        <select name="fromP" ngModel class="filter-text">
            <option hidden value="null">Select operator</option>
            <option value="<">Greater than</option>

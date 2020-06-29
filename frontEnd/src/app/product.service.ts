@@ -169,6 +169,8 @@ export class productService {
     checkRows(routerParams,selectionLength,actionName){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.width = "60%";
+      dialogConfig.height = "60%";
+      dialogConfig.panelClass="myapp-no-padding-dialog"
       if (selectionLength > 1) {
         if (routerParams.toString() == 'noDescription' || routerParams.toString() == 'differentLanguages' || actionName == 'addDescription') {
           dialogConfig.data = "Select only one product"

@@ -134,8 +134,8 @@ export class AllSkusComponent implements OnInit{
     let dialogRef =  this._dialog.open(FilterComponent,
     {
       panelClass: 'myapp-filter-dialog',
-      width : "45%",
-      height:"95%",
+      width : "50%",
+      height:"99%",
       data: "skus"
     })
     dialogRef.afterClosed().subscribe(result=>{

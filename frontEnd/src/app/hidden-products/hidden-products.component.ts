@@ -17,6 +17,7 @@ import { DataTableFilterComponent } from '../popup/data-table-filter/data-table-
 import { ShowSkusComponent } from '../ProductActions/show-skus/show-skus.component';
 import { dataService } from '../data.service';
 import { NgForm } from '@angular/forms';
+import { AutofillMonitor } from '@angular/cdk/text-field';
 export interface tableCol {
   ParentSky: string;
   specialprice: number;
@@ -261,9 +262,9 @@ export class HiddenProductsComponent implements OnInit {
     let dialogRef = this._dialog.open(DataTableFilterComponent,
       {
         panelClass: 'myapp-filter-dialog',
-        width: "45%",
-        height: "80%",
-        data: "article"
+        width: "50%",
+        height: "99%",
+        data: "article",
       })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

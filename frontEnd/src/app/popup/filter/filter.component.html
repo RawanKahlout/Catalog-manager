@@ -1,4 +1,9 @@
 <form *ngIf='requestSource =="article"' #filter="ngForm" (ngSubmit)="submitArticleData(filter)" class="center-form">
+    <div class="main-dev">
+        <img src="../../../assets/filter.svg" class="filter-icon">
+        <h3 class="head-filter">Filter By</h3>
+        <span class="fill-remaining-space"></span>
+      </div>
     <div>
         <label class="toggle-label">Image</label>
         <mat-slide-toggle [(ngModel)]="hasImage" class="example-margin" [color]="color" name="hasImage" [checked]="image">
@@ -7,7 +12,7 @@
         <mat-slide-toggle [(ngModel)]="statusId" class="example-margin" [color]="color" name="statusId">
         </mat-slide-toggle>
 
-        <label class=".toggle-filter-label">Product Status</label>
+        <label class="toggle-filter-label">Product Status</label>
         <mat-slide-toggle [(ngModel)]="stockStatusId" class="example-margin" [color]="color" name="stockStatusId">
         </mat-slide-toggle>
     </div>
@@ -77,6 +82,11 @@
     </div>
 </form>
 <form *ngIf='requestSource =="skus"' #filter="ngForm" (ngSubmit)="submiskutData(filter)" class="center-form">
+    <div class="main-dev">
+        <img src="../../../assets/filter.svg" class="filter-icon">
+        <h3 class="head-filter">Filter By</h3>
+        <span class="fill-remaining-space"></span>
+      </div>
     <div>
         <label class="toggle-label">Enable</label>
         <mat-slide-toggle [(ngModel)]="enabled" class="example-margin" [color]="color" name="enabled">
@@ -146,7 +156,7 @@
     </div>
     <br>
     <div class="form-block">
-        <label class="radio-label">Quantity</label>
+        <label class="radio-label-sku">Quantity</label>
          <select name="fromQ" ngModel class="filter-text">
             <option hidden value="null">Select operator</option>
             <option value="<">Greater than</option>
@@ -154,11 +164,11 @@
             <option value="=">Equal to</option>  
          </select>  
          {{value}}
-        <input type="text" name="quantity" class="filter-text" placeholder="write the quantity" ngModel>
+        <input type="text" name="quantity" class="filter-text"  ngModel>
     </div>
     <br>
     <div class="form-block">
-        <label class="radio-label">Price</label>
+        <label class="radio-label-sku">Price</label>
         <select name="fromP" ngModel class="filter-text">
             <option hidden value="null">Select operator</option>
             <option value="<">Greater than</option>

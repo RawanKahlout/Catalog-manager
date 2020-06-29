@@ -4,7 +4,7 @@
       <div  *ngIf="!result">
         <form #searchForm = ngForm (ngSubmit)="onSearch(searchForm)" >
           <div class="form-group">
-            <input type="search" name="search" #search="ngModel" class="form-control origin" placeholder="Search for product" ngModel>
+            <input type="search" name="search" #search="ngModel" class="search" placeholder="Search for product" ngModel>
           </div>
        </form>
       </div>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-  <input type="search" (keyup)="applyFilter($event)" class="form-control"  placeholder="Search For products ..">
+  <input type="search" (keyup)="applyFilter($event)" class="Search-table"  placeholder="Search For products ..">
   <mat-table #table [dataSource]="dataSource" matSort>  
     <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef" >
       <mat-header-cell *cdkHeaderCellDef  mat-sort-header class="checkBox">

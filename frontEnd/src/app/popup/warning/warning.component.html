@@ -1,10 +1,7 @@
-<mat-toolbar>
-    <span><mat-icon class="icon">report_problem</mat-icon></span>
-    <span class="fill-remaining-space"></span>
-    <button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
-    </mat-toolbar>
-    
-    <h4>Warning !</h4>
-    <h5>{{message}}</h5>
-    
-     
+<span class="fill-remaining-space"></span>
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+</button>
+<img class="dialog-icon" src="../../../assets/warning.svg">
+<h3>Warning !</h3>
+<h4>{{message}}</h4>
