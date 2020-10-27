@@ -7,7 +7,8 @@ const app = express();
 var bodyParser = require('body-parser');
 const http = require('http');
 const normalizePort = require('normalize-port');
-mongoose.connect('mongodb://localhost/nejreeDashBoard',
+databaseUrl
+mongoose.connect(databaseUrl,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
