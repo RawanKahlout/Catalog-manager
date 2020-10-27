@@ -61,7 +61,7 @@ export class productService {
     getDaynamic(type) {
         return this._http.get(apiUrl + type,
             {
-                headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),
+                headers: new HttpHeaders().set('authorization'),
 
             })
     }
@@ -78,7 +78,7 @@ export class productService {
       return this._http.get(apiUrl+'search?',
             {
                 params: params,
-                headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),
+                headers: new HttpHeaders().set('authorization'),
 
             }
       )
@@ -87,12 +87,12 @@ export class productService {
         console.log(queryData)
         return this._http.get(apiUrl+'search?',{ 
         params : queryData,
-        headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),})
+        headers: new HttpHeaders().set('authorization'),})
     }
     skusFilter(queryData){
         return this._http.get(apiUrl+'searchSku?',{ 
             params : queryData,
-            headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),})
+            headers: new HttpHeaders().set('authorization'),})
     }
     addDiscountPersentage(discount, category, rowData) {
         if (!category) {
@@ -154,7 +154,7 @@ export class productService {
       return this._http.get(apiUrl+'searchSku?',
             {
                 params: params,
-                headers: new HttpHeaders().set('authorization', 'AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8'),
+                headers: new HttpHeaders().set('authorization'),
 
             }
       )
