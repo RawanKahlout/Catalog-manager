@@ -9,13 +9,13 @@ export class dataService {
     constructor(private _http: HttpClient , private _router : Router) { }
     getStatistics(){
      return this._http.get('',{
-         headers : new HttpHeaders().set('authorization','AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8')
+         headers : new HttpHeaders().set('authorization','')
      })
     }
     getAttribute(actionId){
         
         return this._http.get(apiUrl+ actionId ,{
-        headers : new HttpHeaders().set('authorization','AIzaSyAJX1z5eViPN6M_-Dzd7XPBQWGBqo-vQt8')
+        headers : new HttpHeaders().set('authorization','')
         })
     }
     downloadFile(data, filename='data') {
