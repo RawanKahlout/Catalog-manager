@@ -1,0 +1,14 @@
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+    <img src="../../../assets/price.svg" class="dialog-icon-form">
+    <h3>New Article</h3>
+    <span class="fill-remaining-space"></span>
+</div>
+<form #changeArticle="ngForm" (ngSubmit)="submitData(changeArticle)" class="pageCenter">
+    <input type="text" name="article" class="fields form-fields" ngModel>
+    <br>
+    <br>
+    <button type="submit" class="btn pryButton">Submit</button>
+</form>
