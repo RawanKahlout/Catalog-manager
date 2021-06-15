@@ -1,0 +1,20 @@
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+  <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+  <img src="../../../assets/gender.svg" class="dialog-icon-form">
+  <h3>New Gender</h3>
+  <span class="fill-remaining-space"></span>
+</div>
+<form #gender="ngForm" (ngSubmit)="submitData(gender)" class="pageCenter">
+  <div class="main-dev">
+    <label class="form-label">Select gender</label>
+    <select name="selectGender" class="fields form-fields" ngModel>
+      <option value="women">women</option>
+      <option value="men">Men</option>
+      <option value="unisex">unisex</option>
+    </select>
+  </div>
+  <br>
+  <button type="submit" class="btn pryButton">Submit</button>
+</form>
