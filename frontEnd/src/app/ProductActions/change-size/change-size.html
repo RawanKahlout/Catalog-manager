@@ -1,0 +1,19 @@
+<button class="btn-dialog-close closeBtn" mat-stroked-button (click)="onClose()" tabIndex="-1">
+  <mat-icon>clear</mat-icon>
+</button>
+<div class="main-dev">
+  <img src="../../../assets/price.svg" class="dialog-icon-form">
+  <h3>New Size</h3>
+  <span class="fill-remaining-space"></span>
+</div>
+<form #size="ngForm" (ngSubmit)="submitData(size)" class="pageCenter">
+  <label class="form-label">Select size</label>
+  <div class="form-block">
+    <select name="sizeId" ngModel class="fields form-fields">
+        <option hidden value="null">Select size</option>
+        <option value={{entry.option_id}} *ngFor="let entry of sizeOptions">{{entry.value}}</option>
+    </select>
+  </div>
+  <br>
+  <br>
+  <button type="submit" class="btn pryButton">Submit</button>
